@@ -2,15 +2,19 @@
 
 /'
 Beispiel
-  Datum: 
-  Bezeichnung:  Drucksache 975/2019
+  Datum:        27.09.2019
   Id:           GRDrs 975/2019
-  Titel:
-  Ausschuss:
+  Titel:        Weltklima in Not -Stuttgart handeltAktionsprogramm Klimaschutz 
+                -Verwendung des Klimaschutzfonds
+  Ausschuss:    Ausschuss für Klima und Umwelt
+
+Zusammengesetzte Werte
+    Bezeichnung:    Drucksache 975/2019
+    Suchergebnis:   Weltklima in Not - Stuttgart handelt Aktionsprogramm Klimaschutz - Verwendung des Klimaschutzfonds
+                    Ausschuss für Klima und Umwelt 
 '/
 class Beratungsunterlage {
     +datum
-    +bezeichnung
     +id
     +titel
     +ausschuss
@@ -19,50 +23,66 @@ Beratungsunterlage --> "*" Dokument : anhaenge
 
 /'
 Beispiel
-  Datum: 
-  Bezeichnung:
-  Titel:
-  Ausschuss:
+  Datum:        24.07.2019
+  Identifier:   414
+  Betreff:      Aufstellung Jahresabschluss 2018
+  Ausschuss:    Verwaltungsausschussdes Gemeinderats der Landeshauptstadt Stuttgart
+
+Zusammengesetzte Werte
+    Bezeichnung:    Top 1a - NsNr 414
+    Titel:          Aufstellung Jahresabschluss 2018
+                    Verwaltungsausschuss 
 '/
 class Protokoll {
     +datum
-    +bezeichnung
-    +titel
+    +id
+    +betreff
     +ausschuss
 }
 Protokoll --> "*" Dokument : anhaenge
+Protokoll --> "1" Beratungsunterlage : drucksache
 
 /'
 Beispiel 
-  Datum: 
-  Bezeichnung:
+  Datum:        24.10.2019
   Id:           1191/2019
-  Titel: 
-  Betreff:
-  Fraktion:
-  Autoren:
+  Betreff:      Aktionsprogramm Klimaschutz
+                Wenn´s den Baum dürstet – gießen 
+  Fraktion:     Bündnis 90/DIE GRÜNEN-Gemeinderatsfraktion
+  Autoren:      Gabriele Nuber-Schöllhammer Andreas Winter
+
+Zusammengesetzte Werte...
+  Bezeichnung:  AntragsNr. 1191/2019
+  Titel:        Aktionsprogramm Klimaschutz Wenn´s den Baum dürstet – gießen
+                Bündnis 90/DIE GRÜNEN-Gemeinderatsfraktion 
 '/
 class Antrag {
     +datum
-    +bezeichnung
     +id
-    +titel
     +betreff
     +fraktion
     +autoren
 }
 Antrag --> "*" Dokument : anhaenge
 
+'Stellungnahme ist noch nicht analysiert
 class Stellungnahme {
 }
-'Stellungnahme ist noch nicht analysiert
 
 /'
 Beispiel
-  Datum: 
-  Uhrzeit:
-  Ausschuss:
-  Inhalt: 
+  Datum:        18.10.2019
+  Uhrzeit:      08:30
+  Ausschuss:    Ausschuss für Klima und Umwelt
+  Inhalt:       ... 
+                1 Weltklima in Not - Stuttgart handelt
+                Aktionsprogramm Klimaschutz - Verwendung des Klimaschutzfonds
+                - Beratung -
+                Beratungsunterlagen
+
+                2 Schnell, deutliche Schritte beim Klimawandel: Was tut Stuttgart bisher?
+                Antrag 274/2019 vom 17.09.2019 der SPD-Gemeinderatsfraktion
+                - mündlicher Bericht -
 
 Tagesordnung besteht aus Text mit Links
 '/
