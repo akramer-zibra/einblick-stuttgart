@@ -39,8 +39,8 @@ class Protokoll {
     +betreff
     +ausschuss
 }
-Protokoll --> "*" Dokument : anhaenge
-Protokoll --> "1" Beratungsunterlage : drucksache
+Protokoll --> "1" Dokument : protokoll
+Protokoll --> "1" Beratungsunterlage : verhandlung
 
 /'
 Beispiel 
@@ -92,7 +92,12 @@ class Tagesordnung {
     +ausschuss
     +inhalt
 }
-Tagesordnung "0...*" --> "*" Beratungsunterlage : beratungsunterlagen
+Tagesordnung --> "*" Tagesordnungspunkt : ordnungspunkt
+
+class Tagesordnungspunkt {
+    +titel
+}
+Tagesordnungspunkt "0...*" --> "0..1" Beratungsunterlage : beratungsunterlage
 
 /'
 Beispiel
@@ -105,5 +110,57 @@ class Dokument {
     +titel
     +typ      
 }
+
+/'
+Beispiel
+  https://www.domino1.stuttgart.de/web/ksd/KSDRedSystem.nsf/ae7aefac3711e63fc1257c67004d7347/b665a8da1aa9f789c125849d00212753?OpenDocument
+'/
+class Haushaltsantrag {
+    +datum
+    +fraktion
+    +id
+    +betreff
+    +inhalt
+}
+
+/'
+Beispiel
+  https://www.domino1.stuttgart.de/web/ksd/KSDRedSystem.nsf/ae7aefac3711e63fc1257c67004d7347/14af3f9c529bee2cc125821600423182?OpenDocument
+'/
+class Anfrage {
+    +datum
+    +fraktion
+    +id
+    +betreff
+    +inhalt
+}
+Anfrage --> "0...1" Dokument: zwischennachricht
+Anfrage --> "0...1" Dokument: beantwortung
+
+/'
+Beispiel: 
+  https://www.domino1.stuttgart.de/web/ksd/KSDRedSystem.nsf/ae7aefac3711e63fc1257c67004d7347/c8806a97487617bac125822d002c193d?OpenDocument
+'/
+class Antrag {
+    +datum
+    +fraktion
+    +id
+    +betreff
+    +inhalt
+}
+Antrag --> "0...1" Dokument: stellungnahme
+
+/'
+Beispiel
+  https://www.domino1.stuttgart.de/web/ksd/KSDRedSystem.nsf/ae7aefac3711e63fc1257c67004d7347/e8913e5cb4af10d1c125824e002c6b1f?OpenDocument
+'/
+class AntragAnfrage {
+    +datum
+    +fraktion
+    +id
+    +betreff
+    +inhalt
+}
+AntragAnfrage --> "0...1" Dokument: beantwortungUndStellungnahme
 
 @enduml
