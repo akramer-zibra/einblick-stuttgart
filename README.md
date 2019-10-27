@@ -1,4 +1,4 @@
-# Stuttgart-Watch
+# Einblick-Stuttgart
 
 ## Mission
 Dieses Projekt startet mit dem Ziel die öffentlichen Ratsdokumente der Stadt Stuttgart übersichtlich und verständlich im Internet zur Verfügung zu stellen.
@@ -7,7 +7,22 @@ Dieses Projekt startet mit dem Ziel die öffentlichen Ratsdokumente der Stadt St
 
 + Als Politiker:in soll ich mit dieser Software die Möglichkeit bekommen, mich zu bestimmten Themen retrospektiv informieren zu können, um mich dadurch besser auf meine politische Aufgabe vorzubereiten und effektivere Entscheidungen treffen zu können
 
-### Beispielhafte Anfragen
+## Software
+
+### Prepare
+`npm install`
+
+### Building
+`npm build`
+
+### Running
+`npm start`
+
+### API-Testing
+Server starten und mit dem Sandbox-Tool unter `loclhost:4000/playground` die API testen.
+
+
+## Beispielhafte Anfragen
 
 1. Als Stadtbewohner:in möchte ich wissen, in wieweit sich die Stadt Stuttgart gerade mit dem Thema "Weltklima in Not - Stuttgart handelt" beschäftigt.
 
@@ -17,8 +32,9 @@ Die Ratsdokumente sind bereits online abrufbar, allerdings nur mit einer verstau
 
 Dieses Projekt ist inspiriert durch [Politik bei uns](https://politik-bei-uns.de/).  
 
+## Sonstiges
 
-## Öffentliche Datenbestände
+### Öffentliche Datenbestände
 
 [Ratsdokumente - Startseite](https://www.stuttgart.de/external/show/ratsdokumente)
 
@@ -27,16 +43,11 @@ Dieses Projekt ist inspiriert durch [Politik bei uns](https://politik-bei-uns.de
 [Sitzungskalender + Tagesordnungen](https://www.domino1.stuttgart.de/web/ksd/KSDRedSystem.nsf/AnSiKa)
 
 
-## Technische Umsetzung
-
-
-
-
-## Drittanbieter "Werkzeuge" 
+### Drittanbieter "Werkzeuge" 
 
 [PlatUML](http://plantuml.com/de/starting) für die technische Konzeption 
 
 
-## ...Alternative Projekttitel
+### ...Alternative Projekttitel
 
-"Stuttgart transparency", "Stuttgart monitoring", ...
+"Stuttgart transparency", "Stuttgart monitoring", "Occupy Stuttgart", "Stuttgart-Watch", ...
