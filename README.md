@@ -21,6 +21,12 @@ Dieses Projekt startet mit dem Ziel die öffentlichen Ratsdokumente der Stadt St
 ### API-Testing
 Server starten und mit dem Sandbox-Tool unter `loclhost:4000/playground` die API testen.
 
+### Drittanbieter "Werkzeuge" 
+#### User Interface
+[Bulma.io](https://bulma.io/)
+
+#### Konzeption
+[PlatUML](http://plantuml.com/de/starting) für die technische Konzeption 
 
 ## Beispielhafte Anfragen
 
@@ -42,12 +48,5 @@ Dieses Projekt ist inspiriert durch [Politik bei uns](https://politik-bei-uns.de
 
 [Sitzungskalender + Tagesordnungen](https://www.domino1.stuttgart.de/web/ksd/KSDRedSystem.nsf/AnSiKa)
 
-
-### Drittanbieter "Werkzeuge" 
-
-[PlatUML](http://plantuml.com/de/starting) für die technische Konzeption 
-
-
 ### ...Alternative Projekttitel
-
 "Stuttgart transparency", "Stuttgart monitoring", "Occupy Stuttgart", "Stuttgart-Watch", ...
