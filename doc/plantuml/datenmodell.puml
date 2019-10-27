@@ -1,0 +1,89 @@
+@startuml Datenressourcen
+
+/'
+Beispiel
+  Datum: 
+  Bezeichnung:  Drucksache 975/2019
+  Id:           GRDrs 975/2019
+  Titel:
+  Ausschuss:
+'/
+class Beratungsunterlage {
+    +datum
+    +bezeichnung
+    +id
+    +titel
+    +ausschuss
+}
+Beratungsunterlage --> "*" Dokument : anhaenge
+
+/'
+Beispiel
+  Datum: 
+  Bezeichnung:
+  Titel:
+  Ausschuss:
+'/
+class Protokoll {
+    +datum
+    +bezeichnung
+    +titel
+    +ausschuss
+}
+Protokoll --> "*" Dokument : anhaenge
+
+/'
+Beispiel 
+  Datum: 
+  Bezeichnung:
+  Id:           1191/2019
+  Titel: 
+  Betreff:
+  Fraktion:
+  Autoren:
+'/
+class Antrag {
+    +datum
+    +bezeichnung
+    +id
+    +titel
+    +betreff
+    +fraktion
+    +autoren
+}
+Antrag --> "*" Dokument : anhaenge
+
+class Stellungnahme {
+}
+'Stellungnahme ist noch nicht analysiert
+
+/'
+Beispiel
+  Datum: 
+  Uhrzeit:
+  Ausschuss:
+  Inhalt: 
+
+Tagesordnung besteht aus Text mit Links
+'/
+class Tagesordnung {
+    +datum
+    +uhrzeit
+    +ausschuss
+    +inhalt
+}
+Tagesordnung "0...*" --> "*" Beratungsunterlage : beratungsunterlagen
+
+/'
+Beispiel
+    url: 
+    titel:
+    typ: application/pdf, text/plain
+'/
+class Dokument {
+    +url
+    +titel
+    +typ      
+}
+
+@enduml
