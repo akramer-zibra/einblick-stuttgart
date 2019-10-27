@@ -1,0 +1,5 @@
+# Dependency libraries
+node_modules/
+
+# 
+package-lock.json
