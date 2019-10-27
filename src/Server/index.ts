@@ -10,9 +10,6 @@ const resolvers = {
     Query: {
         info: () => `This is the fresh API`,
     },
-
-    Mutation: {
-    },
 }
 
 // Initiate API server
