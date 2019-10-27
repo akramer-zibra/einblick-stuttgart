@@ -9,24 +9,9 @@ const repository = new Repository();
 const resolvers = {
     Query: {
         info: () => `This is the fresh API`,
-        feed: () => repository.links,
-        link: (parent, args) => {
-            return repository.findLinkById(args.id);
-        }
     },
 
     Mutation: {
-        post: (parent, args) => {
-            return repository.createPost(args.description, args.url);
-        },
-
-        updateLink: (parent , args) => {
-            return repository.updateLink(args.id, args.description, args.url);
-        },
-
-        deleteLink: (parent, args) => {
-            return repository.deleteLink(args.id);
-        },
     },
 }
 
