@@ -1,0 +1,26 @@
+{
+  "name": "stuttgart-watch",
+  "version": "0.0.1",
+  "description": "Diese Software soll mehr Einblick in die politische Arbeit der Stadt Stuttgart ermöglichen",
+  "main": "index.js",
+  "directories": {
+    "doc": "doc"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "generate:uml": "puml generate doc/plantuml/datenmodell.puml -o doc/plantuml/datenmodell.png"
+  },
+  "keywords": [
+    "Stuttgart",
+    "API",
+    "Open",
+    "Governence",
+    "Bürgerbeteiligung"
+  ],
+  "devDependencies": {
+    "node-plantuml": "0.9.0"
+  },
+  "author": "Achim Kramer <achim@zibra.de>",
+  "license": "ISC",
+  "private": true
+}
