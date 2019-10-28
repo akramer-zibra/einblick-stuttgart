@@ -11,7 +11,7 @@ const bunterlagenResolver = new BeratungsunterlagenResolver();
 const resolvers = {
     Query: {
         info: () => `This is the fresh API`,
-        timeline: timelineResolver.resolve,   // Bind resolver's resolve methode to this query
+        timelineAll: timelineResolver.resolve,   // Bind resolver's resolve methode to this query
         beratungsunterlagen: bunterlagenResolver.resolve
     },
 }
