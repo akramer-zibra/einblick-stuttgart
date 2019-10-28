@@ -1,17 +1,19 @@
 type Query {
     info: String!
-    stream(suche: String): StreamResult!
+    timeline(search: String): TimelineResult!
 }
 
-type StreamResult {
-    title: {
-        media: TimelineMedia
-        text: TimelineText
-    } 
-    events: [StreamEvent]!
+type TimelineResult {
+    title: TimelineTitle!
+    events: [TimelineEvent]!
 }
 
-type StreamEvent {
+type TimelineTitle {
+    media: TimelineMedia
+    text: TimelineText
+}
+
+type TimelineEvent {
     media: TimelineMedia
     start_date: TimelineDate
     text: TimelineText
