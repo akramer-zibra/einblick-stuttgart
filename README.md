@@ -50,3 +50,9 @@ Dieses Projekt ist inspiriert durch [Politik bei uns](https://politik-bei-uns.de
 
 ### ...Alternative Projekttitel
 "Stuttgart transparency", "Stuttgart monitoring", "Occupy Stuttgart", "Stuttgart-Watch", ...
+
+## FAQs
+### Datein-Encoding der Datenquellen domino1.stuttgart.de
++ Suchergebnisse sind in `Windows 1252` codiert
++ Haushaltsanträge sind in `Windows 1252` codiert
++ Anträge sind in `Windows 1252` codiert
