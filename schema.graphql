@@ -42,6 +42,9 @@ type Beratungsunterlagen {
     id: String
     titel: String
     ausschuss: String
+    """
+    Referenzen zu verknüpften pdf Dokumenten
+    """
     beschlussvorlage: Dokument
     anhaenge: [Dokument]
 }
