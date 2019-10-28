@@ -40,7 +40,7 @@ export class BeratungsunterlagenScraper {
             let id = idAnchor.text().replace('Drucksache ', '');
             
             // Extract Beratungsvorlage pdf
-            let document: any = {
+            let beratungsvorlage: any = {
                 url: idAnchor.attr('href'),
                 titel: idAnchor.text(),
                 typ: "application/pdf"
@@ -49,21 +49,21 @@ export class BeratungsunterlagenScraper {
             // Extract Date 
             // and parse it into Date object
             let dateString = $(columns[1]).find('p6').text().trim();
-            let date = dateUtil.parse(dateString, 'DD.MM.YYYY');
+            let datum = dateUtil.parse(dateString, 'DD.MM.YYYY');
 
             // Extract Title & Ausschuss
-            let title = $(columns[2]).find('b').text().trim();
+            let titel = $(columns[2]).find('b').text().trim();
 
             let secondColumnTextLines = $(columns[2]).find('p6').text().split("\n");    // Split Text into lines
-            let board = secondColumnTextLines[secondColumnTextLines.length - 2];        // We need to skip last newline
+            let ausschuss = secondColumnTextLines[secondColumnTextLines.length - 2];        // We need to skip last newline
             
             // Extract Anhänge
             let attachmentAnchors = $(columns[3]).find('a').toArray();
 
-            let attachments: any = [];
+            let anhaenge: any = [];
 
             attachmentAnchors.forEach((anchor) => {
-                attachments.push({
+                anhaenge.push({
                     "url": this.urlPath + $(anchor).attr('href').replace('./.', ''),  // Remove broken path prefix and append with url path
                     "titel": $(anchor).text(),
                     "typ": "application/pdf"
@@ -72,12 +72,12 @@ export class BeratungsunterlagenScraper {
 
             // Push scraped data into collection
             result.push({
-                datum: date,
+                datum: datum,
                 id,
-                titel: title,
-                ausschuss: board,
-                beratungsvorlage: document,
-                anhaenge: attachments
+                titel: titel,
+                ausschuss: ausschuss,
+                beratungsvorlage: beratungsvorlage,
+                anhaenge: anhaenge
             });
         }
 
