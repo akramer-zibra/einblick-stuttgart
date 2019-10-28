@@ -10,7 +10,7 @@ export class TimelineResolver {
 
         // We use "Suche" client
         let ksdSucheClient = new KsdSucheClient();
-        ksdSucheClient.submitSearch(search);
+        ksdSucheClient.submitSearch('Jahresbericht');
 
         // Returns simple demo data
         // @see https://timeline.knightlab.com/docs/json-format.html

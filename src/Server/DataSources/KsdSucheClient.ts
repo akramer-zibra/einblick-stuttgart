@@ -5,7 +5,9 @@ import qs from 'query-string';
 export class KsdSucheClient {
 
     /* Axios client instance */
-    private axios = null;
+    private client;
+
+    /** Default POST call headers */
     private headers = {
         "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
         "Accept-Encoding": "gzip, deflate, br",
@@ -16,10 +18,45 @@ export class KsdSucheClient {
         "Origin": "https://www.domino1.stuttgart.de",
         "Referer": "https://www.domino1.stuttgart.de/web/ksd/KSDRedSystem.nsf/masustart",
         "Upgrade-Insecure-Requests": "1",
-        "User-Agent": "Node.js/axios"
+        "User-Agent": "Node.js/Axios"
     };
 
-    public constructor() {};
+    /** Default POST call parameters */
+    private params = { 
+        "__Click": "0", 
+        "%%Surrogate_AuswahlDatenbank": "1", 
+        "AuswahlDatenbank": "Aktueller+Datenbestand", 
+        "%%Surrogate_Auswahl": "1", 
+        "Auswahl": [
+            "Beratungsunterlagen", 
+            "Protokolle", 
+            "_a85n78sk4ctig_", 
+            "Stellungnahmen", 
+            "Tagesordnungen"
+        ], 
+        "Suchbegriff1": "", 
+        "Suchbegriff2": "", 
+        "Suchbegriff3": "", 
+        "%%Surrogate_AnzahlDokAuswahl": "1", 
+        "AnzahlDokAuswahl": "20", 
+        "Dokumententyp": "Suche", 
+        "$PublicAccess": "1", 
+        "SaveOptions": "0", 
+        "AnzahlDok": "50"   // Maximum is 50 
+    }
+
+    /**
+     * Class constructor method
+     */
+    public constructor() {
+        
+        // Instatiate axios client
+        this.client = axios.create({
+            baseURL: 'https://www.domino1.stuttgart.de/web/ksd/KSDRedSystem.nsf',
+            timeout: 10000,
+            headers: this.headers
+        });
+    };
 
     /**
      * Method does an http POST call to this endpoit
@@ -27,91 +64,28 @@ export class KsdSucheClient {
      */
     public submitSearch(keyword: string) {
 
-        /*
-        let demo = { 
-            "Antwortkopfzeilen (167 B)": { 
-                "headers": [{ 
-                    "name": "Content-Length", 
-                    "value": "41443" 
-                }, { 
-                    "name": "Content-Type", 
-                    "value": "text/html; charset=ISO-8859-1" 
-                }, { 
-                    "name": "Date", 
-                    "value": "Mon, 28 Oct 2019 16:01:19 GMT" 
-                }, { 
-                    "name": "Strict-Transport-Security", 
-                    "value": "max-age=604800" 
-                }] 
-            }, 
-            "Anfragekopfzeilen (613 B)": { 
-                "headers": [{ 
-                    "name": "Accept-Encoding", 
-                    "value":  
-                }, { 
-                    "name":  
-                    "value": 
-                }, { 
-                    "name": "Cache-Control", 
-                    "value": "max-age=0" 
-                }, { 
-                    "name": , 
-                    "value":  
-                }, { 
-                    "name": "Content-Length", 
-                    "value": "407" 
-                }, { 
-                    "name": , 
-                    "value":  
-                }] 
-            } 
-        };
-        */
+        // Use default params 
+        let params = this.params;
+        params["Suchbegriff1"] = 'Stuttgart+28';    // FIXME
 
-        // Instatiate axios client
-        let client = axios.create({
-            baseURL: 'https://www.domino1.stuttgart.de/web/ksd/KSDRedSystem.nsf',
-            timeout: 2000,
-            headers: this.headers
-        });
-
-        let params = { 
-            "__Click": "0", 
-            "%%Surrogate_AuswahlDatenbank": "1", 
-            "AuswahlDatenbank": "Aktueller+Datenbestand", 
-            "%%Surrogate_Auswahl": "1", 
-            "Auswahl": [
-                "Beratungsunterlagen", 
-                "Protokolle", 
-                "_a85n78sk4ctig_", 
-                "Stellungnahmen", 
-                "Tagesordnungen"
-            ], 
-            "Suchbegriff1": "Stuttgart 28", 
-            "Suchbegriff2": "", 
-            "Suchbegriff3": "", 
-            "%%Surrogate_AnzahlDokAuswahl": "1", 
-            "AnzahlDokAuswahl": "20", 
-            "Dokumententyp": "Suche", 
-            "$PublicAccess": "1", 
-            "SaveOptions": "0", 
-            "AnzahlDok": "20" 
-        };
+        // let encodedParams = furlencode(params, {skipIndex : true, sorted : true});
+        let encodedParams = qs.stringify(params, {encode: false});
+        console.log(encodedParams);
 
         // Post this generated form data with www-form-encoded parameters
-        client.post('/masustart', qs.stringify(params))
-          .then(function (response) {
-            
-            // TEST write response to filesystem
-            //console.log(response.data);
-            fs.writeFile('./temp/ergebnis.html', response.data, {}, function(err) {
-                if(err) { console.error(err); }
-            });
+        this.client.post('/masustart', encodedParams)
+            .then(function (response) {
+                
+                // TEST write response to filesystem
+                //console.log(response.data);
+                fs.writeFile('./temp/ergebnis.html', response.data, {}, function(err) {
+                    if(err) { console.error(err); }
+                });
 
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
 
     }
 }
