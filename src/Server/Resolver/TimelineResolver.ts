@@ -1,3 +1,5 @@
+import { KsdSucheClient } from "../DataSources/KsdSucheClient";
+
 export class TimelineResolver {
 
     public resolve(search: string) {
@@ -5,6 +7,10 @@ export class TimelineResolver {
         // DEBUG
         console.log(search);
         // DEBUG
+
+        // We use "Suche" client
+        let ksdSucheClient = new KsdSucheClient();
+        ksdSucheClient.submitSearch(search);
 
         // Returns simple demo data
         // @see https://timeline.knightlab.com/docs/json-format.html
