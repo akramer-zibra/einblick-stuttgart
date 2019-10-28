@@ -1,8 +1,12 @@
-import { KsdSucheClient } from "../DataSources/KsdSucheClient";
+import { KsdSucheClient } from "../DataSources/Ratsdokumente/KsdSucheClient";
 
 export class TimelineResolver {
 
-    public resolve(search: string) {
+    /**
+     * Method resolves data for timeline API
+     * @param search 
+     */
+    public async resolve(search: string) {
 
         // DEBUG
         console.log(search);
@@ -10,7 +14,18 @@ export class TimelineResolver {
 
         // We use "Suche" client
         let ksdSucheClient = new KsdSucheClient();
-        ksdSucheClient.submitSearch('Jahresbericht');
+
+        // 
+        let bodyHtml = await ksdSucheClient.submitSearch('Stuttgart 28');
+            
+        // Scrape retrieved bodyHTML
+        
+
+        // TEST
+        console.log(bodyHtml);
+        // TEST      
+
+
 
         // Returns simple demo data
         // @see https://timeline.knightlab.com/docs/json-format.html

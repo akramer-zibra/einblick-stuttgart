@@ -1,6 +1,6 @@
 type Query {
     info: String!
-    timeline(search: String): TimelineResult!
+    timeline(search: String!): TimelineResult!
 }
 
 type TimelineResult {

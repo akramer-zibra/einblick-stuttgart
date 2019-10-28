@@ -1,6 +1,7 @@
 import axios from 'axios';
 import fs from 'fs';
 import qs from 'query-string';
+import iconv from 'iconv-lite';
 
 export class KsdSucheClient {
 
@@ -62,30 +63,37 @@ export class KsdSucheClient {
      * Method does an http POST call to this endpoit
      * @param keyword 
      */
-    public submitSearch(keyword: string) {
+    public submitSearch(keyword: string): Promise<string> {
 
         // Use default params 
         let params = this.params;
-        params["Suchbegriff1"] = 'Stuttgart+28';    // FIXME
+        params["Suchbegriff1"] = keyword.replace(' ', '+');    // We replace whitespaces with + for concattenated search
 
-        // let encodedParams = furlencode(params, {skipIndex : true, sorted : true});
+        // Stringify params object for POST call
         let encodedParams = qs.stringify(params, {encode: false});
-        console.log(encodedParams);
+        
+        // 
+        return new Promise((resolve, reject) => {
 
-        // Post this generated form data with www-form-encoded parameters
-        this.client.post('/masustart', encodedParams)
-            .then(function (response) {
-                
-                // TEST write response to filesystem
-                //console.log(response.data);
-                fs.writeFile('./temp/ergebnis.html', response.data, {}, function(err) {
-                    if(err) { console.error(err); }
+            // Post this generated form data with www-form-encoded parameters
+            this.client.post('/masustart', encodedParams, { responseType: 'arraybuffer' })
+                .then(function (response) {
+                    
+                    // Change encoding from windows1252 to utf8
+                    let decodedStr = iconv.decode(response.data, 'win1252');
+
+                    // TEST write response to filesystem
+                    //console.log(response.data);
+                    fs.writeFile('./temp/ergebnis.html', decodedStr, function(err) {
+                        if(err) { console.error(err); }
+                    });
+
+                    // We resolve this promise with response HTML body data
+                    resolve(decodedStr);
+                })
+                .catch(function (error) {
+                    reject(error);
                 });
-
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-
+        });
     }
 }
