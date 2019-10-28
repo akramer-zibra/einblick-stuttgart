@@ -10,10 +10,6 @@ export class BeratungsunterlagenResolver {
      */
     public async resolve(search: string) {
 
-        // DEBUG
-        console.log(search);
-        // DEBUG
-
         // We use "Suche" client
         let ksdSucheClient = new KsdSucheClient();
 

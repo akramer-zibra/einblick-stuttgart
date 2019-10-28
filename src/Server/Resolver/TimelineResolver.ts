@@ -10,11 +10,6 @@ export class TimelineResolver {
      */
     public async resolve(search: string) {
 
-        // DEBUG
-        console.log(search);
-        // DEBUG
-
-
         // Define response object stub
         // @see https://timeline.knightlab.com/docs/json-format.html
         let response: any = {
