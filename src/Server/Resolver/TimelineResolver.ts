@@ -1,9 +1,9 @@
 export class TimelineResolver {
 
-    public resolve(suche: string) {
+    public resolve(search: string) {
 
         // DEBUG
-        console.log(suche);
+        console.log(search);
         // DEBUG
 
         // Returns simple demo data
