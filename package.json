@@ -30,6 +30,6 @@
     "node-plantuml": "0.9.0"
   },
   "author": "Achim Kramer <achim@zibra.de>",
-  "license": "ISC",
+  "license": "AGPL-3.0-only",
   "private": true
 }
