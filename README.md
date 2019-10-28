@@ -1,7 +1,7 @@
 # Einblick-Stuttgart
 
 ## Mission
-Dieses Projekt startet mit dem Ziel die öffentlichen Ratsdokumente der Stadt Stuttgart übersichtlich und verständlich im Internet zur Verfügung zu stellen.
+Dieses Projekt startet mit dem Ziel die öffentlichen Ratsdokumente der Stadt Stuttgart übersichtlich und verständlich im Internet zur Verfügung zu stellen. Dabei versteht sich dieses Projekt selbst als unparteiisch und nur einer Toleranz gegenüber demokratischer Meinungsvielfalt verpflichtet.
 
 + Als Stadtbewohner:in soll ich mit dieser Software die Möglichkeit bekommen, mich zu bestimmten Themen/Stichworten retrospektiv schlau zu machen, um einen besseren Einblick in die politische Arbeit der Stadt Stuttgart zu bekommen und mich besser für anstehende Wahlen und Bürgerinitiativen vorzubereiten
 
