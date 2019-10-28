@@ -1,4 +1,4 @@
-export class StreamResolver {
+export class TimelineResolver {
 
     public resolve(suche: string) {
 
@@ -10,17 +10,15 @@ export class StreamResolver {
         // @see https://timeline.knightlab.com/docs/json-format.html
         return {
             "title": {
-                "title": {
-                    "media": {
-                      "url": "//www.flickr.com/photos/tm_10001/2310475988/",
-                      "caption": "Whitney Houston performing on her My Love is Your Love Tour in Hamburg.",
-                      "credit": "flickr/<a href='http://www.flickr.com/photos/tm_10001/'>tm_10001</a>"
-                    },
-                    "text": {
-                      "headline": "Whitney Houston<br/> 1963 - 2012",
-                      "text": "<p>Houston's voice caught the imagination of the world propelling her to superstardom at an early age becoming one of the most awarded performers of our time. This is a look into the amazing heights she achieved and her personal struggles with substance abuse and a tumultuous marriage.</p>"
-                    }
+                "media": {
+                    "url": "//www.flickr.com/photos/tm_10001/2310475988/",
+                    "caption": "Whitney Houston performing on her My Love is Your Love Tour in Hamburg.",
+                    "credit": "flickr/<a href='http://www.flickr.com/photos/tm_10001/'>tm_10001</a>"
                 },
+                "text": {
+                    "headline": "Whitney Houston<br/> 1963 - 2012",
+                    "text": "<p>Houston's voice caught the imagination of the world propelling her to superstardom at an early age becoming one of the most awarded performers of our time. This is a look into the amazing heights she achieved and her personal struggles with substance abuse and a tumultuous marriage.</p>"
+                }
             }, 
             "events": [{
                 "media": {
