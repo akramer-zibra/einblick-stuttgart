@@ -6,34 +6,47 @@
     <title>Einblick Stuttgart</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+
+    <style type="text/css">
+    .app__clickable { cursor: pointer; }
+    </style>
   </head>
 
   <body>
   <section class="section">
     <div class="container">
-      <h1 class="title">
-        Hello World
+      <h1 class="title is-size-1">
+        Einblick Stuttgart
       </h1>
-      <p class="subtitle">
-        My first website with <strong>Bulma</strong>!
+
+      <p>
+        Suchanfragen an die Ratsdokumente der Stadt Stuttgart und stellt die Suchergebnisse in einer Zeitleiste dar. 
       </p>
 
-      <div class="columns">
-        <div class="column">
-          First column
-        </div>
-        <div class="column">
-          Second column
-        </div>
-        <div class="column">
-          Third column
-        </div>
-        <div class="column">
-          Fourth column
-        </div>
+      <h2 style="margin-top: 30px;" class="title is-size-3">Stichwörter</h2>
+      
+      <div class="tags">
+        <span class="tag is-large is-primary app__clickable">Stuttgart 28</span>
+        <span class="tag is-large is-primary app__clickable">Erlebnisraum Neckar</span>
+        <span class="tag is-large is-primary app__clickable">Jobcenter</span>
+        <span class="tag is-large is-primary app__clickable">Weltklima in Not</span>
       </div>
+
+      <div id="timeline"></div>
+
     </div>
   </section>
+
+  <footer class="footer">
+    <div class="content has-text-centered">
+      <p>
+        Dieses ist kein offizielles Projekt und baut auf eine öffentliche Schnittstelle der Stadt Stuttgart und kann darum <u>keine</u> Garantie für Vollständigkeit der Daten geben.
+      </p>
+      <p>
+        Der Quellcode ist lizenziert unter der <a href="https://www.gnu.org/licenses/agpl-3.0.de.html">GNU-AGPLv3</a> Lizenz.
+      </p>
+    </div>
+  </footer>
 
   <script type="text/javascript">
     app.start();
