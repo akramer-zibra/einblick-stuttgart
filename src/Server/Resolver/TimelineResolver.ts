@@ -1,4 +1,6 @@
+import cheerio from 'cheerio';
 import { KsdSucheClient } from "../DataSources/Ratsdokumente/KsdSucheClient";
+import { BeratungsunterlagenScraper } from '../DataSources/Ratsdokumente/Scraper/BeratungsunterlagenScraper';
 
 export class TimelineResolver {
 
@@ -12,62 +14,49 @@ export class TimelineResolver {
         console.log(search);
         // DEBUG
 
+
+        // Define response object stub
+        // @see https://timeline.knightlab.com/docs/json-format.html
+        let response: any = {
+            "title": {
+                "text": {
+                    "headline": "Suche: "+ search,
+                    "text": "<p>Alles was wir dazu finden können</p>"
+                }
+            }, 
+            "events": []
+        } 
+
         // We use "Suche" client
         let ksdSucheClient = new KsdSucheClient();
 
         // 
         let bodyHtml = await ksdSucheClient.submitSearch('Stuttgart 28');
-            
-        // Scrape retrieved bodyHTML
         
+        // Parse html with cheerio
+        let $ = cheerio.load(bodyHtml);     // We parse dom here an pass dom to scrapers instead of HTML string
 
-        // TEST
-        console.log(bodyHtml);
-        // TEST      
+        // Scrape retrieved bodyHTML
+        let buchScraper = new BeratungsunterlagenScraper();
+        let beratungsunterlagenArr = buchScraper.scrape($);
 
+        console.log(beratungsunterlagenArr);
 
-
-        // Returns simple demo data
-        // @see https://timeline.knightlab.com/docs/json-format.html
-        return {
-            "title": {
-                "media": {
-                    "url": "//www.flickr.com/photos/tm_10001/2310475988/",
-                    "caption": "Whitney Houston performing on her My Love is Your Love Tour in Hamburg.",
-                    "credit": "flickr/<a href='http://www.flickr.com/photos/tm_10001/'>tm_10001</a>"
-                },
-                "text": {
-                    "headline": "Whitney Houston<br/> 1963 - 2012",
-                    "text": "<p>Houston's voice caught the imagination of the world propelling her to superstardom at an early age becoming one of the most awarded performers of our time. This is a look into the amazing heights she achieved and her personal struggles with substance abuse and a tumultuous marriage.</p>"
-                }
-            }, 
-            "events": [{
-                "media": {
-                    "url": "https://youtu.be/5Fa09teeaqs",
-                    "caption": "CNN looks back at Houston's iconic performance of the national anthem at Superbowl XXV.",
-                    "credit": "CNN"
-                },
+        // Push each "Beratungsunterlage" into response object
+        beratungsunterlagenArr.forEach((berObj) => {
+            response.events.push({
                 "start_date": {
-                    "year": "1991"
+                    "year": berObj.datum.getFullYear(),
+                    "month": berObj.datum.getMonth(),
+                    "day": berObj.datum.getDay()
                 },
                 "text": {
-                    "headline": "Super Bowl",
-                    "text": "Houston's national anthem performance captures the hearts and minds of Americans ralllying behind soldiers in the Persian Guf War."
+                    "headline": berObj.ausschuss,
+                    "text": berObj.titel
                 }
-            },{
-                "media": {
-                    "url": "https://youtu.be/5Fa09teeaqs",
-                    "caption": "CNN looks back at Houston's iconic performance of the national anthem at Superbowl XXV.",
-                    "credit": "CNN"
-                },
-                "start_date": {
-                    "year": "1999"
-                },
-                "text": {
-                    "headline": "Super Bowl",
-                    "text": "Houston's national anthem performance captures the hearts and minds of Americans ralllying behind soldiers in the Persian Guf War."
-                }
-            }]
-        }        
+            });
+        });
+        
+        return response;       
     }
 }
