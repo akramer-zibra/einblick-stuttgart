@@ -1,15 +1,15 @@
 import { GraphQLServer } from 'graphql-yoga';
 import express from 'express';
-import { StreamResolver } from './Resolver/StreamResolver';
+import { TimelineResolver } from './Resolver/TimelineResolver';
 
 // Instatiate Stream resolver
-const streamResolver = new StreamResolver();
+const timelineResolver = new TimelineResolver();
 
 // Definde API resolvers
 const resolvers = {
     Query: {
         info: () => `This is the fresh API`,
-        stream: streamResolver.resolve   // Bind resolver's resolve methode to this query
+        timeline: timelineResolver.resolve   // Bind resolver's resolve methode to this query
     },
 }
 
