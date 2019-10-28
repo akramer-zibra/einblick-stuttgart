@@ -72,12 +72,12 @@ export class BeratungsunterlagenScraper {
 
             // Push scraped data into collection
             result.push({
-                datum: datum,
+                datum,
                 id,
-                titel: titel,
-                ausschuss: ausschuss,
-                beratungsvorlage: beratungsvorlage,
-                anhaenge: anhaenge
+                titel,
+                ausschuss,
+                beratungsvorlage,
+                anhaenge
             });
         }
 
