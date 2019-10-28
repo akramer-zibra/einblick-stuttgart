@@ -1,6 +1,7 @@
 type Query {
     info: String!
     timeline(search: String!): TimelineResult!
+    beratungsunterlagen(search: String!): [Beratungsunterlagen]!
 }
 
 type TimelineResult {
@@ -34,4 +35,19 @@ type TimelineDate {
 type TimelineText {
     headline: String
     text: String
+}
+
+type Beratungsunterlagen {
+    datum: String
+    id: String
+    titel: String
+    ausschuss: String
+    beschlussvorlage: Dokument
+    anhaenge: [Dokument]
+}
+
+type Dokument {
+    url: String
+    titel: String
+    typ: String
 }
