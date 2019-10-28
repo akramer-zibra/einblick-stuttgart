@@ -1,9 +1,5 @@
 import { GraphQLServer } from 'graphql-yoga';
-import { Repository } from './repository';
 import express from 'express';
-
-// Instantiate new Repository object
-const repository = new Repository();
 
 // Definde API resolvers
 const resolvers = {
