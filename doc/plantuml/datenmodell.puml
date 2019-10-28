@@ -19,6 +19,7 @@ class Beratungsunterlage {
     +titel
     +ausschuss
 }
+Beratungsunterlage --> "1" Dokument : beschlussvorlage
 Beratungsunterlage --> "*" Dokument : anhaenge
 
 /'
