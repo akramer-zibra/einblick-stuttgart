@@ -11,7 +11,7 @@
     "client:build": "parcel build src/Client/index.html --out-dir ./public",
     "client:build:debug": "parcel build src/Client/index.html --out-dir ./public --no-minify",
     "client:build:watch": "parcel watch src/Client/index.html --out-dir ./public ",
-    "start": "npm run server:start",
+    "start": "npm run client:build && npm run server:start",
     "server:start": "npm run server:build:live",
     "server:build": "tsc -p .",
     "server:build:live": "nodemon --watch 'src/**/*.ts' --exec node_modules/.bin/ts-node src/Server/index.ts",
