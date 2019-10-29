@@ -1,7 +1,7 @@
 import dateUtil from 'date-and-time';
 import 'date-and-time/locale/de';
 
-export class BeratungsunterlagenScraper {
+export class SuchergebnisBunterlagenScraper {
 
     /** url path */
     private urlPath = 'https://www.domino1.stuttgart.de/web/ksd/ksdRedSystem.nsf';

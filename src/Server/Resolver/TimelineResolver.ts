@@ -1,6 +1,6 @@
 import cheerio from 'cheerio';
 import { KsdSucheClient } from "../DataSources/Ratsdokumente/KsdSucheClient";
-import { BeratungsunterlagenScraper } from '../DataSources/Ratsdokumente/Scraper/BeratungsunterlagenScraper';
+import { SuchergebnisBunterlagenScraper } from '../DataSources/Ratsdokumente/Scraper/SuchergebnisBunterlagenScraper';
 
 export class TimelineResolver {
 
@@ -32,7 +32,7 @@ export class TimelineResolver {
         let $ = cheerio.load(bodyHtml);     // We parse dom here an pass dom to scrapers instead of HTML string
 
         // Scrape retrieved bodyHTML
-        let buchScraper = new BeratungsunterlagenScraper();
+        let buchScraper = new SuchergebnisBunterlagenScraper();
         let beratungsunterlagenArr = buchScraper.scrape($);
 
         // Push each "Beratungsunterlage" into response object
