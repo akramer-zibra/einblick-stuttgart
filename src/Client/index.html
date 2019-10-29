@@ -5,14 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Einblick Stuttgart</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
-    <script defer="" src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 
     <link title="timeline-styles" rel="stylesheet" href="https://cdn.knightlab.com/libs/timeline3/latest/css/timeline.css">
     <script src="https://cdn.knightlab.com/libs/timeline3/latest/js/timeline.js"></script>
 
-    <script defer="" src="/app.c328ef1a.js"></script>
+    <script defer src="app.js"></script>
 
-    <style>.app__clickable { cursor: pointer; }</style>
+    <style type="text/css">
+      .app__clickable { cursor: pointer; }
+    </style>
   </head>
 
   <body>
@@ -51,22 +53,23 @@
       </div>
     </footer>
 
-    <script>app.start(); // 
+    <script type="text/javascript">
 
-var timeline_json = make_the_json(); // replace make_the_json() with the JSON object you created
-// two arguments: the id of the Timeline container (no '#')
-// and the JSON object or an instance of TL.TimelineConfig created from
-// a suitable JSON object
+      app.start();
 
-window.timeline = new TL.Timeline('timeline-embed', timeline_json, {
-  start_at_end: true,
-  default_bg_color: {
-    r: 0,
-    g: 0,
-    b: 0
-  },
-  timenav_height: 250
-});</script>
+      // 
+      var timeline_json = make_the_json(); // replace make_the_json() with the JSON object you created
+
+      // two arguments: the id of the Timeline container (no '#')
+      // and the JSON object or an instance of TL.TimelineConfig created from
+      // a suitable JSON object
+      window.timeline = new TL.Timeline('timeline-embed', timeline_json, {
+              start_at_end: true,
+              default_bg_color: {r:0, g:0, b:0},
+              timenav_height: 250
+            });
+
+    </script>
   </body>
 </html>
     
