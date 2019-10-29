@@ -23,13 +23,10 @@ export class Timeline {
                 query: gql`
                     query {
                         timelineAll(search:"Stuttgart 28") {
-                            title {
-                            media {url,  caption, credit}, 
-                            text {headline, text}
-                            }
                             events {
-                            start_date {year, month, day}
-                            text {headline, text}
+                                media {url, caption}
+                                start_date {year, month, day}
+                                text {headline, text}
                             }
                         }
                     }`
@@ -55,9 +52,10 @@ export class Timeline {
         // a suitable JSON object
         this.timeline = new TL.Timeline('timeline-embed', timelineJson, {
                 start_at_end: true,
-                //default_bg_color: {r:0, g:0, b:0},
                 timenav_height: 300,
-                language: 'de'
+                language: 'de',
+                timenav_position: 'top',
+                hash_bookmark: true
             });
     }
 }
