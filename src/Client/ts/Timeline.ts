@@ -21,9 +21,7 @@ export class Timeline {
         new TL.Timeline('timeline-embed', timelineJson, {
                 start_at_end: true,
                 timenav_height: 300,
-                language: 'de',
-                timenav_position: 'bottom',
-                hash_bookmark: true
+                language: 'de'
             });
     }
 }
