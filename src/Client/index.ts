@@ -5,6 +5,5 @@ const main = () => {
     console.log('Client Applikation läuft...');
 
     const timeline = new Timeline();
-    timeline.init();
 }
 main();
