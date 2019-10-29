@@ -20,7 +20,17 @@ export class GraphQLClient {
 
         this.client = new ApolloClient({
             cache,
-            link
+            link,
+            defaultOptions: {   // NOTICE: We disable cache for development purpose
+                watchQuery: {
+                  fetchPolicy: 'no-cache',  
+                  errorPolicy: 'ignore',
+                },
+                query: {
+                  fetchPolicy: 'no-cache',
+                  errorPolicy: 'all',
+                },
+              }
         });
     }
 }
