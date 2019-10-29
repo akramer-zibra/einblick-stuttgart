@@ -7,26 +7,24 @@ Dieses Projekt startet mit dem Ziel die öffentlichen Ratsdokumente der Stadt St
 
 + Als Politiker:in soll ich mit dieser Software die Möglichkeit bekommen, mich zu bestimmten Themen retrospektiv informieren zu können, um mich dadurch besser auf meine politische Aufgabe vorzubereiten und effektivere Entscheidungen treffen zu können
 
-## Software
+## Anwendung
+Diese Anwendung besteht aus einem Server und einem Client Teil. Der Server-Teil ist eine Node.js Anwendung Server-Anwendung und ist in TypeScript programmiert. Der Client-Teil ist eine Browseranwendung, die ebenfalls in TypeScript programmiert ist. In diesem Repository liegen beide Anwendungsteile.
 
-### Prepare
-`npm install`
+### Voraussetzungen
+Für den Betrieb muss `Node.js` installiert sein. 
+
+### Bibliotheken und Abhängigkeiten
+Mit dem Befehl `npm install` werden alle Abhängigkeiten zu Code-Bibliotheken installiert. 
+Dies ist die Voraussetzung für die lokale Weiterentwicklung dieser Anwendung.
 
 ### Building
-`npm server:build`
+Der ausführbare Code des Server- und Client-Teil dieser Anwendung kann jeweils separat gebaut werden. Der Befehl `npm run server:build` erzeugt den Server-Code und der Befehl `npm run client:build` erzeugt den Client-Teil (für den Browser).
 
 ### Running
-`npm start`
+Der Befehl `npm start` startet den Server-Teil der Anwendung. Vor dem Start werden jeweils der ausführbare Server- und auch der Client-Code neu erzeugt. Der Client-Teil für den Browser ist über die Server-Anwendung benutzbar.
 
 ### API-Testing
-Server starten und mit dem Sandbox-Tool unter `loclhost:4000/playground` die API testen.
-
-### Drittanbieter "Werkzeuge" 
-#### User Interface
-[Bulma.io](https://bulma.io/)
-
-#### Konzeption
-[PlatUML](http://plantuml.com/de/starting) für die technische Konzeption 
+Server starten und mit dem Sandbox-Tool unter `localhost:4000/playground` die API testen.
 
 ## Beispielhafte Anfragen
 
@@ -39,17 +37,17 @@ Die Ratsdokumente sind bereits online abrufbar, allerdings nur mit einer verstau
 Dieses Projekt ist inspiriert durch [Politik bei uns](https://politik-bei-uns.de/).  
 
 ## Sonstiges
-
 ### Öffentliche Datenbestände
-
 [Ratsdokumente - Startseite](https://www.stuttgart.de/external/show/ratsdokumente)
-
 [Ratsdokumente - Suche](https://www.domino1.stuttgart.de/web/ksd/KSDRedSystem.nsf/masustart)
-
 [Sitzungskalender + Tagesordnungen](https://www.domino1.stuttgart.de/web/ksd/KSDRedSystem.nsf/AnSiKa)
 
-### ...Alternative Projekttitel
-"Stuttgart transparency", "Stuttgart monitoring", "Occupy Stuttgart", "Stuttgart-Watch", ...
+### Drittanbieter "Werkzeuge" 
+#### User Interface
+[Bulma.io](https://bulma.io/)
+
+#### Konzeption
+[PlatUML](http://plantuml.com/de/starting) für die technische Konzeption 
 
 ## FAQs
 ### Datein-Encoding der Datenquellen domino1.stuttgart.de
