@@ -8,7 +8,7 @@ export class ErrorFeedback {
      */
     static showErrorToast(message: string) {
 
-        // Create toast with error message
+        // Create bulma toast with error message
         toast({
             message: `${message}`,
             type: "is-warning",
