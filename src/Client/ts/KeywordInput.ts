@@ -2,6 +2,7 @@ import $ from "jquery";
 import gql from "graphql-tag";
 import { GraphQLClient } from "./GraphQLClient";
 import { Timeline } from "./Timeline";
+import { ErrorFeedback } from "./ErrorFeedback";
 
 export class KeywordInput {
 
@@ -25,45 +26,61 @@ export class KeywordInput {
             // Get keyword from tag text
             const keyword = $(event.target).text();
 
-            console.log(keyword);
-
             // Call API 
-            const timelineJson = this.apiCall(keyword);
+            this.apiCall(keyword)
+                .then((timelineJson) => {
 
-            // Update Timeline
-//            this.timeline.update(timelineJson);
+                    // Update Timeline
+                    this.timeline.update(timelineJson);
+                })
+                .catch(this.handleError);
         });
     }
 
     /**
      * Method calls GraphQL APi for timeline events
      */
-    private apiCall(keywordText: string): Promise<any> {
+    private apiCall(keyword: string): Promise<any> {
 
         return new Promise((resolve, reject) => {
+
+            $('.pageloader').addClass('is-active');
 
             // Load timeline events from GraphQL API
             this.graphQLClient.client
                 .query({
                     query: gql`
-                        query {
-                            timelineByKeyword(search: $keywordText) {
+                        query TimelineByKeyword($keyword: String!) {
+                            timelineByKeyword(search: $keyword) {
                                 events {
                                     media {url}
                                     start_date {year, month, day}
                                     text {headline, text}
                                 }
                             }
-                        }`
-                }, {
+                        }`,
                     variables: {
-                        keywordText
-                    }
+                        keyword
+                    } 
                 })
                 .then(result => {
-                    resolve(result.data.timelineAll);
+                    $('.pageloader').removeClass('is-active');
+                    resolve(result.data.timelineByKeyword);
                 })
-                .catch(err => reject(err));
+                .catch(err => {
+                    $('.pageloader').removeClass('is-active');
+                    reject(err);
+                });
         });
+    }
+
+    /**
+     * Method handles error 
+     * @param err 
+     */
+    private handleError(err) {
+
+        // Show error
+        ErrorFeedback.showErrorToast(err);
     }
 }
