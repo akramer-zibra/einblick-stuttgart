@@ -1,6 +1,6 @@
 import cheerio from 'cheerio';
-import { KsdSucheClient } from "../DataSources/Ratsdokumente/KsdSucheClient";
-import { SuchergebnisBunterlagenScraper } from '../DataSources/Ratsdokumente/Scraper/SuchergebnisBunterlagen.scraper';
+import { KsdSucheClient } from "../Ratsdokumente/data/KsdSucheClient";
+import { SuchergebnisBunterlagenScraper } from '../Ratsdokumente/scraper/SuchergebnisBunterlagen.scraper';
 
 export class BeratungsunterlagenResolver {
 
