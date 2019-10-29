@@ -3,6 +3,8 @@
 // Import a Google Font
 @import url('https://fonts.googleapis.com/css?family=Nunito:400,700');
 
+@import url('https://fonts.googleapis.com/css?family=Merriweather:300,400,700,900&display=swap');
+
 // Set your brand colors
 $purple: #8A4D76;
 $pink: #FA7C91;
@@ -11,11 +13,11 @@ $beige-light: #D0D1CD;
 $beige-lighter: #EFF0EB;
 
 // Update Bulma's global variables
-$family-sans-serif: "Nunito", sans-serif;
+$family-sans-serif: "Merriweather", sans-serif;
 $grey-dark: $brown;
 $grey-light: $beige-light;
 $primary: $purple;
-$link: $purple;
+$link: $pink;
 $widescreen-enabled: false;
 $fullhd-enabled: false;
 
