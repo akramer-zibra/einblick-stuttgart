@@ -54,7 +54,7 @@ export class KsdSucheClient {
         // Instatiate axios client
         this.client = axios.create({
             baseURL: 'https://www.domino1.stuttgart.de/web/ksd/KSDRedSystem.nsf',
-            timeout: 10000,
+            timeout: 20000,
             headers: this.headers
         });
     };
