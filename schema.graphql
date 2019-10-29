@@ -5,8 +5,8 @@ type Query {
 }
 
 type TimelineResult {
-    title: TimelineTitle!
-    events: [TimelineEvent]!
+    events: [TimelineSlide]!
+    title: TimelineTitle
 }
 
 type TimelineTitle {
@@ -14,29 +14,34 @@ type TimelineTitle {
     text: TimelineText
 }
 
-type TimelineEvent {
-    media: TimelineMedia
-    start_date: TimelineDate
-    text: TimelineText
+type TimelineSlide {
+    start_date: TimelineDate!
+    end_date: TimelineDate
+    text: TimelineText!
+    media: TimelineMedia!
+    group: String    
 }
 
 type TimelineMedia {
     url: String!
     caption: String
-    credit: String
     link: String
     link_target: String
 }
 
 type TimelineDate {
-    year: String
+    year: String!
     month: String
     day: String
+    minute: String
+    second: String
+    millisecond: String
+    display_date: String
 }
 
 type TimelineText {
-    headline: String
-    text: String
+    headline: String!
+    text: String!
 }
 
 type Beratungsunterlagen {
