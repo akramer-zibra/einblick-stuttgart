@@ -11,11 +11,13 @@ export class ErrorFeedback {
         // Create bulma toast with error message
         toast({
             message: `${message}`,
-            type: "is-warning",
+            duration: 3000,
+            type: "is-danger",
             position: "center",
+            dismissible: true,
             closeOnClick: true,
             pauseOnHover: true,
-            opacity: 0.8
+            opacity: 0.9
           });
     }
 }
