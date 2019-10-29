@@ -52,7 +52,8 @@ export class TimelineResolver {
                 "text": {
                     "headline": this.cut(berObj.titel),
                     "text": `${berObj.ausschuss}`
-                }
+                },
+                "group": "Beratungsunterlage"
             });
         });
         

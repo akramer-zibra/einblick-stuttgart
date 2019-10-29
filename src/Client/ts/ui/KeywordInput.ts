@@ -18,6 +18,7 @@ export class KeywordInput {
                                             media {url, link, link_target}
                                             start_date {year, month, day}
                                             text {headline, text}
+                                            group
                                         }
                                     }
                                 }`;
