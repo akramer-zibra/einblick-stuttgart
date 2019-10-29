@@ -13,7 +13,7 @@ Dieses Projekt startet mit dem Ziel die öffentlichen Ratsdokumente der Stadt St
 `npm install`
 
 ### Building
-`npm build`
+`npm server:build`
 
 ### Running
 `npm start`
@@ -58,6 +58,6 @@ Dieses Projekt ist inspiriert durch [Politik bei uns](https://politik-bei-uns.de
 + Anträge sind in `Windows 1252` codiert
 
 ### Coding Guidelines
-Die `TypeScript` Lint-Rules stammen aus dem open-source Projekt [MichalLytek/type-graphql](https://github.com/MichalLytek/type-graphql). Der Befehl `npm run lint` überprüft die Guidelines.
+Die `TypeScript` Lint-Rules stammen aus dem open-source Projekt [MichalLytek/type-graphql](https://github.com/MichalLytek/type-graphql). Der Befehl `npm run server:lint` überprüft die Guidelines.
 
 Anwender:innen von VS Code können den Editor so [konfigurieren](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-typescript-tslint-plugin), dass Lint-Errors automatisch beim Speichern behoben werden. 

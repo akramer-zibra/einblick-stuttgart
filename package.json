@@ -7,14 +7,15 @@
     "doc": "doc"
   },
   "scripts": {
-    "start": "npm run build:live",
-    "build": "tsc -p .",
-    "build:live": "nodemon --watch 'src/**/*.ts' --exec node_modules/.bin/ts-node src/Server/index.ts",
-    "check": "tsc --noEmit",
-    "lint": "tslint --project tsconfig.json",
-    "verify": "npm run check && npm run lint",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "generate:uml": "puml generate doc/plantuml/datenmodell.puml -o doc/plantuml/datenmodell.png"
+    "doc:generate:uml": "puml generate doc/plantuml/datenmodell.puml -o doc/plantuml/datenmodell.png",
+    "start": "npm run server:start",
+    "server:start": "npm run server:build:live",
+    "server:build": "tsc -p .",
+    "server:build:live": "nodemon --watch 'src/**/*.ts' --exec node_modules/.bin/ts-node src/Server/index.ts",
+    "server:check": "tsc --noEmit",
+    "server:lint": "tslint --project tsconfig.json",
+    "server:verify": "npm run server:check && npm run server:lint",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "Stuttgart",
