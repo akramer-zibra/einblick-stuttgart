@@ -82,12 +82,6 @@ export class KsdSucheClient {
                     // Change encoding from windows1252 to utf8
                     const decodedStr = iconv.decode(response.data, 'win1252');
 
-                    // TEST write response to filesystem
-                    // console.log(response.data);
-                    fs.writeFile('./temp/ergebnis.html', decodedStr, (err) => {
-                        if(err) { console.error(err); }
-                    });
-
                     // We resolve this promise with response HTML body data
                     resolve(decodedStr);
                 })
