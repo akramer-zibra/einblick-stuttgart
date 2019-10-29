@@ -39,7 +39,7 @@ export class TimelineResolver {
         beratungsunterlagenArr.forEach((berObj) => {
             response.events.push({
                 "media": {
-                    "url": "https://dummyimage.com/200x300/cccccc/fff.png",
+                    "url": "/static/img/beratungsunterlage-200x.png",
                     "caption": "Beratungsunterlage",
                     "credit": "Autorrs"
                 },
