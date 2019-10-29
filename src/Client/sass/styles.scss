@@ -25,5 +25,12 @@ $control-border-width: 2px;
 $input-border-color: transparent;
 $input-shadow: none;
 
+// Customize pageloader
+$pageloader-opacity: 1;
+
 // Import bulma styles
 @import "../../../node_modules/bulma/bulma.sass";
+
+// Import bulma extensions
+@import "bulma-divider-0.2.0/index.sass";
+@import "bulma-pageloader-0.3.0/index.sass";
