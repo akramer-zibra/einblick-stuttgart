@@ -1,7 +1,7 @@
 import { GraphQLServer } from 'graphql-yoga';
 import express from 'express';
-import { TimelineResolver } from './Resolver/TimelineResolver';
-import { BeratungsunterlagenResolver } from './Resolver/BeratungsunterlagenResolver';
+import { TimelineResolver } from './Resolver/Timeline.resolver';
+import { BeratungsunterlagenResolver } from './Resolver/Beratungsunterlagen.resolver';
 
 // Instatiate Stream resolver
 const timelineResolver = new TimelineResolver();
