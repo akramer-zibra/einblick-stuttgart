@@ -24,7 +24,7 @@ const server = new GraphQLServer({
 
 // Graphserver uses express.js internally
 // server.express.use(...);
-server.express.get('/test', function(req, res) {
+server.express.get('/test', (req, res) => {
     res.send('Hello World');
 });
 
@@ -33,7 +33,7 @@ server.express.use('/', express.static('public'));
 
 
 // Server config
-let config = {
+const config = {
     endpoint: '/endpoint', 
     playground: '/playground', 
     subscriptions: '/subscriptions'

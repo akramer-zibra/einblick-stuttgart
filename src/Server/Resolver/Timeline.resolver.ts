@@ -8,11 +8,11 @@ export class TimelineResolver {
      * Method resolves data for timeline API
      * @param searchText 
      */
-    public async resolve(searchText: string) {
+    async resolve(searchText: string) {
 
         // Define response object stub
         // @see https://timeline.knightlab.com/docs/json-format.html
-        let response: any = {
+        const response: any = {
             "title": {
                 "text": {
                     "headline": "Suche: "+ searchText,
@@ -23,17 +23,17 @@ export class TimelineResolver {
         } 
 
         // We use "Suche" client
-        let ksdSucheClient = new KsdSucheClient();
+        const ksdSucheClient = new KsdSucheClient();
 
         // 
-        let bodyHtml = await ksdSucheClient.submitSearch(searchText);
+        const bodyHtml = await ksdSucheClient.submitSearch(searchText);
         
         // Parse html with cheerio
-        let $ = cheerio.load(bodyHtml);     // We parse dom here an pass dom to scrapers instead of HTML string
+        const $ = cheerio.load(bodyHtml);     // We parse dom here an pass dom to scrapers instead of HTML string
 
         // Scrape retrieved bodyHTML
-        let buchScraper = new SuchergebnisBunterlagenScraper();
-        let beratungsunterlagenArr = buchScraper.scrape($);
+        const buchScraper = new SuchergebnisBunterlagenScraper();
+        const beratungsunterlagenArr = buchScraper.scrape($);
 
         // Push each "Beratungsunterlage" into response object
         beratungsunterlagenArr.forEach((berObj) => {

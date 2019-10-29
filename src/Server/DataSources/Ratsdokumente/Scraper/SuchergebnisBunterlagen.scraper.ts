@@ -9,7 +9,7 @@ export class SuchergebnisBunterlagenScraper {
     /**
      * Constructor method
      */
-    public constructor() {
+    constructor() {
         // We use german locale for time functions
         dateUtil.locale("de");
     };
@@ -18,40 +18,40 @@ export class SuchergebnisBunterlagenScraper {
      * Method scrapes "Buchungsunterlagen" from given cheerio dom
      * @param $
      */
-    public scrape($: CheerioStatic) {
+    scrape($: CheerioStatic) {
 
-        let result: any = [];
+        const result: any = [];
 
         // We load first table from page
-        let firstTable = $('table').toArray()[0];
+        const firstTable = $('table').toArray()[0];
 
         // 
-        let rows = $(firstTable).find('tr').toArray();
+        const rows = $(firstTable).find('tr').toArray();
 
         // We iterate each table row 
         // and skip the first one (headline)!
         for(let i=1; i<rows.length; i++) {
 
             // Load columns as array
-            let columns = $(rows[i]).find('td').toArray();
+            const columns = $(rows[i]).find('td').toArray();
 
             // Extract Id
             // and Veratungsvorlage
-            let firstCell = $(columns[0]);
-            let id = this.extractId(firstCell);
-            let beratungsvorlage = this.extractBunterlage(firstCell);
+            const firstCell = $(columns[0]);
+            const id = this.extractId(firstCell);
+            const beratungsvorlage = this.extractBunterlage(firstCell);
                         
             // Extract Date 
             // and parse it into Date object
-            let datum = this.extractDatum($(columns[1]));
+            const datum = this.extractDatum($(columns[1]));
 
             // Extract Title & Ausschuss
-            let thirdCell = $(columns[2]);
-            let titel = this.extractTitel(thirdCell);
-            let ausschuss = this.extractAusschuss(thirdCell);
+            const thirdCell = $(columns[2]);
+            const titel = this.extractTitel(thirdCell);
+            const ausschuss = this.extractAusschuss(thirdCell);
 
             // Extract Anhänge
-            let anhaenge = this.extractAnhaenge($, $(columns[3]));
+            const anhaenge = this.extractAnhaenge($, $(columns[3]));
 
             // Push scraped data into collection
             result.push({
@@ -72,7 +72,7 @@ export class SuchergebnisBunterlagenScraper {
      * @param cell 
      */
     private extractId(cell): string {
-        let idAnchor = cell.find('a');
+        const idAnchor = cell.find('a');
         return idAnchor.text().replace('Drucksache ', '');
     }
 
@@ -81,7 +81,7 @@ export class SuchergebnisBunterlagenScraper {
      * @param cell 
      */
     private extractBunterlage(cell) {
-        let anchor = cell.find('a');
+        const anchor = cell.find('a');
         return {
             url: anchor.attr('href'),
             titel: anchor.text(),
@@ -94,7 +94,7 @@ export class SuchergebnisBunterlagenScraper {
      * @param cell 
      */
     private extractDatum(cell) {
-        let dateString = cell.find('p6').text().trim();
+        const dateString = cell.find('p6').text().trim();
         return dateUtil.parse(dateString, 'DD.MM.YYYY');
     } 
 
@@ -111,7 +111,7 @@ export class SuchergebnisBunterlagenScraper {
      * @param cell 
      */
     private extractAusschuss(cell) {
-        let secondColumnTextLines = cell.find('p6').text().split("\n");    // Split Text into lines
+        const secondColumnTextLines = cell.find('p6').text().split("\n");    // Split Text into lines
         return secondColumnTextLines[secondColumnTextLines.length - 2];        // We need to skip last newline
     }
 
@@ -121,8 +121,8 @@ export class SuchergebnisBunterlagenScraper {
      * @param cell 
      */
     private extractAnhaenge($, cell) {
-        let attachmentAnchors = cell.find('a').toArray();
-        let anhaenge: any = [];
+        const attachmentAnchors = cell.find('a').toArray();
+        const anhaenge: any = [];
 
         attachmentAnchors.forEach((anchor) => {
             anhaenge.push({
