@@ -8,7 +8,7 @@ export class TimelineResolver {
      * Method resolves data for timeline API
      * @param searchText 
      */
-    async resolve(searchText: string) {
+    async resolveByKeyword(searchText: string) {
 
         // Define response object stub
         // @see https://timeline.knightlab.com/docs/json-format.html

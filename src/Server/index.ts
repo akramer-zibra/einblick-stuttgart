@@ -11,7 +11,7 @@ const bunterlagenResolver = new BeratungsunterlagenResolver();
 const resolvers = {
     Query: {
         info: () => `This is the fresh API`,
-        timelineByKeyword: (_, {search}) => timelineResolver.resolve(search),
+        timelineByKeyword: (_, {search}) => timelineResolver.resolveByKeyword(search),
         beratungsunterlagen: (_, {search}) => bunterlagenResolver.resolve(search)
     },
 }
