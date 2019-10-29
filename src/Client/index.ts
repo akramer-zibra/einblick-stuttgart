@@ -1,7 +1,7 @@
 
-import { Timeline } from './ts/Timeline';
-import { KeywordInput } from './ts/KeywordInput';
-import { GraphQLClient } from './ts/GraphQLClient';
+import { Timeline } from './ts/ui/Timeline';
+import { KeywordInput } from './ts/ui/KeywordInput';
+import { GraphQLClient } from './ts/data/GraphQLClient';
 
 const main = () => {
     console.log('Client Applikation läuft...');

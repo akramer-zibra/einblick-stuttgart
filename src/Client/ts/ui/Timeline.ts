@@ -1,4 +1,4 @@
-import { GraphQLClient } from "./GraphQLClient";
+import { GraphQLClient } from "../data/GraphQLClient";
 
 declare const TL: any;  // Declares global TL object integrated with linked script file in index.html
 

@@ -1,6 +1,6 @@
 import $ from "jquery";
 import gql from "graphql-tag";
-import { GraphQLClient } from "./GraphQLClient";
+import { GraphQLClient } from "../data/GraphQLClient";
 import { Timeline } from "./Timeline";
 import { ErrorFeedback } from "./ErrorFeedback";
 
