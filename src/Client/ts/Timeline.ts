@@ -1,4 +1,4 @@
-declare const TL: any;  // Declares global TL object from linked script file
+declare const TL: any;  // Declares global TL object integrated with linked script file in index.html
 
 export class Timeline {
 
