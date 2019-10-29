@@ -8,7 +8,9 @@
   },
   "scripts": {
     "doc:generate:uml": "puml generate doc/plantuml/datenmodell.puml -o doc/plantuml/datenmodell.png",
-    "client:build": "parcel build public/index.html",
+    "client:build": "parcel build src/Client/index.html --out-dir ./public",
+    "client:build:debug": "parcel build src/Client/index.html --out-dir ./public --no-minify",
+    "client:build:watch": "parcel watch src/Client/index.html --out-dir ./public ",
     "start": "npm run server:start",
     "server:start": "npm run server:build:live",
     "server:build": "tsc -p .",
