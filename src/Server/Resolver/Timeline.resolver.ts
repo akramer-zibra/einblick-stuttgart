@@ -40,8 +40,7 @@ export class TimelineResolver {
             response.events.push({
                 "media": {
                     "url": "/static/img/beratungsunterlage-200x.png",
-                    "caption": "Beratungsunterlage",
-                    "credit": "Autorrs"
+                    "caption": "Beratungsunterlage"
                 },
                 "start_date": {
                     "year": berObj.datum.getFullYear(),
