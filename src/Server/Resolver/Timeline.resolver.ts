@@ -38,18 +38,33 @@ export class TimelineResolver {
         // Push each "Beratungsunterlage" into response object
         beratungsunterlagenArr.forEach((berObj) => {
             response.events.push({
+                "media": {
+                    "url": "https://dummyimage.com/200x300/cccccc/fff.png",
+                    "caption": "Beratungsunterlage",
+                    "credit": "Autorrs"
+                },
                 "start_date": {
                     "year": berObj.datum.getFullYear(),
                     "month": berObj.datum.getMonth(),
                     "day": berObj.datum.getDay()
                 },
                 "text": {
-                    "headline": berObj.ausschuss,
-                    "text": berObj.titel
+                    "headline": this.cut(berObj.titel),
+                    "text": `${berObj.ausschuss}`
                 }
             });
         });
         
         return response;       
+    }
+
+    /**
+     * Method cuts headline to a specific length
+     * @param headline 
+     */
+    private cut(headline: string, length: number = 40): string {
+        return (headline.length > length) 
+            ? headline.substr(0, length).trim() + '...'
+            : headline;
     }
 }
