@@ -4,13 +4,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Einblick Stuttgart</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+
+    <!-- Bulma css is imported in style css and customized there -->
+    <link rel="stylesheet" href="./sass/styles.scss">
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-divider@0.2.0/dist/css/bulma-divider.min.css">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 
     <link title="timeline-styles" rel="stylesheet" href="https://cdn.knightlab.com/libs/timeline3/latest/css/timeline.css">
     <script src="https://cdn.knightlab.com/libs/timeline3/latest/js/timeline.js"></script>
-
     
     <style type="text/css">
       .app__clickable { cursor: pointer; }
@@ -111,7 +113,7 @@
           </div>
         </div>
         
-        <div style="margin-top: 50px;" class="is-divider" data-content="Ergebnis"></div>
+        <div style="margin-top: 50px;" class="is-divider" data-content="Ratsdokumente"></div>
 
         <div style="margin-top: 20px; min-height: 600px;" id="timeline-embed"></div>
 
@@ -129,7 +131,7 @@
       </div>
     </footer>
 
-    <script defer src="index.ts"></script>
+    <script defer src="./index.ts"></script>
   </body>
 </html>
     
