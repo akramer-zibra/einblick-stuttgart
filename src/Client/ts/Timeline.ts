@@ -52,7 +52,7 @@ export class Timeline {
                 start_at_end: true,
                 timenav_height: 300,
                 language: 'de',
-                timenav_position: 'top',
+                timenav_position: 'bottom',
                 hash_bookmark: true
             });
     }
