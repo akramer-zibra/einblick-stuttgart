@@ -21,9 +21,11 @@ type TimelineEvent {
 }
 
 type TimelineMedia {
-    url: String
+    url: String!
     caption: String
     credit: String
+    link: String
+    link_target: String
 }
 
 type TimelineDate {

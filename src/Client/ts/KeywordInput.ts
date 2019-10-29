@@ -15,7 +15,7 @@ export class KeywordInput {
                                 query TimelineByKeyword($keyword: String!) {
                                     timelineByKeyword(search: $keyword) {
                                         events {
-                                            media {url}
+                                            media {url, link, link_target}
                                             start_date {year, month, day}
                                             text {headline, text}
                                         }
