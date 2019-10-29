@@ -1,6 +1,6 @@
 type Query {
     info: String!
-    timelineAll(search: String!): TimelineResult!
+    timelineByKeyword(search: String!): TimelineResult!
     beratungsunterlagen(search: String!): [Beratungsunterlagen]!
 }
 

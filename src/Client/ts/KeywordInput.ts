@@ -47,7 +47,7 @@ export class KeywordInput {
                 .query({
                     query: gql`
                         query {
-                            timelineAll(search: $keywordText) {
+                            timelineByKeyword(search: $keywordText) {
                                 events {
                                     media {url}
                                     start_date {year, month, day}
