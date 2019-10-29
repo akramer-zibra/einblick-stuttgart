@@ -6,16 +6,16 @@ export class TimelineResolver {
 
     /**
      * Method resolves data for timeline API
-     * @param searchText 
+     * @param keyword 
      */
-    async resolveByKeyword(searchText: string) {
+    async resolveByKeyword(keyword: string) {
 
         // Define response object stub
         // @see https://timeline.knightlab.com/docs/json-format.html
         const response: any = {
             "title": {
                 "text": {
-                    "headline": "Suche: "+ searchText,
+                    "headline": "Suche: "+ keyword,
                     "text": "<p>Alles was wir dazu finden können</p>"
                 }
             }, 
@@ -26,7 +26,7 @@ export class TimelineResolver {
         const ksdSucheClient = new KsdSucheClient();
 
         // 
-        const bodyHtml = await ksdSucheClient.submitSearch(searchText);
+        const bodyHtml = await ksdSucheClient.submitSearch(keyword);
         
         // Parse html with cheerio
         const $ = cheerio.load(bodyHtml);     // We parse dom here an pass dom to scrapers instead of HTML string
