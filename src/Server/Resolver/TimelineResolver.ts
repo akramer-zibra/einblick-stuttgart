@@ -1,6 +1,6 @@
 import cheerio from 'cheerio';
 import { KsdSucheClient } from "../DataSources/Ratsdokumente/KsdSucheClient";
-import { SuchergebnisBunterlagenScraper } from '../DataSources/Ratsdokumente/Scraper/SuchergebnisBunterlagenScraper';
+import { SuchergebnisBunterlagenScraper } from '../DataSources/Ratsdokumente/Scraper/SuchergebnisBunterlagen.scraper';
 
 export class TimelineResolver {
 
