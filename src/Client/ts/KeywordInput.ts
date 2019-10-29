@@ -47,6 +47,7 @@ export class KeywordInput {
                     $('.pageloader').removeClass('is-active');
 
                     // TODO scroll to timeline
+                    this.scrollToDivider();
 
                     // Update Timeline
                     this.timeline.update(timelineJson);
@@ -89,5 +90,14 @@ export class KeywordInput {
      */
     private handleError(err) {
         ErrorFeedback.showErrorToast(err);  // Use separate error routine
+    }
+
+    /**
+     * Method scrolls browser to timeline 
+     */
+    private scrollToDivider() {
+        $('html, body').animate({
+            scrollTop: $("div[name='divider']").offset().top - 20    // We want to read the divider title
+        }, 'slow');
     }
 }
