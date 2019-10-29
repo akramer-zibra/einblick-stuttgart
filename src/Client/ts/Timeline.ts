@@ -47,9 +47,7 @@ export class Timeline {
      */
     update(timelineJson: any) {
 
-        // two arguments: the id of the Timeline container (no '#')
-        // and the JSON object or an instance of TL.TimelineConfig created from
-        // a suitable JSON object
+        // Create a new Timeline object with given JSON
         this.timeline = new TL.Timeline('timeline-embed', timelineJson, {
                 start_at_end: true,
                 timenav_height: 300,
