@@ -10,6 +10,18 @@ export class KeywordInput {
     private graphQLClient: GraphQLClient;
     private timeline: Timeline;
 
+    /** API call query template */
+    private API_CALL_QUERY = gql`
+                                query TimelineByKeyword($keyword: String!) {
+                                    timelineByKeyword(search: $keyword) {
+                                        events {
+                                            media {url}
+                                            start_date {year, month, day}
+                                            text {headline, text}
+                                        }
+                                    }
+                                }`;
+
     /**
      * Constructor method
      * @param timeline 
@@ -26,14 +38,23 @@ export class KeywordInput {
             // Get keyword from tag text
             const keyword = $(event.target).text();
 
+            $('.pageloader').addClass('is-active');
+
             // Call API 
             this.apiCall(keyword)
                 .then((timelineJson) => {
 
+                    $('.pageloader').removeClass('is-active');
+
+                    // TODO scroll to timeline
+
                     // Update Timeline
                     this.timeline.update(timelineJson);
                 })
-                .catch(this.handleError);
+                .catch(err => {
+                    $('.pageloader').removeClass('is-active');
+                    this.handleError(err) 
+                });
         });
     }
 
@@ -44,27 +65,15 @@ export class KeywordInput {
 
         return new Promise((resolve, reject) => {
 
-            $('.pageloader').addClass('is-active');
-
             // Load timeline events from GraphQL API
             this.graphQLClient.client
                 .query({
-                    query: gql`
-                        query TimelineByKeyword($keyword: String!) {
-                            timelineByKeyword(search: $keyword) {
-                                events {
-                                    media {url}
-                                    start_date {year, month, day}
-                                    text {headline, text}
-                                }
-                            }
-                        }`,
+                    query: this.API_CALL_QUERY,
                     variables: {
                         keyword
                     } 
                 })
                 .then(result => {
-                    $('.pageloader').removeClass('is-active');
                     resolve(result.data.timelineByKeyword);
                 })
                 .catch(err => {
@@ -79,8 +88,6 @@ export class KeywordInput {
      * @param err 
      */
     private handleError(err) {
-
-        // Show error
-        ErrorFeedback.showErrorToast(err);
+        ErrorFeedback.showErrorToast(err);  // Use separate error routine
     }
 }
