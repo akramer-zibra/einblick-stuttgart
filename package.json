@@ -8,6 +8,7 @@
   },
   "scripts": {
     "doc:generate:uml": "puml generate doc/plantuml/datenmodell.puml -o doc/plantuml/datenmodell.png",
+    "client:build": "parcel build public/index.html",
     "start": "npm run server:start",
     "server:start": "npm run server:build:live",
     "server:build": "tsc -p .",
@@ -39,6 +40,7 @@
     "@types/cheerio": "0.22.7",
     "@types/node": "12.11.6",
     "node-plantuml": "0.9.0",
+    "parcel-bundler": "1.12.4",
     "tslint": "5.20.0",
     "tslint-config-prettier": "1.18.0",
     "tslint-eslint-rules": "5.4.0"
