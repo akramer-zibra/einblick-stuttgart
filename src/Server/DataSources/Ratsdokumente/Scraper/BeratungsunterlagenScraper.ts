@@ -36,39 +36,22 @@ export class BeratungsunterlagenScraper {
             let columns = $(rows[i]).find('td').toArray();
 
             // Extract Id
-            let idAnchor = $(columns[0]).find('a');
-            let id = idAnchor.text().replace('Drucksache ', '');
-            
-            // Extract Beratungsvorlage pdf
-            let beratungsvorlage: any = {
-                url: idAnchor.attr('href'),
-                titel: idAnchor.text(),
-                typ: "application/pdf"
-            }
+            // and Veratungsvorlage
+            let firstCell = $(columns[0]);
+            let id = this.extractId(firstCell);
+            let beratungsvorlage = this.extractBunterlage(firstCell);
                         
             // Extract Date 
             // and parse it into Date object
-            let dateString = $(columns[1]).find('p6').text().trim();
-            let datum = dateUtil.parse(dateString, 'DD.MM.YYYY');
+            let datum = this.extractDatum($(columns[1]));
 
             // Extract Title & Ausschuss
-            let titel = $(columns[2]).find('b').text().trim();
+            let thirdCell = $(columns[2]);
+            let titel = this.extractTitel(thirdCell);
+            let ausschuss = this.extractAusschuss(thirdCell);
 
-            let secondColumnTextLines = $(columns[2]).find('p6').text().split("\n");    // Split Text into lines
-            let ausschuss = secondColumnTextLines[secondColumnTextLines.length - 2];        // We need to skip last newline
-            
             // Extract Anhänge
-            let attachmentAnchors = $(columns[3]).find('a').toArray();
-
-            let anhaenge: any = [];
-
-            attachmentAnchors.forEach((anchor) => {
-                anhaenge.push({
-                    "url": this.urlPath + $(anchor).attr('href').replace('./.', ''),  // Remove broken path prefix and append with url path
-                    "titel": $(anchor).text(),
-                    "typ": "application/pdf"
-                });
-            });
+            let anhaenge = this.extractAnhaenge($, $(columns[3]));
 
             // Push scraped data into collection
             result.push({
@@ -82,5 +65,73 @@ export class BeratungsunterlagenScraper {
         }
 
         return result;
+    }
+
+    /**
+     * Method extracts Id from given table cell
+     * @param cell 
+     */
+    private extractId(cell): string {
+        let idAnchor = cell.find('a');
+        return idAnchor.text().replace('Drucksache ', '');
+    }
+
+    /**
+     * Method extracts "Beratungsunterlage" from given table cell
+     * @param cell 
+     */
+    private extractBunterlage(cell) {
+        let anchor = cell.find('a');
+        return {
+            url: anchor.attr('href'),
+            titel: anchor.text(),
+            typ: "application/pdf"
+        }
+    }
+
+    /**
+     * Method extracts "datum" from given table cell
+     * @param cell 
+     */
+    private extractDatum(cell) {
+        let dateString = cell.find('p6').text().trim();
+        return dateUtil.parse(dateString, 'DD.MM.YYYY');
+    } 
+
+    /**
+     * Method extracts "titel" from given table cell
+     * @param cell 
+     */
+    private extractTitel(cell) {
+        return cell.find('b').text().trim();
+    } 
+
+    /**
+     * Method extracts "Ausschuss" from given table cell
+     * @param cell 
+     */
+    private extractAusschuss(cell) {
+        let secondColumnTextLines = cell.find('p6').text().split("\n");    // Split Text into lines
+        return secondColumnTextLines[secondColumnTextLines.length - 2];        // We need to skip last newline
+    }
+
+    /**
+     * Method extracts all attached "Anhänge" from given table cell
+     * @param $ 
+     * @param cell 
+     */
+    private extractAnhaenge($, cell) {
+        let attachmentAnchors = cell.find('a').toArray();
+        let anhaenge: any = [];
+
+        attachmentAnchors.forEach((anchor) => {
+            anhaenge.push({
+                "url": this.urlPath + $(anchor).attr('href').replace('./.', ''),  // Remove broken path prefix and append with url path
+                "titel": $(anchor).text(),
+                "typ": "application/pdf"
+            });
+        });
+
+        return anhaenge;
     }
 }
