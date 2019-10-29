@@ -6,7 +6,14 @@ export class Timeline {
     private timeline: any;
 
     init() {
+        console.log('Timeline initialisiert...');
+    }
 
+    /**
+     * Method updates timeline 
+     */
+    update() {
+        
         // 
         const timelineJson = {}; // replace make_the_json() with the JSON object you created
 
@@ -18,7 +25,5 @@ export class Timeline {
                 default_bg_color: {r:0, g:0, b:0},
                 timenav_height: 250
             });
-
-        console.log('Timeline initialisiert...');
     }
 }
