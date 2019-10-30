@@ -41,6 +41,9 @@ export class KeywordInput {
 
             $('.pageloader').addClass('is-active');
 
+            // TODO Switch to ratsdokumente API
+
+            /*
             // Call API 
             this.apiCall(keyword)
                 .then((timelineJson) => {
@@ -57,6 +60,7 @@ export class KeywordInput {
                     $('.pageloader').removeClass('is-active');
                     this.handleError(err) 
                 });
+            */
         });
     }
 
@@ -68,7 +72,7 @@ export class KeywordInput {
         return new Promise((resolve, reject) => {
 
             // Load timeline events from GraphQL API
-            this.graphQLClient.client
+            this.graphQLClient
                 .query({
                     query: this.API_CALL_QUERY,
                     variables: {

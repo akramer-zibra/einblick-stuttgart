@@ -6,7 +6,7 @@ import { HttpLink } from 'apollo-link-http';
 export class GraphQLClient {
 
     /** Reference to Apollo Client */
-    client: any = null;
+    private client: any = null;
 
     /**
      * Constructor method
@@ -33,4 +33,12 @@ export class GraphQLClient {
               }
         });
     }
+
+    /**
+     * Facade method for client instance
+     * @param query 
+     */
+    query(query) {
+      return this.client.query(query);
+    } 
 }
