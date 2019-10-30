@@ -40,7 +40,7 @@ export class SuchergebnisBunterlagenScraper {
             // and Veratungsvorlage
             const firstCell = $(columns[0]);
             const id = this.extractId(firstCell);
-            const beratungsvorlage = this.extractBunterlage(firstCell);
+            const vorlage = this.extractVorlageDatei(firstCell);
                         
             // Extract Date 
             // and parse it into Date object
@@ -61,7 +61,7 @@ export class SuchergebnisBunterlagenScraper {
                 id,
                 titel,
                 ausschuss,
-                beratungsvorlage,
+                vorlage,
                 anhaenge
             });
         }
@@ -82,13 +82,13 @@ export class SuchergebnisBunterlagenScraper {
      * Method extracts "Beratungsunterlage" from given table cell
      * @param cell 
      */
-    private extractBunterlage(cell): Datei {
+    private extractVorlageDatei(cell): Datei {
         const anchor = cell.find('a');
         return {
-            class: 'Datei',
-            url: anchor.attr('href'),
+            class: "Datei",
+            url: anchor.attr("href"),
             titel: anchor.text(),
-            typ: "application/pdf"
+            mime: "application/pdf"
         }
     }
 
@@ -123,15 +123,16 @@ export class SuchergebnisBunterlagenScraper {
      * @param $ 
      * @param cell 
      */
-    private extractAnhaenge($, cell) {
+    private extractAnhaenge($, cell): Datei[] {
         const attachmentAnchors = cell.find('a').toArray();
         const anhaenge: any = [];
 
         attachmentAnchors.forEach((anchor) => {
             anhaenge.push({
-                "url": this.urlPath + $(anchor).attr('href').replace('./.', ''),  // Remove broken path prefix and append with url path
-                "titel": $(anchor).text(),
-                "typ": "application/pdf"
+                class: "Datei",
+                url: this.urlPath + $(anchor).attr('href').replace('./.', ''),  // Remove broken path prefix and append with url path
+                titel: $(anchor).text(),
+                mime: "application/pdf"
             });
         });
 

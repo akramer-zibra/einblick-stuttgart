@@ -17,7 +17,7 @@ type Beratungsunterlage {
     """
     Referenzen zu verknüpften pdf Dateien
     """
-    beschlussvorlage: Datei!
+    vorlage: Datei!
     anhaenge: [Datei]
 }
 
@@ -35,5 +35,5 @@ type Datei {
     class: String!
     url: String!
     titel: String!
-    typ: String
+    mime: String
 }
