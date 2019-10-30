@@ -34,21 +34,4 @@ export class RatsdokumenteResolver {
         // Return...
         return bunterlagenArr;
     }
-
-    /**
-     * Method transform internal scraped data into API Response structure
-     * @param scrapedData 
-     * @return Returns schema.graphql Ergebnis data structure
-     */
-    private transform(scrapedData: Buchungsunterlage[]) {
-
-        const transformedResult: any = []; 
-
-        // Push each scraped data object with meta data 
-        scrapedData.forEach((obj: Buchungsunterlage) => {
-            transformedResult.push(obj);
-        }); 
-
-        return transformedResult;
-    }
 }
