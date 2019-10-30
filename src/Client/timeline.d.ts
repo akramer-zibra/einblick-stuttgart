@@ -1,17 +1,17 @@
-interface TimelineData {
+export interface TimelineData {
     events: TimelineSlide[],
-    title: TimelineSlide,
+    title?: TimelineSlide,
     eras?: TimelineEra[],
     scale?: string
 }
 
-interface TimelineEra {
+export interface TimelineEra {
     start_date: TimelineDate,
     end_date: TimelineDate
     text?: TimelineText
 }
 
-interface TimelineSlide {
+export interface TimelineSlide {
     start_date: TimelineDate,
     end_date?: TimelineDate,
     text: TimelineText,
@@ -26,12 +26,12 @@ interface TimelineSlide {
     unique_id?: string
 }
 
-interface TimelineText {
+export interface TimelineText {
     headline?: string,
-    title?: string
+    text?: string
 }
 
-interface TimelineMedia {
+export interface TimelineMedia {
     url: string,
     caption?: string,
     credit?: string,
@@ -42,7 +42,7 @@ interface TimelineMedia {
 }
 
 
-interface TimelineDate {
+export interface TimelineDate {
     year: number,
     month?: number,
     day?: number
