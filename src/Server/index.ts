@@ -18,7 +18,7 @@ const resolvers = {
 
 // Initiate API server
 const server = new GraphQLServer({
-    typeDefs: './schema.graphql',
+    typeDefs: './src/Server/schema.graphql',
     resolvers
 }); 
 
