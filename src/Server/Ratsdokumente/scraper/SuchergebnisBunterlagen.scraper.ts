@@ -1,5 +1,6 @@
 import dateUtil from 'date-and-time';
 import 'date-and-time/locale/de';
+import { Buchungsunterlage, Datei } from '../dokumente';
 
 export class SuchergebnisBunterlagenScraper {
 
@@ -18,9 +19,9 @@ export class SuchergebnisBunterlagenScraper {
      * Method scrapes "Buchungsunterlagen" from given cheerio dom
      * @param $
      */
-    scrape($: CheerioStatic) {
+    scrape($: CheerioStatic): Buchungsunterlage[] {
 
-        const result: any = [];
+        const result: Buchungsunterlage[] = [];
 
         // We load first table from page
         const firstTable = $('table').toArray()[0];
@@ -55,6 +56,7 @@ export class SuchergebnisBunterlagenScraper {
 
             // Push scraped data into collection
             result.push({
+                class: "Beratungsunterlage",
                 datum,
                 id,
                 titel,
@@ -80,9 +82,10 @@ export class SuchergebnisBunterlagenScraper {
      * Method extracts "Beratungsunterlage" from given table cell
      * @param cell 
      */
-    private extractBunterlage(cell) {
+    private extractBunterlage(cell): Datei {
         const anchor = cell.find('a');
         return {
+            class: 'Datei',
             url: anchor.attr('href'),
             titel: anchor.text(),
             typ: "application/pdf"
