@@ -27,7 +27,6 @@ Der Befehl `npm start` startet den Server-Teil der Anwendung. Vor dem Start werd
 Server starten und mit dem Sandbox-Tool unter `localhost:4000/playground` die API testen.
 
 ## Beispielhafte Anfragen
-
 1. Als Stadtbewohner:in möchte ich wissen, in wieweit sich die Stadt Stuttgart gerade mit dem Thema "Weltklima in Not - Stuttgart handelt" beschäftigt.
 
 2. Als Stadtbewohner:in möchte ich außerdem einen einfachen Zugriff auf die entsprechenden Ratsdokumente haben, um mich tiefergehend damit auseinandersetzen zu können
@@ -59,3 +58,6 @@ Dieses Projekt ist inspiriert durch [Politik bei uns](https://politik-bei-uns.de
 Die `TypeScript` Lint-Rules stammen aus dem open-source Projekt [MichalLytek/type-graphql](https://github.com/MichalLytek/type-graphql). Der Befehl `npm run server:lint` überprüft die Guidelines.
 
 Anwender:innen von VS Code können den Editor so [konfigurieren](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-typescript-tslint-plugin), dass Lint-Errors automatisch beim Speichern behoben werden. 
+
+## Lizenz
+Der Quellcode dieses Projekts ist unter der [GNU-AGPLv3](LICENSE) lizensiert.
