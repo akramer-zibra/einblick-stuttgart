@@ -1,6 +1,5 @@
 type Query {
     info: String!
-    timelineByKeyword(search: String!): TimelineResult!
     beratungsunterlagen(search: String!): [Beratungsunterlage]!
     """  
     Überarbeitete API
@@ -17,7 +16,6 @@ union Dokument = Beratungsunterlage | Antrag
 
 enum Dokumenttyp {
     BERATUNGSUNTERLAGE
-    ANTRAG
     """
     PROTOKOLL
     TAGESORDNUNG
@@ -29,6 +27,7 @@ enum Dokumenttyp {
     ANTRAG+ANFRAGE
     BEANTWORTUNG+STELLUNGNAHME
     """
+    ANTRAG
 }
 
 type Beratungsunterlage {
@@ -56,49 +55,4 @@ type Datei {
     url: String
     titel: String
     typ: String
-}
-
-
-
-"""
-Timeline Struktur komplett in CLient umziehen!
-"""
-type TimelineResult {
-    events: [TimelineSlide]!
-    title: TimelineTitle
-}
-
-type TimelineTitle {
-    media: TimelineMedia
-    text: TimelineText
-}
-
-type TimelineSlide {
-    start_date: TimelineDate!
-    end_date: TimelineDate
-    text: TimelineText!
-    media: TimelineMedia!
-    group: String    
-}
-
-type TimelineMedia {
-    url: String!
-    caption: String
-    link: String
-    link_target: String
-}
-
-type TimelineDate {
-    year: String!
-    month: String
-    day: String
-    minute: String
-    second: String
-    millisecond: String
-    display_date: String
-}
-
-type TimelineText {
-    headline: String!
-    text: String!
 }
