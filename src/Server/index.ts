@@ -2,17 +2,26 @@ import { GraphQLServer } from 'graphql-yoga';
 import express from 'express';
 import { TimelineResolver } from './Resolver/Timeline.resolver';
 import { BeratungsunterlagenResolver } from './Resolver/Beratungsunterlagen.resolver';
+import { RatsdokumenteResolver } from './Resolver/Ratsdokumente.resolver';
 
 // Instatiate Stream resolver
 const timelineResolver = new TimelineResolver();
 const bunterlagenResolver = new BeratungsunterlagenResolver();
+const ratsdokumenteResolver = new RatsdokumenteResolver();
 
 // Definde API resolvers
 const resolvers = {
     Query: {
-        info: () => `This is the fresh API`,
-        timelineByKeyword: (_, {search}) => timelineResolver.resolveByKeyword(search),
-        beratungsunterlagen: (_, {search}) => bunterlagenResolver.resolve(search)
+        beratungsunterlagen: (_, {search}) => bunterlagenResolver.resolve(search),
+        ratsdokumente: (_, {suchbegriff}) => ratsdokumenteResolver.resolve(suchbegriff)
+    },
+    Dokument: {     
+        __resolveType(dokument, context, info) {    // We need a resolver method for this union type
+            if (dokument.class !== undefined) {
+                return dokument.class
+            }
+            return null;
+        },
     },
 }
 
