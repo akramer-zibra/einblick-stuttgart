@@ -1,9 +1,68 @@
 type Query {
     info: String!
     timelineByKeyword(search: String!): TimelineResult!
-    beratungsunterlagen(search: String!): [Beratungsunterlagen]!
+    beratungsunterlagen(search: String!): [Beratungsunterlage]!
+    """  
+    Überarbeitete API
+    """
+    ratsdokumente(suchbegriff: String!): [Ergebnis]!
 }
 
+type Ergebnis {
+    typ: Dokumenttyp!
+    dokument: Dokument
+}
+
+union Dokument = Beratungsunterlage | Antrag
+
+enum Dokumenttyp {
+    BERATUNGSUNTERLAGE
+    ANTRAG
+    """
+    PROTOKOLL
+    TAGESORDNUNG
+    HAUSHALTSANTRAG
+    STELLUNGNAHME
+    ANFRAGE
+    BEANTWORTUNG
+    ZWISCHENNACHRICHT
+    ANTRAG+ANFRAGE
+    BEANTWORTUNG+STELLUNGNAHME
+    """
+}
+
+type Beratungsunterlage {
+    datum: String!
+    id: String!
+    titel: String!
+    ausschuss: String!
+    """
+    Referenzen zu verknüpften pdf Dateien
+    """
+    beschlussvorlage: Datei!
+    anhaenge: [Datei]
+}
+
+type Antrag {
+    datum: String!
+    fraktion: String!
+    id: String!
+    betreff: String!
+    inhalt: String!
+    stellungnahmen: [Datei]
+}
+
+type Datei {
+    url: String
+    titel: String
+    typ: String
+}
+
+
+
+"""
+Timeline Struktur komplett in CLient umziehen!
+"""
 type TimelineResult {
     events: [TimelineSlide]!
     title: TimelineTitle
@@ -42,22 +101,4 @@ type TimelineDate {
 type TimelineText {
     headline: String!
     text: String!
-}
-
-type Beratungsunterlagen {
-    datum: String
-    id: String
-    titel: String
-    ausschuss: String
-    """
-    Referenzen zu verknüpften pdf Dokumenten
-    """
-    beschlussvorlage: Dokument
-    anhaenge: [Dokument]
-}
-
-type Dokument {
-    url: String
-    titel: String
-    typ: String
 }
