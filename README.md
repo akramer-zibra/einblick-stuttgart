@@ -48,16 +48,11 @@ Dieses Projekt ist inspiriert durch [Politik bei uns](https://politik-bei-uns.de
 #### Konzeption
 [PlatUML](http://plantuml.com/de/starting) für die technische Konzeption 
 
-## FAQs
-### Datein-Encoding der Datenquellen domino1.stuttgart.de
-+ Suchergebnisse sind in `Windows 1252` codiert
-+ Haushaltsanträge sind in `Windows 1252` codiert
-+ Anträge sind in `Windows 1252` codiert
+## Lizenz
+Der Quellcode dieses Projekts ist unter der [GNU-AGPLv3](LICENSE) lizensiert.
 
+## FAQs
 ### Coding Guidelines
 Die `TypeScript` Lint-Rules stammen aus dem open-source Projekt [MichalLytek/type-graphql](https://github.com/MichalLytek/type-graphql). Der Befehl `npm run server:lint` überprüft die Guidelines.
 
 Anwender:innen von VS Code können den Editor so [konfigurieren](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-typescript-tslint-plugin), dass Lint-Errors automatisch beim Speichern behoben werden. 
-
-## Lizenz
-Der Quellcode dieses Projekts ist unter der [GNU-AGPLv3](LICENSE) lizensiert.
