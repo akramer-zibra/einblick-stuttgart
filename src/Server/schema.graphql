@@ -1,5 +1,4 @@
 type Query {
-    info: String!
     beratungsunterlagen(search: String!): [Beratungsunterlage]!
     """  
     Überarbeitete API
