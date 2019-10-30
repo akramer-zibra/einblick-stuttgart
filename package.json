@@ -17,6 +17,7 @@
     "server:build:live": "nodemon --watch 'src/**/*.ts' --exec node_modules/.bin/ts-node src/Server/index.ts",
     "server:check": "tsc --noEmit",
     "server:lint": "tslint --project tsconfig.json",
+    "server:lint:graphql": "graphql-schema-linter ./src/Server/schema.graphql",
     "server:verify": "npm run server:check && npm run server:lint",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -35,6 +36,7 @@
     "bulma-toast": "1.5.3",
     "cheerio": "1.0.0-rc.3",
     "date-and-time": "0.10.0",
+    "graphql-schema-linter": "0.2.1",
     "graphql-tag": "2.10.1",
     "graphql-yoga": "1.18.3",
     "iconv-lite": "0.5.0",
