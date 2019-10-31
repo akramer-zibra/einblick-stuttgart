@@ -61,7 +61,7 @@ export class Timeline {
                 },
                 text: {
                     headline: this.cut(ratsdokument.titel),
-                    text: `${ratsdokument.ausschuss}`
+                    text: `<a href="${ratsdokument.vorlage.url}" target="_blank">${ratsdokument.id}</a><br />${ratsdokument.ausschuss}`
                 }
             });
         });
