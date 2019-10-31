@@ -1,6 +1,6 @@
 import dateUtil from 'date-and-time';
 import 'date-and-time/locale/de';
-import { Protokoll } from '../dokumente';
+import { Protokoll, Datei } from '../dokumente';
 
 export class SuchergebnisProtokolleScraper {
 
@@ -27,20 +27,97 @@ export class SuchergebnisProtokolleScraper {
 
         const result: Protokoll[] = [];
 
-        // We load first table from page
-        const firstTable = $('table').toArray()[0];
+        // We load second table from page
+        const secondTable = $('table').toArray()[1];
 
         // 
-        const rows = $(firstTable).find('tr').toArray();
+        const rows = $(secondTable).find('tr').toArray();
 
         // We iterate each table row 
         // and skip the first one (headline)!
         for(let i=1; i<rows.length; i++) {
 
-            throw new Error("TODO...");
+            // Load columns as array
+            const columns = $(rows[i]).find('td').toArray();
+
+            // Extract Nr
+            // and reference Protokoll-file
+            const firstCell = $(columns[0]);
+            const nnr = this.extractNnr(firstCell);
+            const protokoll = this.extractProtokollDatei(firstCell);
+
+            // Extract Date 
+            // and parse it into Date object
+            const datum = this.extractDatum($(columns[1]));
+
+            // Extract Betreff & Ausschuss
+            const thirdCell = $(columns[2]);
+            const betreff = this.extractBetreff(thirdCell);
+            const ausschuss = this.extractAusschuss(thirdCell);
+
+            // Extract reference to Verhandlung (GRDrs)
+            // NOTICE: needs to scrape PDF file..
             
+            result.push({
+                class: 'Protokoll',
+                nnr,
+                datum,
+                betreff,
+                ausschuss,
+                protokoll
+            });
         }
 
         return result;
+    }
+
+    /**
+     * Method extracts "Niederschrift Nr." from given table cell
+     * @param cell 
+     */
+    private extractNnr(cell): string {
+        const idAnchor = cell.find('a');
+        const tokens = idAnchor.text().split(' ');
+        return tokens.pop();    // Last token is protokoll number
+    }
+
+    /**
+     * Method extracts "Protokoll" from given table cell
+     * @param cell 
+     */
+    private extractProtokollDatei(cell): Datei {
+        const anchor = cell.find('a');
+        return {
+            class: "Datei",
+            url: anchor.attr("href"),
+            titel: anchor.text(),
+            mime: "application/pdf"
+        }
+    }
+
+    /**
+     * Method extracts "datum" from given table cell
+     * @param cell 
+     */
+    private extractDatum(cell) {
+        const dateString = cell.find('p6').text().trim();
+        return dateUtil.parse(dateString, 'DD.MM.YYYY');
+    } 
+
+    /**
+     * Method extracts "titel" from given table cell
+     * @param cell 
+     */
+    private extractBetreff(cell) {
+        return cell.find('b').text().trim();
+    } 
+
+    /**
+     * Method extracts "Ausschuss" from given table cell
+     * @param cell 
+     */
+    private extractAusschuss(cell) {
+        const secondColumnTextLines = cell.find('p6').text().split("\n");    // Split Text into lines
+        return secondColumnTextLines[secondColumnTextLines.length - 2];        // We need to skip last newline
     }
 }
