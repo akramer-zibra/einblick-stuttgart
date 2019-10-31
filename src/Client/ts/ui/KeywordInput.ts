@@ -21,34 +21,40 @@ export class KeywordInput {
         this.timeline = timeline;
 
         // Definiere Event-Listener die auf Klicks auf die Tags reagieren
-        $('.act__keyword').on('click', (event) => {
+        $('.act__keyword').on('click', this.submit.bind(this));
+    }
 
-            // Ermittle das Stichwort vom Text im Tag
-            const keyword = $(event.target).text();
+    /**
+     * Methode steuert die Suchanfrage aus
+     * @param event 
+     */
+    private submit(event) {
 
-            $('.pageloader').addClass('is-active');
+        // Ermittle den Suchtext 
+        const searchtext = $('#app__searchtext').val();
 
-            // Benutze den Ratsdokumente-Provider um an die Daten aus der GraphQL API zu kommen
-            this.ratsdokumenteProvider
-                .queryRatsdokumenteByKeyword(keyword)
-                .then((apiData) => {
+        $('.pageloader').addClass('is-active');
 
-                    $('.pageloader').removeClass('is-active');
+        // Benutze den Ratsdokumente-Provider um an die Daten aus der GraphQL API zu kommen
+        this.ratsdokumenteProvider
+            .queryRatsdokumenteByText(searchtext)
+            .then((apiData) => {
 
-                    // Überprüfe, ob überhaupt Ergebnisse vorhanden sind
-                    if(apiData.ratsdokumente.length === 0) {
-                        this.handleEmptyResult();
-                        return;
-                    }
+                $('.pageloader').removeClass('is-active');
 
-                    this.scrollToDivider();
-                    this.timeline.updateWithApiData(apiData.ratsdokumente);     // Übergebe die API Daten an die Timeline Instanz, um zu aktualisieren
-                })
-                .catch(err => {
-                    $('.pageloader').removeClass('is-active');
-                    this.handleError(err) 
-                });
-        });
+                // Überprüfe, ob überhaupt Ergebnisse vorhanden sind
+                if(apiData.ratsdokumente.length === 0) {
+                    this.handleEmptyResult();
+                    return;
+                }
+
+                this.scrollToDivider();
+                this.timeline.updateWithApiData(apiData.ratsdokumente);     // Übergebe die API Daten an die Timeline Instanz, um zu aktualisieren
+            })
+            .catch(err => {
+                $('.pageloader').removeClass('is-active');
+                this.handleError(err) 
+            });
     }
 
     /**
