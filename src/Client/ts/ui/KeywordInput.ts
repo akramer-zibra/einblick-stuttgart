@@ -57,7 +57,7 @@ export class KeywordInput {
      */
     private handleError(err) {
         console.error(err);
-        ToastFeedback.showErrorToast(err);  // Use separate error routine
+        ToastFeedback.showErrorToast(err);  // Benutze eine separate Funktion für eine grafische Rückmeldung
     }
 
     /**
