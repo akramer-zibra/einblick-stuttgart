@@ -25,6 +25,7 @@ type Beratungsunterlage {
 type Protokoll {
     class: String!
     datum: Date!
+    top: String!
     nnr: String!
     betreff: String!
     ausschuss: String!
