@@ -1,0 +1,40 @@
+@startuml "Komponenten"
+
+/' Clientseite '/
+node "Client" {
+    package "ui" {
+        [KeywordInput] ..> [Timeline] : use
+        [KeywordInput] ..> [ToastFeedback] : use
+    }
+
+    package "provider" {
+        [KeywordInput] ..> [Ratsdokumente.provider] : use
+    }
+
+    package "data (Client)" {
+        [Ratsdokumente.provider] ..> [GraphQLClient] : use
+        [GraphQLClient] - GraphQL
+    }
+}
+
+/' Serverseite '/
+node "Server" {
+
+    GraphQL - [GraphQLServer] 
+
+    package "resolver" {
+        [GraphQLServer] ..> [Ratsdokumente] : use
+    }
+
+    package "scraper" {
+        [Ratsdokumente] ..> [SuchergebnisBunterlagen] : use
+        [Ratsdokumente] ..> [SuchergebnisProtokolle] : use
+    }
+
+    package "data (Server)" {
+        [Ratsdokumente] ..> [KsdSucheClient] : use
+        [KsdSucheClient] - HTTP
+    }
+}
+
+@enduml
