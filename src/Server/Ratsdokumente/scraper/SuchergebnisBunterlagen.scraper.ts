@@ -1,16 +1,20 @@
 import dateUtil from 'date-and-time';
 import 'date-and-time/locale/de';
-import { Buchungsunterlage, Datei } from '../dokumente';
+import { Beratungsunterlage, Datei } from '../dokumente';
 
 export class SuchergebnisBunterlagenScraper {
 
     /** url path */
-    private urlPath = 'https://www.domino1.stuttgart.de/web/ksd/ksdRedSystem.nsf';
+    private urlPath: string;
 
     /**
      * Constructor method
      */
-    constructor() {
+    constructor(urlPath: string = 'https://www.domino1.stuttgart.de/web/ksd/ksdRedSystem.nsf') {
+
+        // Initian params
+        this.urlPath = urlPath;
+
         // We use german locale for time functions
         dateUtil.locale("de");
     };
@@ -19,9 +23,9 @@ export class SuchergebnisBunterlagenScraper {
      * Method scrapes "Buchungsunterlagen" from given cheerio dom
      * @param $
      */
-    scrape($: CheerioStatic): Buchungsunterlage[] {
+    scrape($: CheerioStatic): Beratungsunterlage[] {
 
-        const result: Buchungsunterlage[] = [];
+        const result: Beratungsunterlage[] = [];
 
         // We load first table from page
         const firstTable = $('table').toArray()[0];
