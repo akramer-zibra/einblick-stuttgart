@@ -1,6 +1,6 @@
 import dateUtil from 'date-and-time';
 import 'date-and-time/locale/de';
-import { Beratungsunterlage, Datei } from '../dokumente';
+import { Beratungsunterlage, Datei } from '../../dokumente';
 
 export class SuchergebnisBunterlagenScraper {
 

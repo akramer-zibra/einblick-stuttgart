@@ -1,9 +1,8 @@
 import cheerio from 'cheerio';
 import { KsdSucheClient } from "../Ratsdokumente/data/KsdSucheClient";
-import { SuchergebnisBunterlagenScraper } from "../Ratsdokumente/scraper/SuchergebnisBunterlagen.scraper";
-import { SuchergebnisProtokolleScraper } from '../Ratsdokumente/scraper/SuchergebnisProtokolle.scraper';
+import { SuchergebnisBunterlagenScraper } from "../Ratsdokumente/scraper/Suchergebnisseite/SuchergebnisBunterlagen.scraper";
+import { SuchergebnisProtokolleScraper } from '../Ratsdokumente/scraper/Suchergebnisseite/SuchergebnisProtokolle.scraper';
 import { Beratungsunterlage, Protokoll } from '../Ratsdokumente/dokumente';
-import { throwServerError } from 'apollo-link-http-common';
 
 export class RatsdokumenteResolver {
 
