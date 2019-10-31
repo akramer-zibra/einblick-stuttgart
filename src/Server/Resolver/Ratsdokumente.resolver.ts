@@ -7,21 +7,21 @@ import { Beratungsunterlage, Protokoll } from '../Ratsdokumente/dokumente';
 export class RatsdokumenteResolver {
 
     /**
-     * Method resolves query with given parameter
+     * Methode löst die entsprechende GraphQL query mit dem übergebenen Parameter auf
      * @param suchbegriff 
      */
     async resolve(suchbegriff: string) {
 
-        // We use client instance
+        // Wir benutzen hier eine spezielle Client Instanz für die Suchefunktion
         const ksdSucheClient = new KsdSucheClient();
 
-        // We submit a search with given searchstring
+        // Führe die Suche mit unserem Parameter aus 
         const bodyHtml = await ksdSucheClient.submitSearch(suchbegriff);
-        
-        // Parse html with cheerio
+
+        // Parse die HTTP Antwort mit cheerio
         const $ = cheerio.load(bodyHtml);     // We parse dom here an pass dom to scrapers instead of HTML string
 
-        /* Scrape retrieved bodyHTML */
+        /* Scrape das abgefragte HTML */
         // ..scrape "Beratungsunterlagen"
         const bunterlagenScraper = new SuchergebnisBunterlagenScraper();
         const bunterlagenArr = bunterlagenScraper.scrape($);
@@ -30,22 +30,22 @@ export class RatsdokumenteResolver {
         const protokollScraper = new SuchergebnisProtokolleScraper();
         const protokollArr = protokollScraper.scrape($);
 
-        // TODO scrape other data from search result...
+        // TODO Andere Daten aus der Suchergebnisseite scrapen
 
         const mergedResult = this.merge([bunterlagenArr, protokollArr]);
 
-        // Return merge result
+        // Zusammengeführtes Ergebnis zurückgeben
         return mergedResult;
     }
 
     /**
-     * Method merges given arrays to one single array
-     * NOTICE does not consider ordering
-     * @param ratsdokumente Arrays with either Beratungsunterlagen OR Protokollen
+     * Methode führt die übergebenen Arrays in ein gemeinsames Array zusammen
+     * NOTICE berücksichtigt keine Reihenfolge in den Arrays
+     * @param ratsdokumente Arrays aus Ratsdokumenten
      */
     private merge(ratsdokumente: any[]): Array<Beratungsunterlage|Protokoll> {
 
-        // We use array reduce to merge given arrays
+        // Wir benutzen hier die reduce Methode um ein einziges Arrays mit allen Elementen zu erzeugen
         return ratsdokumente.reduce((accumulator, currentValue) => {
             return accumulator.concat(currentValue);
         });
