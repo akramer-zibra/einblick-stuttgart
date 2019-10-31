@@ -1,6 +1,7 @@
 import cheerio from 'cheerio';
 import { KsdSucheClient } from "../Ratsdokumente/data/KsdSucheClient";
 import { SuchergebnisBunterlagenScraper } from "../Ratsdokumente/scraper/SuchergebnisBunterlagen.scraper";
+import { SuchergebnisProtokolleScraper } from '../Ratsdokumente/scraper/SuchergebnisProtokolle.scraper';
 
 export class RatsdokumenteResolver {
 
@@ -19,9 +20,17 @@ export class RatsdokumenteResolver {
         // Parse html with cheerio
         const $ = cheerio.load(bodyHtml);     // We parse dom here an pass dom to scrapers instead of HTML string
 
-        // Scrape retrieved bodyHTML
+        /* Scrape retrieved bodyHTML */
+        // ..scrape "Beratungsunterlagen"
         const berScraper = new SuchergebnisBunterlagenScraper();
         const bunterlagenArr = berScraper.scrape($);
+
+        // ..scrape "Protokolle"
+        const proScraper = new SuchergebnisProtokolleScraper();
+        const proArr = proScraper.scrape($);
+
+
+        console.log(proArr);
 
         // TODO scrape other data from search result...
 
