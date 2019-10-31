@@ -1,6 +1,7 @@
 declare const TL: any;  // Declares global TL object integrated with linked script file in index.html
 import { GraphQLClient } from "../data/GraphQLClient";
 import { TimelineData, TimelineSlide } from "../../timeline";
+import { Protokoll, Beratungsunterlage } from "../../../Server/Ratsdokumente/dokumente";
 
 export class Timeline {
 
@@ -77,6 +78,8 @@ export class Timeline {
     private classDependingLook(slide: TimelineSlide, dokument): TimelineSlide {
         if(dokument.class === "Beratungsunterlage") {
 
+            (dokument as Beratungsunterlage);   // ATTENTION: This type is a serverside definition!
+
             slide.media = {
                 url: "/static/img/beratungsunterlage-200x.png",
                 link: dokument.vorlage.url,
@@ -88,15 +91,19 @@ export class Timeline {
 
         } else if(dokument.class === "Protokoll") {
 
+            (dokument as Protokoll);    // ATTENTION: This type is a serverside definition!
+
             slide.media = {
                 url: "/static/img/protokoll-200x.png",
                 link: dokument.protokoll.url,
                 link_target: "_blank"
             },
-            slide.text.text = `<a href="${dokument.protokoll.url}" target="_blank">${dokument.id} <i class="fas fa-external-link-alt"></i></a>
-                                <br /><strong>${dokument.titel}</strong>
+            slide.text.text = `<a href="${dokument.protokoll.url}" target="_blank">${dokument.nnr} <i class="fas fa-external-link-alt"></i></a>
+                                <br /><strong>${dokument.betreff}</strong>
                                 <br />${dokument.ausschuss}`;
+        } else {
+            throw new Error("Es wurde ein Dokumententyp gefunden, der nicht unterstützt wird: "+ dokument.class);
         }
-        throw new Error("Es wurde ein Dokumententyp gefunden, der nicht unterstützt wird: "+ dokument.class);
+        return slide;
     }
 }
