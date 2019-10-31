@@ -22,6 +22,16 @@ type Beratungsunterlage {
     anhaenge: [Datei]
 }
 
+type Protokoll {
+    class: Dokumenttyp!
+    datum: Date!
+    nnr: String!
+    betreff: String!
+    ausschuss: String!
+    protokoll: Datei!
+    verhandlung: Beratungsunterlage
+}
+
 type Antrag {
     class: String!
     datum: Date!
