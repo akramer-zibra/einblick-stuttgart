@@ -7,6 +7,10 @@ Dieses Projekt startet mit dem Ziel die öffentlichen Ratsdokumente der Stadt St
 
 + Als Politiker:in soll ich mit dieser Software die Möglichkeit bekommen, mich zu bestimmten Themen retrospektiv informieren zu können, um mich dadurch besser auf meine politische Aufgabe vorzubereiten und effektivere Entscheidungen treffen zu können
 
+Die Ratsdokumente sind bereits online abrufbar, allerdings nur mit einer verstaubten und unübersichtlichen Oberfläche.
+
+Dieses Projekt ist wesentlich inspiriert durch [Politik bei uns](https://politik-bei-uns.de/) und [Frag den Staat](https://fragdenstaat.de/).  
+
 ## Anwendung
 Diese Anwendung besteht aus einem Server und einem Client Teil. Der Server-Teil ist eine Node.js Anwendung Server-Anwendung und ist in TypeScript programmiert. Der Client-Teil ist eine Browseranwendung, die ebenfalls in TypeScript programmiert ist. In diesem Repository liegen beide Anwendungsteile.
 
@@ -26,14 +30,8 @@ Der Befehl `npm start` startet den Server-Teil der Anwendung. Vor dem Start werd
 ### API-Testing
 Server starten und mit dem Sandbox-Tool unter `localhost:4000/playground` die API testen.
 
-## Beispielhafte Anfragen
-1. Als Stadtbewohner:in möchte ich wissen, in wieweit sich die Stadt Stuttgart gerade mit dem Thema "Weltklima in Not - Stuttgart handelt" beschäftigt.
-
-2. Als Stadtbewohner:in möchte ich außerdem einen einfachen Zugriff auf die entsprechenden Ratsdokumente haben, um mich tiefergehend damit auseinandersetzen zu können
-
-Die Ratsdokumente sind bereits online abrufbar, allerdings nur mit einer verstaubten und unübersichtlichen Oberfläche.
-
-Dieses Projekt ist inspiriert durch [Politik bei uns](https://politik-bei-uns.de/).  
+## Berücksichtige Anwendergeschichten ("User stories")
+Dieses Projekt versucht gezielt [Anwendergeschichten](STORIES.md) zu erfüllen.
 
 ## Sonstiges
 ### Öffentliche Datenbestände
