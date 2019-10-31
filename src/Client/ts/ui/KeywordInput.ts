@@ -5,44 +5,44 @@ import { RatsdokumenteProvider } from "../provider/Ratsdokumente.provider";
 
 export class KeywordInput {
 
-    /** Dependencies references */
+    /** Referenzen zu anderen Objekten */
     private ratsdokumenteProvider: RatsdokumenteProvider;
     private timeline: Timeline;
 
     /**
-     * Constructor method
+     * Konstruktor
      * @param ratsdokumenteProvider
      * @param timeline 
      */
     constructor(ratsdokumenteProvider: RatsdokumenteProvider, timeline: Timeline) {
 
-        // Dependency injection
+        // Abhängigkeiten injizieren
         this.ratsdokumenteProvider = ratsdokumenteProvider;
         this.timeline = timeline;
 
-        // Define event listener for click events
+        // Definiere Event-Listener die auf Klicks auf die Tags reagieren
         $('.act__keyword').on('click', (event) => {
 
-            // Get keyword from tag text
+            // Ermittle das Stichwort vom Text im Tag
             const keyword = $(event.target).text();
 
             $('.pageloader').addClass('is-active');
 
-            // Use Ratsdokumente provider to query our data
+            // Benutze den Ratsdokumente-Provider um an die Daten aus der GraphQL API zu kommen
             this.ratsdokumenteProvider
                 .queryRatsdokumenteByKeyword(keyword)
                 .then((apiData) => {
 
                     $('.pageloader').removeClass('is-active');
 
-                    // Check if result set is empty
+                    // Überprüfe, ob überhaupt Ergebnisse vorhanden sind
                     if(apiData.ratsdokumente.length === 0) {
                         this.handleEmptyResult();
                         return;
                     }
 
                     this.scrollToDivider();
-                    this.timeline.updateWithApiData(apiData.ratsdokumente); // Give received api data to timeline for an update
+                    this.timeline.updateWithApiData(apiData.ratsdokumente);     // Übergebe die API Daten an die Timeline Instanz, um zu aktualisieren
                 })
                 .catch(err => {
                     $('.pageloader').removeClass('is-active');
@@ -52,7 +52,7 @@ export class KeywordInput {
     }
 
     /**
-     * Method handles error 
+     * Methode reagiert auf Fehler
      * @param err 
      */
     private handleError(err) {
@@ -61,14 +61,14 @@ export class KeywordInput {
     }
 
     /**
-     * Method gives feed
+     * Methode reagiert auf ein leeres Ergebnis
      */
     private handleEmptyResult() {
         ToastFeedback.showWarningToast("Es wurden keine Dokumente gefunden...");
     }
 
     /**
-     * Method scrolls browser to timeline 
+     * Methode scrollt den Browser bis zur Timeline
      */
     private scrollToDivider() {
         $('html, body').animate({
