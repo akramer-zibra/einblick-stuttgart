@@ -60,8 +60,10 @@ export class Timeline {
                     link_target: "_blank"
                 },
                 text: {
-                    headline: this.cut(ratsdokument.titel),
-                    text: `<a href="${ratsdokument.vorlage.url}" target="_blank">${ratsdokument.id}</a><br />${ratsdokument.ausschuss}`
+                    headline: ratsdokument.class,
+                    text: `<a href="${ratsdokument.vorlage.url}" target="_blank">${ratsdokument.id}</a>
+                            <br /><strong>${ratsdokument.titel}</strong>
+                            <br />${ratsdokument.ausschuss}`
                 }
             });
         });
