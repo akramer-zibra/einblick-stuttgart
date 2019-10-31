@@ -61,7 +61,7 @@ export class Timeline {
                 },
                 text: {
                     headline: ratsdokument.class,
-                    text: `<a href="${ratsdokument.vorlage.url}" target="_blank">${ratsdokument.id}</a>
+                    text: `<a href="${ratsdokument.vorlage.url}" target="_blank">${ratsdokument.id} <i class="fas fa-external-link-alt"></i></a>
                             <br /><strong>${ratsdokument.titel}</strong>
                             <br />${ratsdokument.ausschuss}`
                 }
