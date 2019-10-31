@@ -1,24 +1,21 @@
 import $ from "jquery";
-import { Timeline } from "./Timeline";
 import { ToastFeedback } from "./ToastFeedback";
-import { RatsdokumenteProvider } from "../provider/Ratsdokumente.provider";
+import { SearchController } from "../controller/SearchController";
+import { Divider } from "./Divider";
 
 export class KeywordInput {
 
     /** Referenzen zu anderen Objekten */
-    private ratsdokumenteProvider: RatsdokumenteProvider;
-    private timeline: Timeline;
+    private searchController: SearchController;
 
     /**
      * Konstruktor
-     * @param ratsdokumenteProvider
-     * @param timeline 
+     * @param searchController
      */
-    constructor(ratsdokumenteProvider: RatsdokumenteProvider, timeline: Timeline) {
+    constructor(searchController: SearchController) {
 
         // Abhängigkeiten injizieren
-        this.ratsdokumenteProvider = ratsdokumenteProvider;
-        this.timeline = timeline;
+        this.searchController = searchController
 
         // Definiere Event-Listener die auf Klicks auf die Tags reagieren
         $('.act__keyword').on('click', this.submit.bind(this));
@@ -30,30 +27,21 @@ export class KeywordInput {
      */
     private submit(event) {
 
-        // Ermittle den Suchtext 
-        const searchtext = $('#app__searchtext').val();
+        // Ermittle das ausgewählte Stichwort 
+        const keyword = $(event.target).text();
 
         $('.pageloader').addClass('is-active');
 
-        // Benutze den Ratsdokumente-Provider um an die Daten aus der GraphQL API zu kommen
-        this.ratsdokumenteProvider
-            .queryRatsdokumenteByText(searchtext)
-            .then((apiData) => {
-
+        // Benutze den Search-Controller für die Datenabfrage und Weitergabe
+        this.searchController
+            .search(keyword)
+            .then((count) => {
                 $('.pageloader').removeClass('is-active');
-
-                // Überprüfe, ob überhaupt Ergebnisse vorhanden sind
-                if(apiData.ratsdokumente.length === 0) {
-                    this.handleEmptyResult();
-                    return;
-                }
-
-                this.scrollToDivider();
-                this.timeline.updateWithApiData(apiData.ratsdokumente);     // Übergebe die API Daten an die Timeline Instanz, um zu aktualisieren
+                if (count > 0) { Divider.scrollTo(); }   // Wir scrollen bis zu den Suchergebnissen, wenn es welche gibt                 
             })
-            .catch(err => {
+            .catch((error) => {
                 $('.pageloader').removeClass('is-active');
-                this.handleError(err) 
+                this.handleError(error);
             });
     }
 
@@ -71,14 +59,5 @@ export class KeywordInput {
      */
     private handleEmptyResult() {
         ToastFeedback.showWarningToast("Es wurden keine Dokumente gefunden...");
-    }
-
-    /**
-     * Methode scrollt den Browser bis zur Timeline
-     */
-    private scrollToDivider() {
-        $('html, body').animate({
-            scrollTop: $("div[name='divider']").offset().top - 20    // We want to read the divider title
-        }, 'slow');
     }
 }

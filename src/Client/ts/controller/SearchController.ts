@@ -1,6 +1,7 @@
 import { RatsdokumenteProvider } from "../provider/Ratsdokumente.provider";
 import { Timeline } from "../ui/Timeline";
 import { ToastFeedback } from "../ui/ToastFeedback";
+import { Divider } from "../ui/Divider";
 
 export class SearchController {
 
@@ -38,6 +39,9 @@ export class SearchController {
                         this.handleEmptyResult();
                         resolve(0);
                     }
+
+                    // Wir zeigen im Divider den Suchtext
+                    Divider.setTitle('Suche: ' + searchtext);
 
                     this.timeline.updateWithApiData(apiData.ratsdokumente);     // Übergebe die API Daten an die Timeline Instanz, um zu aktualisieren
                     resolve(apiData.ratsdokumente.length);

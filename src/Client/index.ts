@@ -4,6 +4,7 @@ import { KeywordInput } from './ts/ui/KeywordInput';
 import { GraphQLClient } from './ts/data/GraphQLClient';
 import { RatsdokumenteProvider } from './ts/provider/Ratsdokumente.provider';
 import { SearchInput } from './ts/ui/SearchInput';
+import { SearchController } from './ts/controller/SearchController';
 
 const main = () => {
     console.log('Client Applikation läuft...');
@@ -16,7 +17,12 @@ const main = () => {
 
     // Initialisiere UI Komponenten
     const timeline = new Timeline();
-    new SearchInput(ratsdokumenteProvider, timeline);
-    new KeywordInput(ratsdokumenteProvider, timeline);
+
+    // Initialisiere core Objekte
+    const searchController = new SearchController(ratsdokumenteProvider, timeline);
+
+    // 
+    new SearchInput(searchController);
+    new KeywordInput(searchController);
 }
 main();
