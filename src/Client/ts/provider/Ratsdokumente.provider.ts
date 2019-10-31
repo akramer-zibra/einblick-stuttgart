@@ -8,8 +8,8 @@ export class RatsdokumenteProvider {
 
     /** Vorlage für API Anfrage */
     private API_CALL_QUERY = gql`
-    query Ratsdokumente($keyword: String!) {
-        ratsdokumente(suchbegriff: $keyword) {
+    query Ratsdokumente($suchbegriff: String!) {
+        ratsdokumente(suchbegriff: $suchbegriff) {
             __typename
             ... on Beratungsunterlage {
                 class
@@ -43,9 +43,9 @@ export class RatsdokumenteProvider {
 
     /**
      * Methode fragt die GraphQL API mit dem übergebenen Stichwort ab
-     * @param keyword 
+     * @param suchbegriff 
      */
-    queryRatsdokumenteByKeyword(keyword: string): Promise<any> {
+    queryRatsdokumenteByText(suchbegriff: string): Promise<any> {
 
         return new Promise((resolve, reject) => {
 
@@ -54,7 +54,7 @@ export class RatsdokumenteProvider {
                 .query({
                     query: this.API_CALL_QUERY,
                     variables: {
-                        keyword
+                        suchbegriff
                     } 
                 })
                 .then((result) => {
