@@ -43,7 +43,7 @@ export class SuchergebnisProtokolleScraper {
             // Extract Nr
             // and reference Protokoll-file
             const firstCell = $(columns[0]);
-            const nnr = this.extractNnr(firstCell);
+            const {top, nnr} = this.extractTopAndNnr(firstCell);
             const protokoll = this.extractProtokollDatei(firstCell);
 
             // Extract Date 
@@ -60,6 +60,7 @@ export class SuchergebnisProtokolleScraper {
             
             result.push({
                 class: 'Protokoll',
+                top,
                 nnr,
                 datum,
                 betreff,
@@ -72,13 +73,13 @@ export class SuchergebnisProtokolleScraper {
     }
 
     /**
-     * Method extracts "Niederschrift Nr." from given table cell
+     * Method extracts "TOP" and "Niederschrift Nr." from given table cell
      * @param cell 
      */
-    private extractNnr(cell): string {
+    private extractTopAndNnr(cell): {top, nnr} {
         const idAnchor = cell.find('a');
         const tokens = idAnchor.text().split(' ');
-        return tokens.pop();    // Last token is protokoll number
+        return {top: tokens[1], nnr: tokens.pop()}  // Second token is TOP number, last token is protokoll number
     }
 
     /**
