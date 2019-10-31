@@ -26,8 +26,9 @@ export interface Datei {
     mime: string
 }
 
-// We use type instead of enum!
+// Wir benutzen hier einen Type anstatt eines enum!
 // @See https://lukasbehal.com/2017-05-22-enums-in-declaration-files/
-// TLDR: ...definition files are not compiled to JS
+// TLDR: TypeScript Declarations-Dateien werden nicht in JavaScript kompiliert.
+//       Während der Laufzeit kann darum darauf nicht zugegriffen werden
 export type Dokumenttyp = "Antrag" | "Beratungsunterlage" | "Protokoll";
 export type Dateityp = "Datei";

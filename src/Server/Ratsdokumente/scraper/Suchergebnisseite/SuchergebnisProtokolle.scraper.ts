@@ -8,56 +8,57 @@ export class SuchergebnisProtokolleScraper {
     private urlPath: string;
 
     /**
-     * Constructor method
+     * Konstruktor
      */
     constructor(urlPath:string = "https://www.domino1.stuttgart.de/web/ksd/ksdRedSystem.nsf") {
 
-        // Initial options
+        // Initiale Optionen 
         this.urlPath = urlPath;
 
-        // We use german locale for time functions
+        // Wir setzen Deutschland als locale für die Datumsformatierung
         dateUtil.locale("de");
     };
 
     /**
-     * Method scrapes "Protokoll" from given cheerio dom
+     * Methode zieht "Protokoll" Daten aus dem übergebenen cheerio DOM Objekt
      * @param $
      */
     scrape($: CheerioStatic): Protokoll[] {
 
         const result: Protokoll[] = [];
 
-        // We load second table from page
+        // Wir suchen die zweite Tabelle auf der Seite
         const secondTable = $('table').toArray()[1];
 
         // 
         const rows = $(secondTable).find('tr').toArray();
 
-        // We iterate each table row 
-        // and skip the first one (headline)!
+        // Wir iterieren über alle Tabellenzeilen
+        // überspringen aber die erste Headline-Zeile
         for(let i=1; i<rows.length; i++) {
 
-            // Load columns as array
+            // Lade alle Spalten in dieser Zeile als array
             const columns = $(rows[i]).find('td').toArray();
 
-            // Extract Nr
-            // and reference Protokoll-file
+            // Extrahiere Nummer
+            // und eine Referenz zur Protokoll-Datei
             const firstCell = $(columns[0]);
             const {top, nnr} = this.extractTopAndNnr(firstCell);
             const protokoll = this.extractProtokollDatei(firstCell);
 
-            // Extract Date 
-            // and parse it into Date object
+            // Extrahiere Datum
+            // und parse es in ein Date Objekt
             const datum = this.extractDatum($(columns[1]));
 
-            // Extract Betreff & Ausschuss
+            // Extrahiere Betreff 
+            // und Ausschuss
             const thirdCell = $(columns[2]);
             const betreff = this.extractBetreff(thirdCell);
             const ausschuss = this.extractAusschuss(thirdCell);
 
-            // Extract reference to Verhandlung (GRDrs)
-            // NOTICE: needs to scrape PDF file..
-            
+            // Extrahiere Referenz zur passenden "Beratungsunterlage" (GRDrs)
+            // NOTICE: dafür muss man das verlinkte PDF scrapen...
+
             result.push({
                 class: 'Protokoll',
                 top,
@@ -73,7 +74,7 @@ export class SuchergebnisProtokolleScraper {
     }
 
     /**
-     * Method extracts "TOP" and "Niederschrift Nr." from given table cell
+     * Methode extrahiert "TOP" (Tagesordnungspunkt) und "nnr" (Niederschriftnummer) aus der übergebenen Zelle 
      * @param cell 
      */
     private extractTopAndNnr(cell): {top, nnr} {
@@ -83,7 +84,7 @@ export class SuchergebnisProtokolleScraper {
     }
 
     /**
-     * Method extracts "Protokoll" from given table cell
+     * Methode extrahiert "Protokoll"-Datei aus der übergebenen Zelle
      * @param cell 
      */
     private extractProtokollDatei(cell): Datei {
@@ -97,7 +98,7 @@ export class SuchergebnisProtokolleScraper {
     }
 
     /**
-     * Method extracts "datum" from given table cell
+     * Methode extrahiert "Datum" aus der übergebenen Zelle
      * @param cell 
      */
     private extractDatum(cell) {
@@ -106,7 +107,7 @@ export class SuchergebnisProtokolleScraper {
     } 
 
     /**
-     * Method extracts "titel" from given table cell
+     * Methode extrahiert "Titel" aus der übergebenen Zelle
      * @param cell 
      */
     private extractBetreff(cell) {
@@ -114,7 +115,7 @@ export class SuchergebnisProtokolleScraper {
     } 
 
     /**
-     * Method extracts "Ausschuss" from given table cell
+     * Methode extrahiert "Asschuss" aus der übergebenen Zelle
      * @param cell 
      */
     private extractAusschuss(cell) {
