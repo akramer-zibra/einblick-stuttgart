@@ -11,11 +11,12 @@ export interface Beratungsunterlage {
 export interface Protokoll {
     class: Dokumenttyp,
     datum: Date,
-    id: string,
+    top: string,
+    nnr: string,
     betreff: string,
     ausschuss: string,
     protokoll: Datei,
-    verhandlung: Beratungsunterlage
+    verhandlung?: Beratungsunterlage
 }
 
 export interface Datei {
