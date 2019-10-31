@@ -6,7 +6,7 @@ type Query {
     ratsdokumente(suchbegriff: String!): [Dokument]!
 }
 
-union Dokument = Beratungsunterlage | Antrag
+union Dokument = Beratungsunterlage | Protokoll | Antrag
 scalar Date
 
 type Beratungsunterlage {
