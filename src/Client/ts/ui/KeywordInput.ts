@@ -1,6 +1,6 @@
 import $ from "jquery";
 import { Timeline } from "./Timeline";
-import { ErrorFeedback } from "./ErrorFeedback";
+import { ToastFeedback } from "./ToastFeedback";
 import { RatsdokumenteProvider } from "../provider/Ratsdokumente.provider";
 
 export class KeywordInput {
@@ -34,10 +34,15 @@ export class KeywordInput {
                 .then((apiData) => {
 
                     $('.pageloader').removeClass('is-active');
-                    this.scrollToDivider();
 
-                    // Give received api data to timeline for an update
-                    this.timeline.updateWithApiData(apiData.ratsdokumente);
+                    // Check if result set is empty
+                    if(apiData.ratsdokumente.length === 0) {
+                        this.handleEmptyResult();
+                        return;
+                    }
+
+                    this.scrollToDivider();
+                    this.timeline.updateWithApiData(apiData.ratsdokumente); // Give received api data to timeline for an update
                 })
                 .catch(err => {
                     $('.pageloader').removeClass('is-active');
@@ -52,7 +57,14 @@ export class KeywordInput {
      */
     private handleError(err) {
         console.error(err);
-        ErrorFeedback.showErrorToast(err);  // Use separate error routine
+        ToastFeedback.showErrorToast(err);  // Use separate error routine
+    }
+
+    /**
+     * Method gives feed
+     */
+    private handleEmptyResult() {
+        ToastFeedback.showWarningToast("Es wurden keine Dokumente gefunden...");
     }
 
     /**
