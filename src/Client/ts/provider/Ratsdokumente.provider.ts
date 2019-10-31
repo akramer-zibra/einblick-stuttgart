@@ -1,12 +1,12 @@
-import $ from "jquery";
 import gql from "graphql-tag";
 import { GraphQLClient } from "../data/GraphQLClient";
 
 export class RatsdokumenteProvider {
 
+    /** Referenzen zu anderen Objekten */
     private graphQLClient: GraphQLClient;
 
-    /** API call query template */
+    /** Vorlage für API Anfrage */
     private API_CALL_QUERY = gql`
     query Ratsdokumente($keyword: String!) {
         ratsdokumente(suchbegriff: $keyword) {
@@ -32,22 +32,24 @@ export class RatsdokumenteProvider {
     }`;
 
     /**
-     * Constructor method for this class providing Ratsdokumente data
+     * Konstruktor
      * @param graphQLclient 
      */
     constructor(graphQLclient: GraphQLClient) {
+
+        // Abhängigkeiten injizieren
         this.graphQLClient = graphQLclient;
     }
 
     /**
-     * Method queries GraphQL API with given keyword string 
+     * Methode fragt die GraphQL API mit dem übergebenen Stichwort ab
      * @param keyword 
      */
     queryRatsdokumenteByKeyword(keyword: string): Promise<any> {
 
         return new Promise((resolve, reject) => {
 
-            // Load timeline events from GraphQL API
+            // Benutze GraphQL Client um an die Daten zu kommen
             this.graphQLClient
                 .query({
                     query: this.API_CALL_QUERY,
@@ -56,7 +58,7 @@ export class RatsdokumenteProvider {
                     } 
                 })
                 .then((result) => {
-                    // NOTICE we only pass the data payload
+                    // NOTICE: Wir geben nur den Daten-Payload der Abfrage weiter
                     resolve(result.data);
                 })
                 .catch(reject);
