@@ -7,10 +7,11 @@ type Query {
 }
 
 union Dokument = Beratungsunterlage | Antrag
+scalar Date
 
 type Beratungsunterlage {
     class: String!
-    datum: String!
+    datum: Date!
     id: String!
     titel: String!
     ausschuss: String!
@@ -23,7 +24,7 @@ type Beratungsunterlage {
 
 type Antrag {
     class: String!
-    datum: String!
+    datum: Date!
     fraktion: String!
     id: String!
     betreff: String!
