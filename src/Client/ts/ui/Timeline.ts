@@ -71,17 +71,6 @@ export class Timeline {
     } 
 
     /**
-     * Method cuts string texts to a certain length
-     * @param text 
-     * @param length 
-     */
-    private cut(text: string, length = 40) {
-        return (text.length > length) 
-        ? text.substr(0, length) + '...'
-        : text;
-    }
-
-    /**
      * Methode generates class depending slide look
      * @param dokument 
      */
