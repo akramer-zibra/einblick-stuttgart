@@ -1,16 +1,13 @@
 import { GraphQLServer } from 'graphql-yoga';
 import express from 'express';
-import { BeratungsunterlagenResolver } from './Resolver/Beratungsunterlagen.resolver';
 import { RatsdokumenteResolver } from './Resolver/Ratsdokumente.resolver';
 
 // Instatiate Stream resolver
-const bunterlagenResolver = new BeratungsunterlagenResolver();
 const ratsdokumenteResolver = new RatsdokumenteResolver();
 
 // Definde API resolvers
 const resolvers = {
     Query: {
-        beratungsunterlagen: (_, {search}) => bunterlagenResolver.resolve(search),
         ratsdokumente: (_, {suchbegriff}) => ratsdokumenteResolver.resolve(suchbegriff)
     },
     Dokument: {     

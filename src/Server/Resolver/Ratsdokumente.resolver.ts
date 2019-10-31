@@ -1,7 +1,6 @@
 import cheerio from 'cheerio';
 import { KsdSucheClient } from "../Ratsdokumente/data/KsdSucheClient";
 import { SuchergebnisBunterlagenScraper } from "../Ratsdokumente/scraper/SuchergebnisBunterlagen.scraper";
-import { Buchungsunterlage, Dokumenttyp } from "../Ratsdokumente/dokumente";
 
 export class RatsdokumenteResolver {
 
