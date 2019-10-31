@@ -7,7 +7,7 @@ export class Divider {
      */
     static scrollTo() {
         $('html, body').animate({
-            scrollTop: $("div[name='divider']").offset().top - 20    // ...nur soweit, dass wir den Titel des Devider noch lesen können
+            scrollTop: $("#app__divider").offset().top - 20    // ...nur soweit, dass wir den Titel des Devider noch lesen können
         }, 'slow');
     }
 
@@ -16,13 +16,13 @@ export class Divider {
      * @param text 
      */
     static setTitle(text: string) {
-        $("div[name='divider']").data('content', text);
+        $("#app__divider").attr('data-content', text);
     }
 
     /**
-     * Methode resettet den Dividertext
+     * Methode setzt den Dividertext zurück
      */
     static reset() {
-        $("div[name='divider']").data('content', 'Ratsdokumente');
+        $("#app__divider").attr('data-content', 'Ratsdokumente');
     }
 }
