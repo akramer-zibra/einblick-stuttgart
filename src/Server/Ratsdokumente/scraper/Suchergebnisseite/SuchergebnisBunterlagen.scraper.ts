@@ -8,57 +8,58 @@ export class SuchergebnisBunterlagenScraper {
     private urlPath: string;
 
     /**
-     * Constructor method
+     * Konstruktor
      */
     constructor(urlPath: string = 'https://www.domino1.stuttgart.de/web/ksd/ksdRedSystem.nsf') {
 
-        // Initian params
+        // Initiale Parameter
         this.urlPath = urlPath;
 
-        // We use german locale for time functions
+        // Wir benutzen Deutsch als locale fpr die Datumsformatierung
         dateUtil.locale("de");
     };
 
     /**
-     * Method scrapes "Buchungsunterlagen" from given cheerio dom
+     * Methode zieht "Beratungsunterlagen" aus dem übergebenen cheerio Objekt
      * @param $
      */
     scrape($: CheerioStatic): Beratungsunterlage[] {
 
         const result: Beratungsunterlage[] = [];
 
-        // We load first table from page
+        // Wir suchen die erste Tabelle auf der Seite
         const firstTable = $('table').toArray()[0];
 
         // 
         const rows = $(firstTable).find('tr').toArray();
 
-        // We iterate each table row 
-        // and skip the first one (headline)!
+        // Wir iterieren durch alle Tabellenzeilen
+        // übersprichen aber die erste, weil nur Überschriften
         for(let i=1; i<rows.length; i++) {
 
-            // Load columns as array
+            // Lade alle Zellen dieser Reihe in ein Array
             const columns = $(rows[i]).find('td').toArray();
 
-            // Extract Id
-            // and Veratungsvorlage
+            // Extrahiere Id
+            // und Beratungsvorlage
             const firstCell = $(columns[0]);
             const id = this.extractId(firstCell);
             const vorlage = this.extractVorlageDatei(firstCell);
-                        
-            // Extract Date 
-            // and parse it into Date object
+
+            // Extrahiere Datum
+            // und parse es in Date Objekt
             const datum = this.extractDatum($(columns[1]));
 
-            // Extract Title & Ausschuss
+            // Extrahiere Titel
+            // und Ausschuss
             const thirdCell = $(columns[2]);
             const titel = this.extractTitel(thirdCell);
             const ausschuss = this.extractAusschuss(thirdCell);
 
-            // Extract Anhänge
+            // Extrahiere Anhänge
             const anhaenge = this.extractAnhaenge($, $(columns[3]));
 
-            // Push scraped data into collection
+            // Sammle herausgezogenes Datenobjekt 
             result.push({
                 class: "Beratungsunterlage",
                 datum,
@@ -74,7 +75,7 @@ export class SuchergebnisBunterlagenScraper {
     }
 
     /**
-     * Method extracts Id from given table cell
+     * Methode extrahiert "Id" aus übergebener Zelle
      * @param cell 
      */
     private extractId(cell): string {
@@ -83,7 +84,7 @@ export class SuchergebnisBunterlagenScraper {
     }
 
     /**
-     * Method extracts "Beratungsunterlage" from given table cell
+     * Methode extrahiert verknüpfte "Vorlage" Datei aus übergebener Zelle
      * @param cell 
      */
     private extractVorlageDatei(cell): Datei {
@@ -97,7 +98,7 @@ export class SuchergebnisBunterlagenScraper {
     }
 
     /**
-     * Method extracts "datum" from given table cell
+     * Methode extrahiert "Datum" aus übergebener Zelle
      * @param cell 
      */
     private extractDatum(cell) {
@@ -106,7 +107,7 @@ export class SuchergebnisBunterlagenScraper {
     } 
 
     /**
-     * Method extracts "titel" from given table cell
+     * Methode extrahiert "Titel" aus übergebener Zelle
      * @param cell 
      */
     private extractTitel(cell) {
@@ -114,7 +115,7 @@ export class SuchergebnisBunterlagenScraper {
     } 
 
     /**
-     * Method extracts "Ausschuss" from given table cell
+     * Methode extrahiert "Ausschuss" aus übergebener Zelle
      * @param cell 
      */
     private extractAusschuss(cell) {
@@ -123,7 +124,7 @@ export class SuchergebnisBunterlagenScraper {
     }
 
     /**
-     * Method extracts all attached "Anhänge" from given table cell
+     * Methode extrahiert alle verknüpften "Anhänge" aus übergebener Zelle
      * @param $ 
      * @param cell 
      */
