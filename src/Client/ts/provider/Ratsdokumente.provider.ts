@@ -20,9 +20,21 @@ export class RatsdokumenteProvider {
                 vorlage {url, titel, mime}
                 anhaenge {url, titel, mime}
             }
+            ... on Protokoll {
+                class
+                datum
+                nnr
+                betreff
+                ausschuss
+                protokoll {url, titel, mime}
+            }
         }
     }`;
 
+    /**
+     * Constructor method for this class providing Ratsdokumente data
+     * @param graphQLclient 
+     */
     constructor(graphQLclient: GraphQLClient) {
         this.graphQLClient = graphQLclient;
     }
