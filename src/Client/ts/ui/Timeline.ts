@@ -48,24 +48,23 @@ export class Timeline {
             // deserialize "datum" into DateTime object
             const ratsdokumentDatum = new Date(ratsdokument.datum);
 
-            slides.push({
+            // Start with default slide 
+            let slide: TimelineSlide = {
                 start_date: {
                     year: ratsdokumentDatum.getFullYear(), 
                     month: ratsdokumentDatum.getMonth(),
                     day: ratsdokumentDatum.getDay()
                 },
-                media: {
-                    url: "/static/img/beratungsunterlage-200x.png",
-                    link: ratsdokument.vorlage.url,
-                    link_target: "_blank"
-                },
                 text: {
-                    headline: ratsdokument.class,
-                    text: `<a href="${ratsdokument.vorlage.url}" target="_blank">${ratsdokument.id} <i class="fas fa-external-link-alt"></i></a>
-                            <br /><strong>${ratsdokument.titel}</strong>
-                            <br />${ratsdokument.ausschuss}`
+                    headline: ratsdokument.class
                 }
-            });
+            };
+
+            // Give this slide a class depending look
+            slide = this.classDependingLook(slide, ratsdokument);
+
+            // 
+            slides.push(slide);
         });
 
         return { events: slides };
@@ -80,5 +79,35 @@ export class Timeline {
         return (text.length > length) 
         ? text.substr(0, length) + '...'
         : text;
+    }
+
+    /**
+     * Methode generates class depending slide look
+     * @param dokument 
+     */
+    private classDependingLook(slide: TimelineSlide, dokument): TimelineSlide {
+        if(dokument.class === "Beratungsunterlage") {
+
+            slide.media = {
+                url: "/static/img/beratungsunterlage-200x.png",
+                link: dokument.vorlage.url,
+                link_target: "_blank"
+            },
+            slide.text.text = `<a href="${dokument.vorlage.url}" target="_blank">${dokument.id} <i class="fas fa-external-link-alt"></i></a>
+                                <br /><strong>${dokument.titel}</strong>
+                                <br />${dokument.ausschuss}`;
+
+        } else if(dokument.class === "Protokoll") {
+
+            slide.media = {
+                url: "/static/img/protokoll-200x.png",
+                link: dokument.protokoll.url,
+                link_target: "_blank"
+            },
+            slide.text.text = `<a href="${dokument.protokoll.url}" target="_blank">${dokument.id} <i class="fas fa-external-link-alt"></i></a>
+                                <br /><strong>${dokument.titel}</strong>
+                                <br />${dokument.ausschuss}`;
+        }
+        throw new Error("Es wurde ein Dokumententyp gefunden, der nicht unterstützt wird: "+ dokument.class);
     }
 }
