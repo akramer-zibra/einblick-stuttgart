@@ -5,11 +5,11 @@ import { HttpLink } from 'apollo-link-http';
 
 export class GraphQLClient {
 
-    /** Reference to Apollo Client */
+    /** Referenz zu notwendigem Apollo Client */
     private client: any = null;
 
     /**
-     * Constructor method
+     * Konstruktor
      */
     constructor() {
 
@@ -21,7 +21,7 @@ export class GraphQLClient {
         this.client = new ApolloClient({
             cache,
             link,
-            defaultOptions: {   // NOTICE: We disable cache for development purpose
+            defaultOptions: {   // NOTICE: Wir deaktivieren den Client cache für die Etwicklung
                 watchQuery: {
                   fetchPolicy: 'no-cache',  
                   errorPolicy: 'ignore',
@@ -35,7 +35,7 @@ export class GraphQLClient {
     }
 
     /**
-     * Facade method for client instance
+     * Methode macht eine query-Abfrage mit dem übergebenen query-Objekt
      * @param query 
      */
     query(query) {
