@@ -38,21 +38,21 @@ export class SuchergebnisProtokolleScraper {
         for(let i=1; i<rows.length; i++) {
 
             // Lade alle Spalten in dieser Zeile als array
-            const columns = $(rows[i]).find('td').toArray();
+            const cells = $(rows[i]).find('td').toArray();
 
             // Extrahiere Nummer
             // und eine Referenz zur Protokoll-Datei
-            const firstCell = $(columns[0]);
+            const firstCell = $(cells[0]);
             const {top, nnr} = this.extractTopAndNnr(firstCell);
             const protokoll = this.extractProtokollDatei(firstCell);
 
             // Extrahiere Datum
             // und parse es in ein Date Objekt
-            const datum = this.extractDatum($(columns[1]));
+            const datum = this.extractDatum($(cells[1]));
 
             // Extrahiere Betreff 
             // und Ausschuss
-            const thirdCell = $(columns[2]);
+            const thirdCell = $(cells[2]);
             const betreff = this.extractBetreff(thirdCell);
             const ausschuss = this.extractAusschuss(thirdCell);
 

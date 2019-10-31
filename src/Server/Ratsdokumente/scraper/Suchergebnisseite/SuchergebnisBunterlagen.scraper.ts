@@ -38,26 +38,26 @@ export class SuchergebnisBunterlagenScraper {
         for(let i=1; i<rows.length; i++) {
 
             // Lade alle Zellen dieser Reihe in ein Array
-            const columns = $(rows[i]).find('td').toArray();
+            const cells = $(rows[i]).find('td').toArray();
 
             // Extrahiere Id
             // und Beratungsvorlage
-            const firstCell = $(columns[0]);
+            const firstCell = $(cells[0]);
             const id = this.extractId(firstCell);
             const vorlage = this.extractVorlageDatei(firstCell);
 
             // Extrahiere Datum
             // und parse es in Date Objekt
-            const datum = this.extractDatum($(columns[1]));
+            const datum = this.extractDatum($(cells[1]));
 
             // Extrahiere Titel
             // und Ausschuss
-            const thirdCell = $(columns[2]);
+            const thirdCell = $(cells[2]);
             const titel = this.extractTitel(thirdCell);
             const ausschuss = this.extractAusschuss(thirdCell);
 
             // Extrahiere Anhänge
-            const anhaenge = this.extractAnhaenge($, $(columns[3]));
+            const anhaenge = this.extractAnhaenge($, $(cells[3]));
 
             // Sammle herausgezogenes Datenobjekt 
             result.push({
