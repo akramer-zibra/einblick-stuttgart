@@ -5,10 +5,10 @@ import iconv from 'iconv-lite';
 
 export class KsdSucheClient {
 
-    /* Axios client instance */
+    /* Axios client Instanz */
     private client;
 
-    /** Default POST call headers */
+    /** Default POST Anfrage Header */
     private headers = {
         "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
         "Accept-Encoding": "gzip, deflate, br",
@@ -22,7 +22,7 @@ export class KsdSucheClient {
         "User-Agent": "Node.js/Axios"
     };
 
-    /** Default POST call parameters */
+    /** Default POST Anfrage Parameter */
     private params = { 
         "__Click": "0", 
         "%%Surrogate_AuswahlDatenbank": "1", 
@@ -43,15 +43,15 @@ export class KsdSucheClient {
         "Dokumententyp": "Suche", 
         "$PublicAccess": "1", 
         "SaveOptions": "0", 
-        "AnzahlDok": "50"   // Maximum is 50 
+        "AnzahlDok": "50"   // Maximum ist serverseitig auf 50 limitiert 
     }
 
     /**
-     * Class constructor method
+     * Konstruktor
      */
     constructor() {
-        
-        // Instatiate axios client
+
+        // Instantiiere axios Client
         this.client = axios.create({
             baseURL: 'https://www.domino1.stuttgart.de/web/ksd/KSDRedSystem.nsf',
             timeout: 20000,
@@ -60,29 +60,29 @@ export class KsdSucheClient {
     };
 
     /**
-     * Method does an http POST call to this endpoit
+     * Methode macht eine Suchanfrage an den Ratsdokumente-Server
      * @param keyword 
      */
     submitSearch(keyword: string): Promise<string> {
 
-        // Use default params 
+        // Nutze deault Parameter
         const params = this.params;
-        params.Suchbegriff1 = keyword.replace(' ', '+');    // We replace whitespaces with + for concattenated search
+        params.Suchbegriff1 = keyword.replace(' ', '+');    // Wir ersetzen Leerzeichen durch + für eine bessere Suchlogik
 
-        // Stringify params object for POST call
+        // Wandle die Anfrage Parameter in einen einzigen String um
         const encodedParams = qs.stringify(params, {encode: false});
         
         // 
         return new Promise((resolve, reject) => {
 
-            // Post this generated form data with www-form-encoded parameters
+            // Schicke eine POST Anfrage mit www-form-encoded Formulardaten
             this.client.post('/masustart', encodedParams, { responseType: 'arraybuffer' })
                 .then((response) => {
                     
-                    // Change encoding from windows1252 to utf8
+                    // Dekodiere die HTML Antwort von windows1252 in utf8
                     const decodedStr = iconv.decode(response.data, 'win1252');
 
-                    // We resolve this promise with response HTML body data
+                    // Gib dekodierte HTML Antwort im Code weiter
                     resolve(decodedStr);
                 })
                 .catch((error) => {
