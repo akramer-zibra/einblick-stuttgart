@@ -23,7 +23,7 @@ type Beratungsunterlage {
 }
 
 type Protokoll {
-    class: Dokumenttyp!
+    class: String!
     datum: Date!
     nnr: String!
     betreff: String!
