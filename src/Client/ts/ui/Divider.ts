@@ -12,6 +12,14 @@ export class Divider {
     }
 
     /**
+     * Methode ändert den Titel des Divider
+     * @param text 
+     */
+    static setTitle(text: string) {
+        $("div[name='divider']").data('content', text);
+    }
+
+    /**
      * Methode resettet den Dividertext
      */
     static reset() {
