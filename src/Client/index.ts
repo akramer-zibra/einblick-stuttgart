@@ -7,13 +7,13 @@ import { RatsdokumenteProvider } from './ts/provider/Ratsdokumente.provider';
 const main = () => {
     console.log('Client Applikation läuft...');
 
-    // Initialize internal components
+    // Initialisiere api Objekt
     const graphQLCLient = new GraphQLClient();
 
-    // Initialize providers
+    // Initialisiere provider Objekte
     const ratsdokumenteProvider = new RatsdokumenteProvider(graphQLCLient);
 
-    // Initialize UI components
+    // Initialisiere UI Komponenten
     const timeline = new Timeline();
     new KeywordInput(ratsdokumenteProvider, timeline);
 }

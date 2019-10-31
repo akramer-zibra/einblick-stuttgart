@@ -1,24 +1,23 @@
 declare const TL: any;  // Declares global TL object integrated with linked script file in index.html
-import { GraphQLClient } from "../data/GraphQLClient";
 import { TimelineData, TimelineSlide } from "../../timeline";
 import { Protokoll, Beratungsunterlage } from "../../../Server/Ratsdokumente/dokumente";
 
 export class Timeline {
 
-    /** Reference to graphQL client */
-    private graphQLClient: GraphQLClient = new GraphQLClient();
-
+    /**
+     * Konstruktor
+     */
     constructor() {
         console.log('Timeline initialisiert...');
     }
     
     /**
-     * Method updates timeline with given object
+     * Methode aktualisiert die Timeline mit neuen Daten
      * @param timelineJson 
      */
-    update(timelineJson: any) {
+    update(timelineJson: TimelineData) {
 
-        // Create a new Timeline object with given JSON
+        // Erzeuge eine neue Timeline mit den übergebenen Daten
         new TL.Timeline('timeline-embed', timelineJson, {
                 start_at_end: true,
                 timenav_height: 300,
@@ -27,7 +26,7 @@ export class Timeline {
     }
 
     /**
-     * Method takes api data and updates timeline with a transformed structure
+     * Methode aktualisiert die Timeline mit api Daten
      * @param apiRatsdokumente 
      */
     updateWithApiData(apiRatsdokumente: any) {
@@ -36,20 +35,21 @@ export class Timeline {
     }
 
     /**
-     * Method converts retrieved API data to TimelineData 
+     * Methode transformiert die übergebenen API Daten in die 
+     * Timeline Datenstruktur um
      * @param apiRatsdokumente 
      */
     private transform(apiRatsdokumente: any): TimelineData {
 
         const slides: TimelineSlide[] = [];
 
-        // We convert each ratsdokument into a timeline event
+        // Wir wandeln jedes Ratsdokument in eine Timeline Slide um
         apiRatsdokumente.forEach((ratsdokument) => {
 
-            // deserialize "datum" into DateTime object
+            // Deserialisiere "Datum" String in ein Date Objekt
             const ratsdokumentDatum = new Date(ratsdokument.datum);
 
-            // Start with default slide 
+            // Starte mit den default Werten dieser Slide
             let slide: TimelineSlide = {
                 start_date: {
                     year: ratsdokumentDatum.getFullYear(), 
@@ -61,10 +61,10 @@ export class Timeline {
                 }
             };
 
-            // Give this slide a class depending look
+            // Befülle diese Slide entsprechend des Dokumenttyps            
             slide = this.classDependingLook(slide, ratsdokument);
 
-            // 
+            // Übernehme diese Slide in die Timeline Datenstruktur
             slides.push(slide);
         });
 
@@ -72,13 +72,13 @@ export class Timeline {
     } 
 
     /**
-     * Methode generates class depending slide look
+     * Methode generiert eine Dokumenttyp spezifischen Look der übergebenen Slide
      * @param dokument 
      */
     private classDependingLook(slide: TimelineSlide, dokument): TimelineSlide {
         if(dokument.class === "Beratungsunterlage") {
 
-            (dokument as Beratungsunterlage);   // ATTENTION: This type is a serverside definition!
+            (dokument as Beratungsunterlage);   // ACHTUNG: Dieser Typ ist eine Serverseitige Definition
 
             slide.media = {
                 url: "/static/img/beratungsunterlage-200x.png",
@@ -91,7 +91,7 @@ export class Timeline {
 
         } else if(dokument.class === "Protokoll") {
 
-            (dokument as Protokoll);    // ATTENTION: This type is a serverside definition!
+            (dokument as Protokoll);    // ACHTUNG: Dieser Typ ist eine Serverseitige Definition
 
             slide.media = {
                 url: "/static/img/protokoll-200x.png",

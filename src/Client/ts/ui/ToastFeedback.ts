@@ -3,12 +3,12 @@ import { toast } from "bulma-toast";
 export class ToastFeedback {
 
     /**
-     * Method shows error toast
+     * Methode blendet eine Error "Toast" ein 
      * @param message 
      */
     static showErrorToast(message: string) {
 
-        // Create bulma toast with error message
+        // Erzeuge bulma Toast-Anzeige mit einer Fehlernachricht
         toast({
             message: `${message}`,
             duration: 3000,
@@ -22,12 +22,12 @@ export class ToastFeedback {
     }
 
     /**
-     * Message shows a warning toast
+     * Methode blendet eine Warning "Toast" ein
      * @param message 
      */
     static showWarningToast(message: string) {
-        
-        // Create bulma toast with error message
+
+        // Erzeuge eine bulma Toast-Anzeige mit einer Warnnachricht
         toast({
             message: `${message}`,
             duration: 3000,
