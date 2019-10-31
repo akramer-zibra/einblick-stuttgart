@@ -1,11 +1,21 @@
-export interface Buchungsunterlage {
-    class: Dokumenttyp
+export interface Beratungsunterlage {
+    class: Dokumenttyp,
     datum: Date,
     id: string,
     titel: string,
     ausschuss: string,
     vorlage: Datei,
     anhaenge?: Datei[]
+}
+
+export interface Protokoll {
+    class: Dokumenttyp,
+    datum: Date,
+    id: string,
+    betreff: string,
+    ausschuss: string,
+    protokoll: Datei,
+    verhandlung: Beratungsunterlage
 }
 
 export interface Datei {
@@ -18,5 +28,5 @@ export interface Datei {
 // We use type instead of enum!
 // @See https://lukasbehal.com/2017-05-22-enums-in-declaration-files/
 // TLDR: ...definition files are not compiled to JS
-export type Dokumenttyp = "Antrag" | "Beratungsunterlage";
+export type Dokumenttyp = "Antrag" | "Beratungsunterlage" | "Protokoll";
 export type Dateityp = "Datei";
