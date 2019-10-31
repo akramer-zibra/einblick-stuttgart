@@ -75,7 +75,7 @@ export class SuchergebnisBunterlagenScraper {
      */
     private extractId(cell): string {
         const idAnchor = cell.find('a');
-        return idAnchor.text().replace('Drucksache ', '');
+        return idAnchor.text().replace('Drucksache ', 'GRDrs ');
     }
 
     /**
