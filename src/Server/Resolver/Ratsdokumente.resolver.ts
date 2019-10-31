@@ -2,6 +2,8 @@ import cheerio from 'cheerio';
 import { KsdSucheClient } from "../Ratsdokumente/data/KsdSucheClient";
 import { SuchergebnisBunterlagenScraper } from "../Ratsdokumente/scraper/SuchergebnisBunterlagen.scraper";
 import { SuchergebnisProtokolleScraper } from '../Ratsdokumente/scraper/SuchergebnisProtokolle.scraper';
+import { Beratungsunterlage, Protokoll } from '../Ratsdokumente/dokumente';
+import { throwServerError } from 'apollo-link-http-common';
 
 export class RatsdokumenteResolver {
 
@@ -22,24 +24,31 @@ export class RatsdokumenteResolver {
 
         /* Scrape retrieved bodyHTML */
         // ..scrape "Beratungsunterlagen"
-        const berScraper = new SuchergebnisBunterlagenScraper();
-        const bunterlagenArr = berScraper.scrape($);
+        const bunterlagenScraper = new SuchergebnisBunterlagenScraper();
+        const bunterlagenArr = bunterlagenScraper.scrape($);
 
         // ..scrape "Protokolle"
-        const proScraper = new SuchergebnisProtokolleScraper();
-        const proArr = proScraper.scrape($);
-
-
-        console.log(proArr);
+        const protokollScraper = new SuchergebnisProtokolleScraper();
+        const protokollArr = protokollScraper.scrape($);
 
         // TODO scrape other data from search result...
 
-        // TODO merge scraped result arrays
+        const mergedResult = this.merge([bunterlagenArr, protokollArr]);
 
-        // Transform
-        // const transformedData = this.transform(beratungsunterlagenArr);
+        // Return merge result
+        return mergedResult;
+    }
 
-        // Return...
-        return bunterlagenArr;
+    /**
+     * Method merges given arrays to one single array
+     * NOTICE does not consider ordering
+     * @param ratsdokumente Arrays with either Beratungsunterlagen OR Protokollen
+     */
+    private merge(ratsdokumente: any[]): Array<Beratungsunterlage|Protokoll> {
+
+        // We use array reduce to merge given arrays
+        return ratsdokumente.reduce((accumulator, currentValue) => {
+            return accumulator.concat(currentValue);
+        });
     }
 }
