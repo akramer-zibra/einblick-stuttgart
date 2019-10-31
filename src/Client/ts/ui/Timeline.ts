@@ -45,11 +45,14 @@ export class Timeline {
         // We convert each ratsdokument into a timeline event
         apiRatsdokumente.forEach((ratsdokument) => {
 
+            // deserialize "datum" into DateTime object
+            const ratsdokumentDatum = new Date(ratsdokument.datum);
+
             slides.push({
                 start_date: {
-                    year: ratsdokument.getFullYear(), 
-                    month: ratsdokument.getMonth(),
-                    day: ratsdokument.getDay()
+                    year: ratsdokumentDatum.getFullYear(), 
+                    month: ratsdokumentDatum.getMonth(),
+                    day: ratsdokumentDatum.getDay()
                 },
                 media: {
                     url: "/static/img/beratungsunterlage-200x.png",
@@ -57,7 +60,7 @@ export class Timeline {
                     link_target: "_blank"
                 },
                 text: {
-                    headline: ratsdokument.titel,
+                    headline: this.cut(ratsdokument.titel),
                     text: `${ratsdokument.ausschuss}`
                 }
             });
@@ -65,4 +68,15 @@ export class Timeline {
 
         return { events: slides };
     } 
+
+    /**
+     * Method cuts string texts to a certain length
+     * @param text 
+     * @param length 
+     */
+    private cut(text: string, length = 40) {
+        return (text.length > length) 
+        ? text.substr(0, length) + '...'
+        : text;
+    }
 }

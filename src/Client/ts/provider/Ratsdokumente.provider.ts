@@ -43,7 +43,7 @@ export class RatsdokumenteProvider {
                         keyword
                     } 
                 })
-                .then(result => {
+                .then((result) => {
                     // NOTICE we only pass the data payload
                     resolve(result.data);
                 })
