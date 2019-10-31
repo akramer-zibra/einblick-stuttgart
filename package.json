@@ -7,7 +7,7 @@
     "doc": "doc"
   },
   "scripts": {
-    "doc:generate:uml": "puml generate doc/plantuml/datenmodell.puml -o doc/plantuml/datenmodell.png",
+    "doc:generate:uml": "puml generate doc/plantuml/komponenten.puml -o doc/plantuml/komponenten.png",
     "client:build": "parcel build src/Client/index.html --out-dir ./public",
     "client:build:debug": "parcel build src/Client/index.html --out-dir ./public --no-minify",
     "client:build:watch": "parcel watch src/Client/index.html --out-dir ./public ",
