@@ -1,36 +1,23 @@
 import $ from "jquery";
-import gql from "graphql-tag";
-import { GraphQLClient } from "../data/GraphQLClient";
 import { Timeline } from "./Timeline";
 import { ErrorFeedback } from "./ErrorFeedback";
+import { RatsdokumenteProvider } from "../provider/Ratsdokumente.provider";
 
 export class KeywordInput {
 
     /** Dependencies references */
-    private graphQLClient: GraphQLClient;
+    private ratsdokumenteProvider: RatsdokumenteProvider;
     private timeline: Timeline;
-
-    /** API call query template */
-    private API_CALL_QUERY = gql`
-                                query TimelineByKeyword($keyword: String!) {
-                                    timelineByKeyword(search: $keyword) {
-                                        events {
-                                            media {url, link, link_target}
-                                            start_date {year, month, day}
-                                            text {headline, text}
-                                            group
-                                        }
-                                    }
-                                }`;
 
     /**
      * Constructor method
+     * @param ratsdokumenteProvider
      * @param timeline 
      */
-    constructor(graphQLClient: GraphQLClient, timeline: Timeline) {
+    constructor(ratsdokumenteProvider: RatsdokumenteProvider, timeline: Timeline) {
 
         // Dependency injection
-        this.graphQLClient = graphQLClient;
+        this.ratsdokumenteProvider = ratsdokumenteProvider;
         this.timeline = timeline;
 
         // Define event listener for click events
@@ -41,50 +28,20 @@ export class KeywordInput {
 
             $('.pageloader').addClass('is-active');
 
-            // TODO Switch to ratsdokumente API
-
-            /*
-            // Call API 
-            this.apiCall(keyword)
-                .then((timelineJson) => {
+            // Use Ratsdokumente provider to query our data
+            this.ratsdokumenteProvider
+                .queryRatsdokumenteByKeyword(keyword)
+                .then((apiData) => {
 
                     $('.pageloader').removeClass('is-active');
-
-                    // TODO scroll to timeline
                     this.scrollToDivider();
 
-                    // Update Timeline
-                    this.timeline.update(timelineJson);
+                    // Give received api data to timeline for an update
+                    this.timeline.updateWithApiData(apiData.ratsdokumente);
                 })
                 .catch(err => {
                     $('.pageloader').removeClass('is-active');
                     this.handleError(err) 
-                });
-            */
-        });
-    }
-
-    /**
-     * Method calls GraphQL APi for timeline events
-     */
-    private apiCall(keyword: string): Promise<any> {
-
-        return new Promise((resolve, reject) => {
-
-            // Load timeline events from GraphQL API
-            this.graphQLClient
-                .query({
-                    query: this.API_CALL_QUERY,
-                    variables: {
-                        keyword
-                    } 
-                })
-                .then(result => {
-                    resolve(result.data.timelineByKeyword);
-                })
-                .catch(err => {
-                    $('.pageloader').removeClass('is-active');
-                    reject(err);
                 });
         });
     }
@@ -94,6 +51,7 @@ export class KeywordInput {
      * @param err 
      */
     private handleError(err) {
+        console.error(err);
         ErrorFeedback.showErrorToast(err);  // Use separate error routine
     }
 
