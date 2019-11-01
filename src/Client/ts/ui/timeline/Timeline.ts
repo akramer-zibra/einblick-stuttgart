@@ -13,8 +13,8 @@ export class Timeline {
     /** Hashmap mit Arrays von listenern für bestimmte Events der Timeline */
     private listeners: any = {};
 
-    /** Hashmap mit  */
-    private dataObjects: any = {};
+    /** Hashmap cached Objekt mit einer uuid */
+    private cacheObjects: any = {};
 
     /**
      * Konstruktor
@@ -66,17 +66,17 @@ export class Timeline {
      * @param uuid 
      * @param data 
      */
-    cache(uuid: string, data) {
-        this.dataObjects[uuid] = data;
+    cache(uuid: string, data: any) {
+        this.cacheObjects[uuid] = data;
     }
 
     /**
      * Methode gibt das mit einer Slide verknüpfte Datenobjekt
-     * @param slideId 
+     * @param uuid 
      */
-    slideData(slideId): any {
-        if(!(slideId in this.dataObjects)) { return null; } 
-        return this.dataObjects[slideId];
+    slideInstance(uuid): any|null {
+        if(uuid in this.cacheObjects) { return this.cacheObjects[uuid]; } 
+        return null;
     }
 
     /**
@@ -139,18 +139,31 @@ export class Timeline {
 
             (dokument as Beratungsunterlage);
 
-            const customSlide = new BeratungsunterlageSlide(dokument);
-            slide = customSlide.adjustJson(slide);
+            const slideInstance = new BeratungsunterlageSlide(dokument);
 
-            
-            this.cache(slide.unique_id, ratsdokument);
+            // Wir cachen das Datenobjekt zu dieser Slide unter seiner eindeutigen unique_id 
+            this.cache(slide.unique_id, slideInstance);
+
+            // DEBUG
+            console.log(this.slideInstance(slide.unique_id));
+            // DEBUG
+
+            slide = slideInstance.adjustJson(slide);
 
         } else if(dokument.class === "Protokoll") {
 
             (dokument as Protokoll);
 
-            const customSlide = new ProtokollSlide(dokument);
-            slide = customSlide.adjustJson(slide);
+            const slideInstance = new ProtokollSlide(dokument);
+            
+            // Wir cachen unser Slideobject zu dieser Slide unter seiner eindeutigen unique_id 
+            this.cache(slide.unique_id, slideInstance);
+
+            // DEBUG
+            console.log(this.slideInstance(slide.unique_id));
+            // DEBUG
+
+            slide = slideInstance.adjustJson(slide);
             
         } else {
             throw new Error("Es wurde ein Dokumententyp gefunden, der nicht unterstützt wird: "+ dokument.class);

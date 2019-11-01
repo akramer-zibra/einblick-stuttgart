@@ -23,7 +23,7 @@ export interface TimelineSlide {
         color: string
     },
     autolink?: boolean,
-    unique_id?: string
+    unique_id: string
 }
 
 export interface TimelineText {
