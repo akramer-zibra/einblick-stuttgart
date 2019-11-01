@@ -63,7 +63,7 @@ export class BeratungsunterlageSlide implements SlideGenerator {
 
         slide.text = {
             headline : this.data.class,
-            text: Mustache.render(this.TEXT_TEMPLATE, {data: this.data, slide: slideDefaults});   // Wir rendern den Textblock mit Mustache
+            text: Mustache.render(this.TEXT_TEMPLATE, {data: this.data, slide: slideDefaults})  // Wir rendern den Textblock mit Mustache
         }
                 
         return slide;
