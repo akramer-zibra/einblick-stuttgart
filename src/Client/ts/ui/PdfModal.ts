@@ -50,7 +50,7 @@ export class PdfModal {
             // ...wir stoppen hier, wenn wir zu der uuid kein passendes Slide Objekt bekommen
             if(slideObj === null) { return; }
 
-            // Zeige PdfModal mit der PDF DAtei, welche mit dieser Slide verknüpft ist
+            // Zeige PdfModal mit der PDF Datei, welche mit dieser Slide verknüpft ist
             this.show(slideObj.getAssignedPdf());
 
             event.preventDefault();
@@ -58,12 +58,12 @@ export class PdfModal {
     }
 
     /**
-     * Methode blendet das übergebene PDF DOkument in einem Modal über der Seite ein
+     * Methode blendet das übergebene PDF Dokument in einem Modal über der Seite ein
      * @param pdf 
      */
     show(file: Datei) {
 
-        // Integriere fremdes PDF in das Modal mit einem Viewer ein
+        // Integriere fremdes PDF in das Modal mit dem PDFjs Viewer
         PDFObject.embed(file.url, '#app__pdfmodal__viewer', {
             pdfOpenParams: { view: 'FitH,20' }      // Passt sich an die verfügbare Breite mit ein bisschen Padding an
         });
