@@ -139,31 +139,23 @@ export class Timeline {
 
             (dokument as Beratungsunterlage);
 
-            const slideInstance = new BeratungsunterlageSlide(dokument);
+            const slideWrapper = new BeratungsunterlageSlide(dokument);
 
             // Wir cachen das Datenobjekt zu dieser Slide unter seiner eindeutigen unique_id 
-            this.cache(slide.unique_id, slideInstance);
+            this.cache(slide.unique_id, slideWrapper);
 
-            // DEBUG
-            console.log(this.slideInstance(slide.unique_id));
-            // DEBUG
-
-            slide = slideInstance.adjustJson(slide);
+            slide = slideWrapper.slideJson(slide);
 
         } else if(dokument.class === "Protokoll") {
 
             (dokument as Protokoll);
 
-            const slideInstance = new ProtokollSlide(dokument);
+            const slideWrapper = new ProtokollSlide(dokument);
             
             // Wir cachen unser Slideobject zu dieser Slide unter seiner eindeutigen unique_id 
-            this.cache(slide.unique_id, slideInstance);
+            this.cache(slide.unique_id, slideWrapper);
 
-            // DEBUG
-            console.log(this.slideInstance(slide.unique_id));
-            // DEBUG
-
-            slide = slideInstance.adjustJson(slide);
+            slide = slideWrapper.slideJson(slide);
             
         } else {
             throw new Error("Es wurde ein Dokumententyp gefunden, der nicht unterstützt wird: "+ dokument.class);
