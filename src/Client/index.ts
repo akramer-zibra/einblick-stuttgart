@@ -5,6 +5,7 @@ import { GraphQLClient } from './ts/data/GraphQLClient';
 import { RatsdokumenteProvider } from './ts/provider/Ratsdokumente.provider';
 import { SearchInput } from './ts/ui/SearchInput';
 import { SearchController } from './ts/controller/SearchController';
+import { PdfModal } from './ts/ui/PdfModal';
 
 const main = () => {
     console.log('Client Applikation läuft...');
@@ -24,5 +25,6 @@ const main = () => {
     // 
     new SearchInput(searchController);
     new KeywordInput(searchController);
+    new PdfModal(timeline);
 }
 main();

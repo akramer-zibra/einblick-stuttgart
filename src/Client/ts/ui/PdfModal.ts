@@ -1,69 +1,63 @@
 import $ from "jquery";
+import PDFObject from 'pdfobject';
 import { Datei } from "../../../Server/Ratsdokumente/dokumente";
+import { Timeline } from "./Timeline";
 
 export class PdfModal {
 
     /**
      * Konstruktor
      */
-    constructor() {
+    constructor(timeline: Timeline) {
 
         // Definiert event listener
         $('#app__pdfmodal .modal-close').on('click', this.hide.bind(this));
         $('#app__pdfmodal .modal-background').on('click', this.hide.bind(this));
 
-        this.show();
+        // Registiert event listener bei der Timeline Komponente
+        timeline.addEventListener('change', () => console.log('PDFModal received change event'));
+        timeline.addEventListener('change', this.attachPdfModalView.bind(this));
+        timeline.addEventListener('loaded', this.attachPdfModalView.bind(this));
+    }
+
+    /**
+     * Methode verknüpft einen event handler auf das übergebene HTML Element 
+     * um bei Klick das Modal mit dem PDF anzuzeigen
+     */
+    attachPdfModalView() {
+
+        // Überprüfe zuerst, ob inline PDFs vom browser überhaupt supported werden
+        if(!PDFObject.supportsPDFs) {
+            return;
+        }
+
+        // TODO Lade Dateiinformationen aus DOM
+
+        // Lege einen Click Eventhanlder auf alle Elemente, die das pdfmodal anzeigen können
+        $('.app__pdfmodal__anchor').on('click', (event) => {
+
+            this.show({
+                class: 'Datei',
+                url: 'https://www.domino1.stuttgart.de/web/ksd/ksdRedSystem.nsf/0/3FC06629CE4EA240C125849A00318EA0/$File/ABA684D1EA697092C1258495004CF5FB.pdf?OpenElement',
+                titel: 'Protokoll ...',
+                mime: 'application/pdf'
+            });
+            event.preventDefault();
+        });
     }
 
     /**
      * Methode blendet das übergebene PDF DOkument in einem Modal über der Seite ein
      * @param pdf 
      */
-    show() { // ACHTUNG Declaration kommt aus der Serverseite 
+    show(file: Datei) { // ACHTUNG Declaration kommt aus der Serverseite 
 
-        const url = '/static/pdf/ABA684D1EA697092C1258495004CF5FB.pdf';
-
-        // Loaded via <script> tag, create shortcut to access PDF.js exports.
-        const pdfjsLib = window['pdfjs-dist/build/pdf'];
-
-        // The workerSrc property shall be specified.
-        pdfjsLib.GlobalWorkerOptions.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.js';
-
-        // Asynchronous download of PDF
-        const loadingTask = pdfjsLib.getDocument(url);
-        loadingTask.promise.then((pdf) => {
-
-            console.log('PDF loaded');
-
-            // Fetch the first page
-            const pageNumber = 1;
-            pdf.getPage(pageNumber).then((page) => {
-                console.log('Page loaded');
-
-                const scale = 0.5;
-                const viewport = page.getViewport({ scale });
-
-                // Prepare canvas using PDF page dimensions
-                const canvas = $('#app__pdfmodal__canvas');
-                const context = canvas[0].getContext('2d');
-
-                canvas.height(viewport.height);
-                canvas.width(viewport.width);
-
-                // Render PDF page into canvas context
-                const renderContext = {
-                    canvasContext: context,
-                    viewport
-                };
-                const renderTask = page.render(renderContext);
-                renderTask.promise.then(() => {
-                    console.log('Page rendered');
-                });
-            });
-        }, (reason) => {
-            // PDF loading error
-            console.error(reason);
+        // Integriere fremdes PDF in das Modal mit einem Viewer ein
+        PDFObject.embed(file.url, '#app__pdfmodal__viewer', {
+            pdfOpenParams: { view: 'FitH,20' }      // Passt sich an die verfügbare Breite mit ein bisschen Padding an
         });
+
+        $('#app__pdfmodal').addClass('is-active');
     }
 
     /**

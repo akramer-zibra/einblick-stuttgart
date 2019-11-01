@@ -4,6 +4,12 @@ import { Protokoll, Beratungsunterlage } from "../../../Server/Ratsdokumente/dok
 
 export class Timeline {
 
+    /** Referenz zu intermer Timeline Instanz */
+    private timeline: any;
+
+    /** Hashmap mit Arrays von listenern für bestimmte Events der Timeline */
+    private listeners: any = {};
+
     /**
      * Konstruktor
      */
@@ -18,11 +24,34 @@ export class Timeline {
     update(timelineJson: TimelineData) {
 
         // Erzeuge eine neue Timeline mit den übergebenen Daten
-        new TL.Timeline('timeline-embed', timelineJson, {
+        this.timeline = new TL.Timeline('timeline-embed', timelineJson, {
                 start_at_end: true,
                 timenav_height: 300,
-                language: 'de'
+                language: 'de',
+                track_events: ['loaded', 'added', 'change', 'nav_next', 'nav_previous']
             });
+
+        // Die registrierten event Listener mit der frischen Timeline verbinden
+        Object.keys(this.listeners).forEach((event) => {
+            this.listeners[event].forEach((listener) => {
+                this.timeline.on(event, listener, this);
+            });
+        })
+
+        // Trigger timeline loaded event
+        this.timeline.fire('loaded', {}, this.timeline);
+    }
+
+    /**
+     * Methode bindet listeners update übergreifend an die Timeline
+     * @param event 
+     * @param listener 
+     */
+    addEventListener(event: string, listener) {
+        if(!(event in this.listeners)) {
+            this.listeners[event] = [];
+        }
+        this.listeners[event].push(listener);
     }
 
     /**
@@ -85,7 +114,7 @@ export class Timeline {
                 link: dokument.vorlage.url,
                 link_target: "_blank"
             },
-            slide.text.text = `<a href="${dokument.vorlage.url}" target="_blank">${dokument.id} <i class="fas fa-external-link-alt"></i></a>
+            slide.text.text = `<a class="app__pdfmodal__anchor" href="${dokument.vorlage.url}" target="_blank">${dokument.id} <i class="fas fa-external-link-alt"></i></a>
                                 <br /><strong>${dokument.titel}</strong>
                                 <br />${dokument.ausschuss}`;
 
@@ -98,7 +127,7 @@ export class Timeline {
                 link: dokument.protokoll.url,
                 link_target: "_blank"
             },
-            slide.text.text = `<a href="${dokument.protokoll.url}" target="_blank">${dokument.nnr} <i class="fas fa-external-link-alt"></i></a>
+            slide.text.text = `<a class="app__pdfmodal__anchor" href="${dokument.protokoll.url}" target="_blank">${dokument.nnr} <i class="fas fa-external-link-alt"></i></a>
                                 <br /><strong>${dokument.betreff}</strong>
                                 <br />${dokument.ausschuss}`;
         } else {
