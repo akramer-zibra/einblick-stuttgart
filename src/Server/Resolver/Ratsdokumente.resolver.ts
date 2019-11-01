@@ -2,8 +2,9 @@ import cheerio from 'cheerio';
 import { KsdSucheClient } from "../Ratsdokumente/data/KsdSucheClient";
 import { SuchergebnisBunterlagenScraper } from "../Ratsdokumente/scraper/Suchergebnisseite/SuchergebnisBunterlagen.scraper";
 import { SuchergebnisProtokolleScraper } from '../Ratsdokumente/scraper/Suchergebnisseite/SuchergebnisProtokolle.scraper';
-import { Beratungsunterlage, Protokoll, Antrag } from '../../shared/dokumente';
+import { Beratungsunterlage, Protokoll, Antrag, Stellungnahme } from '../../shared/dokumente';
 import { SuchergebnisAntraegeScraper } from '../Ratsdokumente/scraper/Suchergebnisseite/SuchergebnisAntraege.scraper';
+import { SuchergebnisStellungnahmenScraper } from '../Ratsdokumente/scraper/Suchergebnisseite/SuchergebnisStellungnahmen.scraper';
 
 export class RatsdokumenteResolver {
 
@@ -35,11 +36,15 @@ export class RatsdokumenteResolver {
         const antragScraper = new SuchergebnisAntraegeScraper();
         const antraegeArr = antragScraper.scrape($);
 
+        // ..scrape "Stellungnahmen"
+        const stellungnahmenScraper = new SuchergebnisStellungnahmenScraper();
+        const stellungnahmenArr = stellungnahmenScraper.scrape($);
+
         // TODO Andere Daten aus der Suchergebnisseite scrapen
 
-        const mergedResult = this.merge([bunterlagenArr, protokollArr, antraegeArr]);
+        const mergedResult = this.merge([bunterlagenArr, protokollArr, antraegeArr, stellungnahmenArr]);
 
-        // Zusammengeführtes Ergebnis zurückgeben
+        // Zusammengeführtes Array mit Ergebnissen zurückgeben
         return mergedResult;
     }
 
@@ -48,7 +53,7 @@ export class RatsdokumenteResolver {
      * NOTICE berücksichtigt keine Reihenfolge in den Arrays
      * @param ratsdokumente Arrays aus Ratsdokumenten
      */
-    private merge(ratsdokumente: any[]): Array<Beratungsunterlage|Protokoll|Antrag> {
+    private merge(ratsdokumente: any[]): Array<Beratungsunterlage|Protokoll|Antrag|Stellungnahme> {
 
         // Wir benutzen hier die reduce Methode um ein einziges Arrays mit allen Elementen zu erzeugen
         return ratsdokumente.reduce((accumulator, currentValue) => {

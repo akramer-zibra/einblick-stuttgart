@@ -28,6 +28,15 @@ export interface Antrag {
     dokument: Datei
 }
 
+export interface Stellungnahme {
+    class: Dokumenttyp,
+    datum: Date,
+    betreff: string,
+    fraktionen: string,
+    dokument: Datei,
+    refAntrag: string
+}
+
 export interface Datei {
     class: Dateityp,
     url: string,
@@ -39,5 +48,5 @@ export interface Datei {
 // @See https://lukasbehal.com/2017-05-22-enums-in-declaration-files/
 // TLDR: TypeScript Declarations-Dateien werden nicht in JavaScript kompiliert.
 //       Während der Laufzeit kann darum darauf nicht zugegriffen werden
-export type Dokumenttyp = "Antrag" | "Beratungsunterlage" | "Protokoll";
+export type Dokumenttyp = "Antrag" | "Beratungsunterlage" | "Protokoll" | "Stellungnahme";
 export type Dateityp = "Datei";

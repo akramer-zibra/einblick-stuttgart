@@ -36,6 +36,14 @@ export class RatsdokumenteProvider {
                 fraktionen
                 dokument {url, titel, mime}
             }
+            ... on Stellungnahme {
+                class
+                datum
+                refAntrag
+                betreff
+                fraktionen
+                dokument {url, titel, mime}
+            }
         }
     }`;
 

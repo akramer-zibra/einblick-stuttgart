@@ -2,7 +2,7 @@ type Query {
     ratsdokumente(suchbegriff: String!): [Dokument]!
 }
 
-union Dokument = Beratungsunterlage | Protokoll | Antrag
+union Dokument = Beratungsunterlage | Protokoll | Antrag | Stellungnahme
 scalar Date
 
 type Beratungsunterlage {
@@ -36,6 +36,15 @@ type Antrag {
     betreff: String!
     fraktionen: String!
     dokument: Datei!
+}
+
+type Stellungnahme {
+    class: String!
+    datum: Date!
+    betreff: String!
+    fraktionen: String!
+    dokument: Datei!
+    refAntrag: String!
 }
 
 type Datei {

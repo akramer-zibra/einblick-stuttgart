@@ -4,6 +4,7 @@ import { BeratungsunterlageSlideGenerator } from "./slides/BeratungsunterlageSli
 import { ProtokollSlideGenerator } from "./slides/ProtokollSlideGenerator";
 import uuidv4 from 'uuid/v4';
 import { AntragSlideGenerator } from "./slides/AntragSlideGenerator";
+import { StellungnahmeSlideGenerator } from "./slides/StellungnahmeSlideGenerator";
 
 export class Timeline {
 
@@ -20,7 +21,8 @@ export class Timeline {
     private slideTypeFactories = {
         'Beratungsunterlage': BeratungsunterlageSlideGenerator.build,
         'Protokoll': ProtokollSlideGenerator.build,
-        'Antrag': AntragSlideGenerator.build
+        'Antrag': AntragSlideGenerator.build,
+        'Stellungnahme': StellungnahmeSlideGenerator.build
     }
 
     /**
