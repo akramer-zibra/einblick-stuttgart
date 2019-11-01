@@ -11,7 +11,7 @@ const resolvers = {
         ratsdokumente: (_, {suchbegriff}) => ratsdokumenteResolver.resolve(suchbegriff)
     },
     Dokument: {     
-        __resolveType(dokument, context, info) {    // We need a resolver method for this union type
+        __resolveType(dokument, context, info) {    // Wir brauchen einen zusätzlichen Resolver, der Untertypen des abstrakten Typs Dokument auflösen kann 
             if (dokument.class !== undefined) {
                 return dokument.class
             }
