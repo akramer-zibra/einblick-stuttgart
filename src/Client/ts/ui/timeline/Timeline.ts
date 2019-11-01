@@ -50,7 +50,8 @@ export class Timeline {
             });
         })
 
-        // Trigger timeline loaded event
+        // Wir signalisieren, dass die Timeline jetzt geladen ist
+        // NOTICE: Damit die erste Slide auch schon angepasst werden kann
         this.timeline.fire('loaded', {}, this.timeline);
     }
 
@@ -127,9 +128,9 @@ export class Timeline {
 
     /**
      * Methode generiert eine Dokumenttyp spezifischen Look der übergebenen Slide
-     * @param dokumentData 
+     * @param slideData 
      */
-    private generateSlideWithGenerator(slideDefaults: TimelineSlideDefault, dokumentData): TimelineSlide {
+    private generateSlideWithGenerator(slideDefaults: TimelineSlideDefault, slideData): TimelineSlide {
 
         // Definiere eine Variable für unsere generische Slide Generator Instanz
         let slideGenerator: SlideGenerator|null = null;
@@ -138,13 +139,13 @@ export class Timeline {
         Object.keys(this.slideTypeFactories).forEach((slideClassName) => {
 
             // Benutze diese Factory Methode und schaue ob eine Instanz damit erzeugt werden kann
-            const instance = this.slideTypeFactories[slideClassName](dokumentData);
+            const instance = this.slideTypeFactories[slideClassName](slideData);
             if(instance !== null) { slideGenerator = instance; }            
         });
 
         // Wir haben einen Fehler, wenn wir keinen Generator zuordnen können
         if(slideGenerator === null) {
-            throw new Error("Es liegen Daten vor, die wir nicht anzeigen können: "+ dokumentData.class);
+            throw new Error("Es liegen Daten vor, die wir nicht anzeigen können: "+ slideData.class);
         } 
 
         // Wir haben einen Generator gefunden und casten die Instanz entsprechend 
