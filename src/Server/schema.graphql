@@ -36,11 +36,10 @@ type Protokoll {
 type Antrag {
     class: String!
     datum: Date!
-    fraktion: String!
-    id: String!
+    bezeichnung: String!
     betreff: String!
-    inhalt: String!
-    stellungnahmen: [Datei]
+    fraktionen: String!
+    dokument: Datei
 }
 
 type Datei {
