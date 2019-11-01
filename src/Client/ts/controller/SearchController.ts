@@ -2,21 +2,26 @@ import { RatsdokumenteProvider } from "../provider/Ratsdokumente.provider";
 import { Timeline } from "../ui/timeline/Timeline";
 import { ToastFeedback } from "../ui/ToastFeedback";
 import { Divider } from "../ui/Divider";
+import { SearchHistory } from "../helper/SearchHistory";
 
 export class SearchController {
 
     /** Referenzen zu notwendigen Objekten */
     private ratsdokumenteProvider;
-    private timeline;
+    private timeline: Timeline;
+    private searchHistory: SearchHistory;
 
     /**
      * Konstruktor
      * @param ratsdokumenteProvider 
      * @param timeline 
      */
-    constructor(ratsdokumenteProvider: RatsdokumenteProvider, timeline: Timeline) {
+    constructor(ratsdokumenteProvider: RatsdokumenteProvider, 
+                timeline: Timeline, 
+                searchHistory: SearchHistory) {
 
         // Abhängikeiten injizieren
+        this.searchHistory = searchHistory;
         this.ratsdokumenteProvider = ratsdokumenteProvider;
         this.timeline = timeline;
     }
@@ -26,6 +31,9 @@ export class SearchController {
      * @param searchtext 
      */
     search(searchtext: string): Promise<number> {
+
+        // Behalte den Suchtext in einer Historie
+        this.searchHistory.remember(searchtext);
 
         return new Promise((resolve, reject) => {
 
@@ -53,6 +61,15 @@ export class SearchController {
                 })
                 .catch(reject);
         });
+    }
+
+    /**
+     * Methode gibt den letzten angewendeten Suchbegriff zurück
+     * oder null, falls die History leer ist
+     */
+    last(): string|null {
+        if(this.searchHistory.length === 0) { return null; }
+        return this.searchHistory[this.searchHistory.length - 1];
     }
     
     /**

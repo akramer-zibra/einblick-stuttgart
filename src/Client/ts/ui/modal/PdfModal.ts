@@ -3,23 +3,24 @@ import PDFObject from 'pdfobject';
 import { Datei } from "../../../../shared/dokumente";
 import { Timeline } from "../timeline/Timeline";
 import { TimelineEvent, SlideGenerator } from "../timeline";
-import { BeratungsunterlageSlide } from "../timeline/slides/BeratungsunterlageSlide";
-import { ProtokollSlide } from "../timeline/slides/ProtokollSlide";
-import { AntragSlide } from "../timeline/slides/AntragSlide";
+import { SearchHistory } from "../../helper/SearchHistory";
 
 export class PdfModal {
 
     /** Referenz zu Timeline Instanz */
     private timeline: Timeline;
+    private searchHistory: SearchHistory;
 
     /**
      * Konstruktor
+     * @param searchController
      * @param timeline
      */
-    constructor(timeline: Timeline) {
+    constructor(timeline: Timeline, searchHistory: SearchHistory) {
 
         // Abhängigkeiten injizieren
         this.timeline = timeline;
+        this.searchHistory = searchHistory;
 
         // Definiert event listener
         $('#app__pdfmodal .modal-close').on('click', this.hide.bind(this));
@@ -49,9 +50,15 @@ export class PdfModal {
      */
     show(pdfFile: Datei) {
 
+        // Lade den letzten Suchtext aus der Historie
+        const searchText = this.searchHistory.last(); 
+
         // Integriere fremdes PDF in das Modal mit dem PDFjs Viewer
         PDFObject.embed(pdfFile.url, '#app__pdfmodal__viewer', {
-            pdfOpenParams: { view: 'FitH,20' }      // Passt sich an die verfügbare Breite mit ein bisschen Padding an
+            pdfOpenParams: { 
+                view: 'FitH,20',     // Passt sich an die verfügbare Breite mit ein bisschen Padding an
+                search: searchText   // Unser Suchtext soll im PDF markiert werden
+            }      
         });
 
         $('#app__pdfmodal').addClass('is-active');
