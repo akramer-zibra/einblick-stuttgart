@@ -121,7 +121,7 @@ export class Timeline {
             };
 
             // Befülle diese Slide entsprechend des Dokumenttyps            
-            slide = this.classDependingSlide(slide, ratsdokument);
+            slide = this.generateSlide(slide, ratsdokument);
 
             // Übernehme diese Slide in die Timeline Datenstruktur
             slides.push(slide);
@@ -134,7 +134,7 @@ export class Timeline {
      * Methode generiert eine Dokumenttyp spezifischen Look der übergebenen Slide
      * @param dokument 
      */
-    private classDependingSlide(slide: TimelineSlide, dokument): TimelineSlide {
+    private generateSlide(slide: TimelineSlide, dokument): TimelineSlide {
         if(dokument.class === "Beratungsunterlage") {
 
             (dokument as Beratungsunterlage);
