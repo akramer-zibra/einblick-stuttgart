@@ -1,5 +1,5 @@
 
-import { Timeline } from './ts/ui/Timeline';
+import { Timeline } from './ts/ui/timeline/Timeline';
 import { KeywordInput } from './ts/ui/KeywordInput';
 import { GraphQLClient } from './ts/data/GraphQLClient';
 import { RatsdokumenteProvider } from './ts/provider/Ratsdokumente.provider';

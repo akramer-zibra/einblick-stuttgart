@@ -1,6 +1,6 @@
 declare const TL: any;  // Declares global TL object integrated with linked script file in index.html
-import { TimelineData, TimelineSlide } from "../../timeline";
-import { Protokoll, Beratungsunterlage } from "../../../Server/Ratsdokumente/dokumente";
+import { TimelineData, TimelineSlide } from "./timeline.d";
+import { Protokoll, Beratungsunterlage } from "../../../../Server/Ratsdokumente/dokumente";
 
 export class Timeline {
 

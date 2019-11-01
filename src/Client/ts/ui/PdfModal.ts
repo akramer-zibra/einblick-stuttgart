@@ -1,7 +1,7 @@
 import $ from "jquery";
 import PDFObject from 'pdfobject';
 import { Datei } from "../../../Server/Ratsdokumente/dokumente";
-import { Timeline } from "./Timeline";
+import { Timeline } from "./timeline/Timeline";
 
 export class PdfModal {
 

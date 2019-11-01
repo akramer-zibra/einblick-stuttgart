@@ -1,5 +1,5 @@
 import { RatsdokumenteProvider } from "../provider/Ratsdokumente.provider";
-import { Timeline } from "../ui/Timeline";
+import { Timeline } from "../ui/timeline/Timeline";
 import { ToastFeedback } from "../ui/ToastFeedback";
 import { Divider } from "../ui/Divider";
 
