@@ -25,7 +25,6 @@ export class PdfModal {
         $('#app__pdfmodal .modal-background').on('click', this.hide.bind(this));
 
         // Registiert event listener bei der Timeline Komponente
-//        timeline.addEventListener('change', this.attachPdfModalView.bind(this));
         timeline.addEventListener('loaded', this.attachPdfModalView.bind(this));
     }
 
@@ -69,7 +68,7 @@ export class PdfModal {
      * @param event 
      */
     private clickEventHandler(event) {
-        
+
         // Lade slide uuid aus pdfmodal ancher
         const uuid = $(event.target).attr('data-uuid');
 
