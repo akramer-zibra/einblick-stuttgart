@@ -62,7 +62,7 @@ export class SearchController {
 
                     // Wir zeigen im Divider den Suchtext
                     // ...und scrollen dorthin
-                    Divider.setTitle('Suche: ' + searchtext);
+                    Divider.setTitle(`Suche: ${searchtext} (${apiData.ratsdokumente.length} Ergebnisse)`);
                     Divider.scrollTo(); 
                     
                     resolve(apiData.ratsdokumente.length);
