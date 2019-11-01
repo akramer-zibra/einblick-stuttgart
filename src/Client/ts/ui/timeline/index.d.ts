@@ -60,7 +60,6 @@ export interface TimelineEvent {
 }
 
 /* Eigene Typen die mit der Timeline zusammenhängen*/
-
 export interface TimelineSlideDefault {
     unique_id: string
 }
