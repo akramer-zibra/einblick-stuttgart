@@ -4,6 +4,7 @@ import { TimelineSlide } from "..";
 
 export class ProtokollSlide {
 
+    /** Vorlage für den Textblock in der Slide */
     private TEXT_TEMPLATE = `<a class="app__pdfmodal__anchor" href="{{data.protokoll.url}}" 
                                     target="_blank"
                                     data-uuid="{{slide.unique_id}}">
