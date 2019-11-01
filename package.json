@@ -11,12 +11,12 @@
     "client:build": "parcel build src/Client/index.html --out-dir ./public",
     "client:build:debug": "parcel build src/Client/index.html --out-dir ./public --no-minify",
     "client:build:watch": "parcel watch src/Client/index.html --out-dir ./public ",
+    "lint": "tslint --project tsconfig.json",
     "start": "npm run client:build && npm run server:start",
     "server:start": "npm run server:build:live",
     "server:build": "tsc -p .",
     "server:build:live": "nodemon --watch 'src/**/*.ts' --exec node_modules/.bin/ts-node src/Server/index.ts",
     "server:check": "tsc --noEmit",
-    "server:lint": "tslint --project tsconfig.json",
     "server:lint:graphql": "graphql-schema-linter ./src/Server/schema.graphql",
     "server:verify": "npm run server:check && npm run server:lint",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -42,7 +42,7 @@
     "iconv-lite": "0.5.0",
     "jquery": "3.4.1",
     "nodemon": "1.19.4",
-    "pdfjs-dist-viewer-min": "2.3.200",
+    "pdfobject": "2.1.1",
     "query-string": "6.8.3",
     "ts-node": "8.4.1",
     "typescript": "3.4.5"
