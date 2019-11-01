@@ -1,38 +1,38 @@
 import Mustache from 'mustache';
-import { Datei, Antrag } from "../../../../../shared/dokumente";
+import { Protokoll, Datei } from "../../../../../shared/dokumente";
 import { TimelineSlide, SlideGenerator, TimelineSlideDefault } from "..";
 
-export class AntragSlide implements SlideGenerator {
+export class ProtokollSlideGenerator implements SlideGenerator {
 
     /** Vorlage für den Textblock in der Slide */
-    private TEXT_TEMPLATE = `<a class="app__pdfmodal__anchor" href="{{data.dokument.url}}" 
+    private TEXT_TEMPLATE = `<a class="app__pdfmodal__anchor" href="{{data.protokoll.url}}" 
                                     target="_blank"
                                     data-uuid="{{slide.unique_id}}">
-                                    {{data.bezeichnung}} <i class="fas fa-external-link-alt"></i>
+                                    {{data.nnr}} <i class="fas fa-external-link-alt"></i>
                                 </a>
                                 <br /><strong>{{data.betreff}}</strong>
-                                <br />{{data.fraktionen}}`;
+                                <br />{{data.ausschuss}}`;
 
     /** Referenz zu verknüpftem Datenobjekt */
-    private data: Antrag;
+    private data: Protokoll;
 
     /**
      * Statische Factory Methode für diese Klasse
      * @param data 
      */
-    static build(data: Antrag) {
+    static build(data: Protokoll) {
 
         // Überprüfe, ob übergebene Daten ausreichen
-        if(data.class !== 'Antrag') { return null; }
+        if(data.class !== 'Protokoll') { return null; }
 
-        return new AntragSlide(data);
+        return new ProtokollSlideGenerator(data);
     }
 
     /**
      * Konstruktor
      * @param data 
      */
-    private constructor(data: Antrag) {
+    private constructor(data: Protokoll) {
         this.data = data;
     }
     
@@ -54,10 +54,10 @@ export class AntragSlide implements SlideGenerator {
         },
 
         slide.media = {
-            url: "/static/img/antrag-200px.png",
-            link: this.data.dokument.url,
+            url: "/static/img/protokoll-200px.png",
+            link: this.data.protokoll.url,
             link_target: "_blank",
-            thumbnail: "/static/img/antrag-thumb.svg",
+            thumbnail: "/static/img/protokoll-thumb.svg",
             alt: slide.unique_id     // Wir platzieren die uuid dieser Slide in das alt-Attribut für eine Verlinkung
         },
 
@@ -73,6 +73,6 @@ export class AntragSlide implements SlideGenerator {
      * Methode gibt Url des verlinkten PDFs zurück
      */
     getAssignedPdf(): Datei {
-        return this.data.dokument;
+        return this.data.protokoll;
     } 
 }

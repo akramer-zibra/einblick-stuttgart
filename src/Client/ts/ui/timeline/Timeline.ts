@@ -1,9 +1,9 @@
 declare const TL: any;  // Declares global TL object integrated with linked script file in index.html
 import { TimelineData, TimelineSlide, SlideGenerator, TimelineSlideDefault } from ".";
-import { BeratungsunterlageSlide } from "./slides/BeratungsunterlageSlide";
-import { ProtokollSlide } from "./slides/ProtokollSlide";
+import { BeratungsunterlageSlideGenerator } from "./slides/BeratungsunterlageSlideGenerator";
+import { ProtokollSlideGenerator } from "./slides/ProtokollSlideGenerator";
 import uuidv4 from 'uuid/v4';
-import { AntragSlide } from "./slides/AntragSlide";
+import { AntragSlideGenerator } from "./slides/AntragSlideGenerator";
 
 export class Timeline {
 
@@ -18,9 +18,9 @@ export class Timeline {
 
     /** Konfiguriert Auswahl an Slide Typen und deren factory Methoden */
     private slideTypeFactories = {
-        'Beratungsunterlage': BeratungsunterlageSlide.build,
-        'Protokoll': ProtokollSlide.build,
-        'Antrag': AntragSlide.build
+        'Beratungsunterlage': BeratungsunterlageSlideGenerator.build,
+        'Protokoll': ProtokollSlideGenerator.build,
+        'Antrag': AntragSlideGenerator.build
     }
 
     /**

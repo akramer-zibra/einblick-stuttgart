@@ -1,43 +1,41 @@
 import Mustache from 'mustache';
-import { Beratungsunterlage, Datei } from "../../../../../shared/dokumente";
+import { Datei, Antrag } from "../../../../../shared/dokumente";
 import { TimelineSlide, SlideGenerator, TimelineSlideDefault } from "..";
 
-export class BeratungsunterlageSlide implements SlideGenerator {
+export class AntragSlideGenerator implements SlideGenerator {
 
     /** Vorlage für den Textblock in der Slide */
     private TEXT_TEMPLATE = `<a class="app__pdfmodal__anchor" href="{{data.dokument.url}}" 
-                                target="_blank"
-                                data-uuid="{{slide.unique_id}}">
-                                {{data.bezeichnung}} <i class="fas fa-external-link-alt"></i>
-                            </a>
-                            <br /><strong>{{data.titel}}</strong>
-                            <br />{{data.ausschuss}}`;
+                                    target="_blank"
+                                    data-uuid="{{slide.unique_id}}">
+                                    {{data.bezeichnung}} <i class="fas fa-external-link-alt"></i>
+                                </a>
+                                <br /><strong>{{data.betreff}}</strong>
+                                <br />{{data.fraktionen}}`;
 
     /** Referenz zu verknüpftem Datenobjekt */
-    private data: Beratungsunterlage;
+    private data: Antrag;
 
     /**
      * Statische Factory Methode für diese Klasse
-     * Die Methode überprüft die übergebene Datenstruktur und gibt null zurück, falls 
-     * keine Instanz davon gebaut werden kann 
      * @param data 
      */
-    static build(data: Beratungsunterlage): BeratungsunterlageSlide|null {
-        
-        // Überprüfe, ob übergebene Daten ausreichen
-        if(data.class !== 'Beratungsunterlage') { return null; }
+    static build(data: Antrag) {
 
-        return new BeratungsunterlageSlide(data);
+        // Überprüfe, ob übergebene Daten ausreichen
+        if(data.class !== 'Antrag') { return null; }
+
+        return new AntragSlideGenerator(data);
     }
 
     /**
      * Konstruktor
      * @param data 
      */
-    private constructor(data: Beratungsunterlage) {
+    private constructor(data: Antrag) {
         this.data = data;
     }
-
+    
     /**
      * Methode ergänzt das übergebene Timeline Side-Objekt um spezifische Werte und Aussehen
      */
@@ -56,18 +54,18 @@ export class BeratungsunterlageSlide implements SlideGenerator {
         },
 
         slide.media = {
-            url: "/static/img/beratungsunterlage-200px.png",
+            url: "/static/img/antrag-200px.png",
             link: this.data.dokument.url,
             link_target: "_blank",
-            thumbnail: "/static/img/beratungsunterlage-thumb.svg",
+            thumbnail: "/static/img/antrag-thumb.svg",
             alt: slide.unique_id     // Wir platzieren die uuid dieser Slide in das alt-Attribut für eine Verlinkung
         },
 
         slide.text = {
             headline : this.data.class,
-            text: Mustache.render(this.TEXT_TEMPLATE, {data: this.data, slide})  // Wir rendern den Textblock mit Mustache
+            text: Mustache.render(this.TEXT_TEMPLATE, {data: this.data, slide: slideDefaults})
         }
-                
+        
         return slide;
     }
 
