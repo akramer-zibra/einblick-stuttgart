@@ -1,6 +1,6 @@
 import dateUtil from 'date-and-time';
 import 'date-and-time/locale/de';
-import { Protokoll, Datei } from '../../dokumente';
+import { Protokoll, Datei } from '../../../../shared/dokumente';
 
 export class SuchergebnisProtokolleScraper {
 
