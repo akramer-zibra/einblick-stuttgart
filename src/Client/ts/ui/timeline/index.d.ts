@@ -1,3 +1,5 @@
+import { Datei } from "../../../../shared/dokumente";   // ACHTUNG Das ist ein Import aus einer geteilten Typendefinition
+
 export interface TimelineData {
     events: TimelineSlide[],
     title?: TimelineSlide,
@@ -65,5 +67,6 @@ export interface TimelineSlideDefault {
 }
 
 export interface SlideGenerator {
-    generateWith(slideDefaults: TimelineSlideDefault): TimelineSlide
+    generateWith(slideDefaults: TimelineSlideDefault): TimelineSlide,
+    getAssignedPdf(): Datei
 }
