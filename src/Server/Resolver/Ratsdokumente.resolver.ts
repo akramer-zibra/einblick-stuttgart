@@ -2,7 +2,8 @@ import cheerio from 'cheerio';
 import { KsdSucheClient } from "../Ratsdokumente/data/KsdSucheClient";
 import { SuchergebnisBunterlagenScraper } from "../Ratsdokumente/scraper/Suchergebnisseite/SuchergebnisBunterlagen.scraper";
 import { SuchergebnisProtokolleScraper } from '../Ratsdokumente/scraper/Suchergebnisseite/SuchergebnisProtokolle.scraper';
-import { Beratungsunterlage, Protokoll } from '../../shared/dokumente';
+import { Beratungsunterlage, Protokoll, Antrag } from '../../shared/dokumente';
+import { SuchergebnisAntraegeScraper } from '../Ratsdokumente/scraper/Suchergebnisseite/SuchergebnisAntraege.scraper';
 
 export class RatsdokumenteResolver {
 
@@ -30,9 +31,13 @@ export class RatsdokumenteResolver {
         const protokollScraper = new SuchergebnisProtokolleScraper();
         const protokollArr = protokollScraper.scrape($);
 
+        // ..scrape "Anträge"
+        const antragScraper = new SuchergebnisAntraegeScraper();
+        const antraegeArr = antragScraper.scrape($);
+
         // TODO Andere Daten aus der Suchergebnisseite scrapen
 
-        const mergedResult = this.merge([bunterlagenArr, protokollArr]);
+        const mergedResult = this.merge([bunterlagenArr, protokollArr, antraegeArr]);
 
         // Zusammengeführtes Ergebnis zurückgeben
         return mergedResult;
@@ -43,7 +48,7 @@ export class RatsdokumenteResolver {
      * NOTICE berücksichtigt keine Reihenfolge in den Arrays
      * @param ratsdokumente Arrays aus Ratsdokumenten
      */
-    private merge(ratsdokumente: any[]): Array<Beratungsunterlage|Protokoll> {
+    private merge(ratsdokumente: any[]): Array<Beratungsunterlage|Protokoll|Antrag> {
 
         // Wir benutzen hier die reduce Methode um ein einziges Arrays mit allen Elementen zu erzeugen
         return ratsdokumente.reduce((accumulator, currentValue) => {
