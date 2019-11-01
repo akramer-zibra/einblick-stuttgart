@@ -16,13 +16,13 @@ const main = () => {
     // Initialisiere provider Objekte
     const ratsdokumenteProvider = new RatsdokumenteProvider(graphQLCLient);
 
-    // Initialisiere UI Komponenten
+    // Initialisiere UI Ausgabe Komponenten
     const timeline = new Timeline();
 
     // Initialisiere core Objekte
     const searchController = new SearchController(ratsdokumenteProvider, timeline);
 
-    // 
+    // Initialisiere EIngabe Komponenten
     new SearchInput(searchController);
     new KeywordInput(searchController);
     new PdfModal(timeline);
