@@ -1,8 +1,8 @@
 import Mustache from 'mustache';
 import { Protokoll, Datei } from "../../../../../shared/dokumente";
-import { TimelineSlide } from "..";
+import { TimelineSlide, SlideGenerator, TimelineSlideDefault } from "..";
 
-export class ProtokollSlide {
+export class ProtokollSlide implements SlideGenerator {
 
     /** Vorlage für den Textblock in der Slide */
     private TEXT_TEMPLATE = `<a class="app__pdfmodal__anchor" href="{{data.protokoll.url}}" 
@@ -17,26 +17,54 @@ export class ProtokollSlide {
     private data: Protokoll;
 
     /**
+     * Statische Factory Methode für diese Klasse
+     * @param data 
+     */
+    static build(data: Protokoll) {
+
+        // Überprüfe, ob übergebene Daten ausreichen
+        if(data.class !== 'Protokoll') { return null; }
+
+        return new ProtokollSlide(data);
+    }
+
+    /**
      * Konstruktor
      * @param data 
      */
-    constructor(data: Protokoll) {
+    private constructor(data: Protokoll) {
         this.data = data;
     }
     
     /**
      * Methode ergänzt das übergebene Timeline Side-Objekt um spezifische Werte und Aussehen
      */
-    slideJson(slideDefaults: TimelineSlide) {
+    generateWith(slideDefaults: TimelineSlideDefault): TimelineSlide {
         
-        slideDefaults.media = {
+        // Wir übernehmen die Defaults aus dem Argument und überschreiben die spezifischen Sachen
+        const slide = (slideDefaults as TimelineSlide);
+
+        // Deserialisiere "Datum" String in ein Date Objekt
+        const documentDate = new Date(this.data.datum);
+
+        slide.start_date = {
+            year: documentDate.getFullYear(), 
+            month: documentDate.getMonth(),
+            day: documentDate.getDay()
+        },
+
+        slide.media = {
             url: "/static/img/protokoll-200x.png",
             link: this.data.protokoll.url,
             link_target: "_blank"
         },
-        slideDefaults.text.text = Mustache.render(this.TEXT_TEMPLATE, {data: this.data, slide: slideDefaults});
+
+        slide.text = {
+            headline : this.data.class,
+            text: Mustache.render(this.TEXT_TEMPLATE, {data: this.data, slide: slideDefaults})
+        }
         
-        return slideDefaults;
+        return slide;
     }
 
     /**

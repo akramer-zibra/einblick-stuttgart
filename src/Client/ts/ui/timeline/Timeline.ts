@@ -1,5 +1,5 @@
 declare const TL: any;  // Declares global TL object integrated with linked script file in index.html
-import { TimelineData, TimelineSlide } from ".";
+import { TimelineData, TimelineSlide, SlideGenerator, TimelineSlideDefault } from ".";
 import { Protokoll, Beratungsunterlage } from "../../../../shared/dokumente";
 import { BeratungsunterlageSlide } from "./slides/BeratungsunterlageSlide";
 import { ProtokollSlide } from "./slides/ProtokollSlide";
@@ -15,6 +15,12 @@ export class Timeline {
 
     /** Hashmap cached Objekt mit einer uuid */
     private cacheObjects: any = {};
+
+    /** Konfiguriert Auswahl an Slide Typen und deren factory Methoden */
+    private slideTypeFactories = {
+        'Beratungsunterlage': BeratungsunterlageSlide.build,
+        'Protokoll': ProtokollSlide.build
+    }
 
     /**
      * Konstruktor
@@ -100,28 +106,17 @@ export class Timeline {
         // Wir wandeln jedes Ratsdokument in eine Timeline Slide um
         apiRatsdokumente.forEach((ratsdokument) => {
 
-            // Deserialisiere "Datum" String in ein Date Objekt
-            const ratsdokumentDatum = new Date(ratsdokument.datum);
-
-            // Wir generieren eine uuid für diese Slide
+            // Wir generieren eine uuid für diese neue Slide
             // ...um die Datenstruktur, die zur Slide gehört, eindeutig zu cachen
             const uniqueId = uuidv4();
 
             // Starte mit den default Werten dieser Slide
-            let slide: TimelineSlide = {
-                start_date: {
-                    year: ratsdokumentDatum.getFullYear(), 
-                    month: ratsdokumentDatum.getMonth(),
-                    day: ratsdokumentDatum.getDay()
-                },
-                text: {
-                    headline: ratsdokument.class
-                },
+            const slideDefault: TimelineSlideDefault = {
                 unique_id: uniqueId
             };
 
             // Befülle diese Slide entsprechend des Dokumenttyps            
-            slide = this.generateSlide(slide, ratsdokument);
+            const slide = this.generateSlideWithGenerator(slideDefault, ratsdokument);
 
             // Übernehme diese Slide in die Timeline Datenstruktur
             slides.push(slide);
@@ -132,34 +127,34 @@ export class Timeline {
 
     /**
      * Methode generiert eine Dokumenttyp spezifischen Look der übergebenen Slide
-     * @param dokument 
+     * @param dokumentData 
      */
-    private generateSlide(slide: TimelineSlide, dokument): TimelineSlide {
-        if(dokument.class === "Beratungsunterlage") {
+    private generateSlideWithGenerator(slideDefaults: TimelineSlideDefault, dokumentData): TimelineSlide {
 
-            (dokument as Beratungsunterlage);
+        // Definiere eine Variable für unsere generische Slide Generator Instanz
+        let slideGenerator: SlideGenerator|null = null;
 
-            const slideWrapper = new BeratungsunterlageSlide(dokument);
+        // Wir versuchen jede der konfigurierten Factorymethoden um eine Wrapper Instanz für die Daten zu bekommen
+        Object.keys(this.slideTypeFactories).forEach((slideClassName) => {
 
-            // Wir cachen das Datenobjekt zu dieser Slide unter seiner eindeutigen unique_id 
-            this.cache(slide.unique_id, slideWrapper);
+            // Benutze diese Factory Methode und schaue ob eine Instanz damit erzeugt werden kann
+            const instance = this.slideTypeFactories[slideClassName](dokumentData);
+            if(instance !== null) { slideGenerator = instance; }            
+        });
 
-            slide = slideWrapper.slideJson(slide);
+        // Wir haben einen Fehler, wenn wir keinen Generator zuordnen können
+        if(slideGenerator === null) {
+            throw new Error("Es liegen Daten vor, die wir nicht anzeigen können: "+ dokumentData.class);
+        } 
 
-        } else if(dokument.class === "Protokoll") {
+        // Wir haben einen Generator gefunden und casten die Instanz entsprechend 
+        slideGenerator = (slideGenerator as SlideGenerator);
 
-            (dokument as Protokoll);
+        // Wir cachen die Generator Instanz von dieser Slide mit deren unique_id
+        this.cache(slideDefaults.unique_id, slideGenerator);
 
-            const slideWrapper = new ProtokollSlide(dokument);
-            
-            // Wir cachen unser Slideobject zu dieser Slide unter seiner eindeutigen unique_id 
-            this.cache(slide.unique_id, slideWrapper);
-
-            slide = slideWrapper.slideJson(slide);
-            
-        } else {
-            throw new Error("Es wurde ein Dokumententyp gefunden, der nicht unterstützt wird: "+ dokument.class);
-        }
-        return slide;
+        // Generiere das JSON für diese Slide mithilfe des Generators
+        // ...und gib dieses Slide Objekt zurück
+        return slideGenerator.generateWith(slideDefaults);
     }
 }
