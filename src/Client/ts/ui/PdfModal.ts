@@ -2,7 +2,7 @@ import $ from "jquery";
 import PDFObject from 'pdfobject';
 import { Datei } from "../../../shared/dokumente";
 import { Timeline } from "./timeline/Timeline";
-import { TimelineEvent } from "./timeline/timeline.d";
+import { TimelineEvent } from "./timeline";
 import { BeratungsunterlageSlide } from "./timeline/slides/BeratungsunterlageSlide";
 import { ProtokollSlide } from "./timeline/slides/ProtokollSlide";
 

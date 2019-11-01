@@ -1,5 +1,5 @@
 import { Protokoll, Datei } from "../../../../../shared/dokumente";
-import { TimelineSlide } from "../timeline.d";
+import { TimelineSlide } from "..";
 
 export class ProtokollSlide {
 
