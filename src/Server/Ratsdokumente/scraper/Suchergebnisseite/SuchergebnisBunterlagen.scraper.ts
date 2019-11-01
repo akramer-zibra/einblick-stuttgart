@@ -41,10 +41,10 @@ export class SuchergebnisBunterlagenScraper {
             const cells = $(rows[i]).find('td').toArray();
 
             // Extrahiere Id
-            // und Beratungsvorlage
+            // und verknüpfte Dokument-Datei
             const firstCell = $(cells[0]);
             const id = this.extractId(firstCell);
-            const vorlage = this.extractVorlageDatei(firstCell);
+            const dokument = this.extractDokumentDatei(firstCell);
 
             // Extrahiere Datum
             // und parse es in Date Objekt
@@ -66,7 +66,7 @@ export class SuchergebnisBunterlagenScraper {
                 id,
                 titel,
                 ausschuss,
-                vorlage,
+                dokument,
                 anhaenge
             });
         }
@@ -87,7 +87,7 @@ export class SuchergebnisBunterlagenScraper {
      * Methode extrahiert verknüpfte "Vorlage" Datei aus übergebener Zelle
      * @param cell 
      */
-    private extractVorlageDatei(cell): Datei {
+    private extractDokumentDatei(cell): Datei {
         const anchor = cell.find('a');
         return {
             class: "Datei",

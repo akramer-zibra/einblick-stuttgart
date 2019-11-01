@@ -4,7 +4,7 @@ export interface Beratungsunterlage {
     id: string,
     titel: string,
     ausschuss: string,
-    vorlage: Datei,
+    dokument: Datei,
     anhaenge?: Datei[]
 }
 

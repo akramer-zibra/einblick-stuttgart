@@ -17,7 +17,7 @@ export class RatsdokumenteProvider {
                 id
                 titel
                 ausschuss
-                vorlage {url, titel, mime}
+                dokument {url, titel, mime}
                 anhaenge {url, titel, mime}
             }
             ... on Protokoll {

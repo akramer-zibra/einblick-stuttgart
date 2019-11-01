@@ -1,8 +1,4 @@
 type Query {
-    beratungsunterlagen(search: String!): [Beratungsunterlage]!
-    """  
-    Überarbeitete API
-    """
     ratsdokumente(suchbegriff: String!): [Dokument]!
 }
 
@@ -18,7 +14,7 @@ type Beratungsunterlage {
     """
     Referenzen zu verknüpften pdf Dateien
     """
-    vorlage: Datei!
+    dokument: Datei!
     anhaenge: [Datei]
 }
 
@@ -39,7 +35,7 @@ type Antrag {
     bezeichnung: String!
     betreff: String!
     fraktionen: String!
-    dokument: Datei
+    dokument: Datei!
 }
 
 type Datei {

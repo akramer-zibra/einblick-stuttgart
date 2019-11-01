@@ -5,7 +5,7 @@ import { TimelineSlide, SlideGenerator, TimelineSlideDefault } from "..";
 export class BeratungsunterlageSlide implements SlideGenerator {
 
     /** Vorlage für den Textblock in der Slide */
-    private TEXT_TEMPLATE = `<a class="app__pdfmodal__anchor" href="{{data.vorlage.url}}" 
+    private TEXT_TEMPLATE = `<a class="app__pdfmodal__anchor" href="{{data.dokument.url}}" 
                                 target="_blank"
                                 data-uuid="{{slide.unique_id}}">
                                 {{data.id}} <i class="fas fa-external-link-alt"></i>
@@ -57,7 +57,7 @@ export class BeratungsunterlageSlide implements SlideGenerator {
 
         slide.media = {
             url: "/static/img/beratungsunterlage-200px.png",
-            link: this.data.vorlage.url,
+            link: this.data.dokument.url,
             link_target: "_blank",
             thumbnail: "/static/img/beratungsunterlage-thumb.svg",
             alt: slide.unique_id     // Wir platzieren die uuid dieser Slide in das alt-Attribut für eine Verlinkung
@@ -75,6 +75,6 @@ export class BeratungsunterlageSlide implements SlideGenerator {
      * Methode gibt Url des verlinkten PDFs zurück
      */
     getAssignedPdf(): Datei {
-        return this.data.vorlage;
+        return this.data.dokument;
     } 
 }
