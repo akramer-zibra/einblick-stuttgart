@@ -4,6 +4,7 @@ import { Protokoll, Beratungsunterlage } from "../../../../shared/dokumente";
 import { BeratungsunterlageSlide } from "./slides/BeratungsunterlageSlide";
 import { ProtokollSlide } from "./slides/ProtokollSlide";
 import uuidv4 from 'uuid/v4';
+import { AntragSlide } from "./slides/AntragSlide";
 
 export class Timeline {
 
@@ -19,7 +20,8 @@ export class Timeline {
     /** Konfiguriert Auswahl an Slide Typen und deren factory Methoden */
     private slideTypeFactories = {
         'Beratungsunterlage': BeratungsunterlageSlide.build,
-        'Protokoll': ProtokollSlide.build
+        'Protokoll': ProtokollSlide.build,
+        'Antrag': AntragSlide.build
     }
 
     /**
@@ -39,6 +41,7 @@ export class Timeline {
         this.timeline = new TL.Timeline('timeline-embed', timelineJson, {
                 start_at_end: true,
                 timenav_height: 300,
+                initial_zoom: 5,
                 language: 'de'
             });
 
