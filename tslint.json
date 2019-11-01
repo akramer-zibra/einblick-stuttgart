@@ -35,6 +35,7 @@
           ]
         }
       ],
+      "quotes": ["warning", "single"],
       "unified-signatures": false,
       "interface-name": [true, "never-prefix"],
       "ordered-imports": false,
