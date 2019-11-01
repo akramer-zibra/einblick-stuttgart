@@ -25,7 +25,7 @@ export class PdfModal {
         $('#app__pdfmodal .modal-background').on('click', this.hide.bind(this));
 
         // Registiert event listener bei der Timeline Komponente
-        timeline.addEventListener('change', this.attachPdfModalView.bind(this));
+//        timeline.addEventListener('change', this.attachPdfModalView.bind(this));
         timeline.addEventListener('loaded', this.attachPdfModalView.bind(this));
     }
 
@@ -39,22 +39,7 @@ export class PdfModal {
         if(!PDFObject.supportsPDFs) { return; }
 
         // Lege einen Click Eventhanlder auf alle Elemente, die das pdfmodal anzeigen können
-        $('.app__pdfmodal__anchor').on('click', (event) => {
-
-            // Lade slide uuid aus pdfmodal ancher
-            const uuid = $(event.target).attr('data-uuid');
-
-            // Lade gecachtes Datenobjekt das zu dieser Slide gehört
-            const slideObj = this.timeline.slideInstance(uuid) as BeratungsunterlageSlide|ProtokollSlide;
-
-            // ...wir stoppen hier, wenn wir zu der uuid kein passendes Slide Objekt bekommen
-            if(slideObj === null) { return; }
-
-            // Zeige PdfModal mit der PDF Datei, welche mit dieser Slide verknüpft ist
-            this.show(slideObj.getAssignedPdf());
-
-            event.preventDefault();
-        });
+        $('.app__pdfmodal__anchor').on('click', this.clickEventHandler.bind(this));
     }
 
     /**
@@ -77,4 +62,26 @@ export class PdfModal {
     hide() {
         $('#app__pdfmodal').removeClass('is-active');
     } 
+
+    /**
+     * Methode reagiert auf die Click events, welche das PdfModal 
+     * anzeigen sollen
+     * @param event 
+     */
+    private clickEventHandler(event) {
+        
+        // Lade slide uuid aus pdfmodal ancher
+        const uuid = $(event.target).attr('data-uuid');
+
+        // Lade gecachtes Datenobjekt das zu dieser Slide gehört
+        const slideObj = this.timeline.slideInstance(uuid) as BeratungsunterlageSlide|ProtokollSlide;
+
+        // ...wir stoppen hier, wenn wir zu der uuid kein passendes Slide Objekt bekommen
+        if(slideObj === null) { return; }
+
+        // Zeige PdfModal mit der PDF Datei, welche mit dieser Slide verknüpft ist
+        this.show(slideObj.getAssignedPdf());
+
+        event.preventDefault();
+    }
 }
