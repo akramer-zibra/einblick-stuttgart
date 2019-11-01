@@ -26,7 +26,7 @@ const main = () => {
     bottle.factory('KeywordInput', KeywordInput.build);
     bottle.factory('PdfModal', PdfModal.build);
 
-    // Initialisiere Eingabe Komponenten
+    // Initialisiere Startkomponenten
     bottle.container.SearchInput;
     bottle.container.KeywordInput;
     bottle.container.PdfModal;
