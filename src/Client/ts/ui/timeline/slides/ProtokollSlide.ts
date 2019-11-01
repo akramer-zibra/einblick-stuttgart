@@ -57,7 +57,8 @@ export class ProtokollSlide implements SlideGenerator {
             url: "/static/img/protokoll-200px.png",
             link: this.data.protokoll.url,
             link_target: "_blank",
-            thumbnail: "/static/img/protokoll-thumb.svg"
+            thumbnail: "/static/img/protokoll-thumb.svg",
+            alt: slide.unique_id     // Wir platzieren die uuid dieser Slide in das alt-Attribut für eine Verlinkung
         },
 
         slide.text = {

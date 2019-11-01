@@ -59,7 +59,8 @@ export class BeratungsunterlageSlide implements SlideGenerator {
             url: "/static/img/beratungsunterlage-200px.png",
             link: this.data.vorlage.url,
             link_target: "_blank",
-            thumbnail: "/static/img/beratungsunterlage-thumb.svg"
+            thumbnail: "/static/img/beratungsunterlage-thumb.svg",
+            alt: slide.unique_id     // Wir platzieren die uuid dieser Slide in das alt-Attribut für eine Verlinkung
         },
 
         slide.text = {

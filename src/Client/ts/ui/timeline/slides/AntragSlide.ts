@@ -57,7 +57,8 @@ export class AntragSlide implements SlideGenerator {
             url: "/static/img/antrag-200px.png",
             link: this.data.dokument.url,
             link_target: "_blank",
-            thumbnail: "/static/img/antrag-thumb.svg"
+            thumbnail: "/static/img/antrag-thumb.svg",
+            alt: slide.unique_id     // Wir platzieren die uuid dieser Slide in das alt-Attribut für eine Verlinkung
         },
 
         slide.text = {

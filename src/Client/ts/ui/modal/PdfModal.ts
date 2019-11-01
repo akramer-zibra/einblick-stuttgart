@@ -2,9 +2,10 @@ import $ from "jquery";
 import PDFObject from 'pdfobject';
 import { Datei } from "../../../../shared/dokumente";
 import { Timeline } from "../timeline/Timeline";
-import { TimelineEvent } from "../timeline";
+import { TimelineEvent, SlideGenerator } from "../timeline";
 import { BeratungsunterlageSlide } from "../timeline/slides/BeratungsunterlageSlide";
 import { ProtokollSlide } from "../timeline/slides/ProtokollSlide";
+import { AntragSlide } from "../timeline/slides/AntragSlide";
 
 export class PdfModal {
 
@@ -38,7 +39,8 @@ export class PdfModal {
         if(!PDFObject.supportsPDFs) { return; }
 
         // Lege einen Click Eventhanlder auf alle Elemente, die das pdfmodal anzeigen können
-        $('.app__pdfmodal__anchor').on('click', this.clickEventHandler.bind(this));
+        $('.app__pdfmodal__anchor').on('click', this.clickLinkEventHandler.bind(this));
+        $('.tl-media-content-container .tl-media-link').on('click', this.clickMediaEventHandler.bind(this));
     }
 
     /**
@@ -63,24 +65,51 @@ export class PdfModal {
     } 
 
     /**
-     * Methode reagiert auf die Click events, welche das PdfModal 
-     * anzeigen sollen
+     * Methode reagiert auf das Click Event eines Links aus den Slides, 
+     * welche das PdfModal anzeigen sollen
      * @param event 
      */
-    private clickEventHandler(event) {
+    private clickLinkEventHandler(event) {
+        
+        // Unterdrücke die eigentliche Funktion des Links
+        event.preventDefault();
 
-        // Lade slide uuid aus pdfmodal ancher
+        // Lade Slide uuid aus data Attribut des Links
         const uuid = $(event.target).attr('data-uuid');
 
+        // Zeige verknüpfte Datei im PdfModal 
+        this.showAssignedPdfFromUuid(uuid);        
+    }
+
+    /**
+     * Methode reagiert auf ein Click Event auf das Media-Bild eines Slides
+     * @param event 
+     */
+    private clickMediaEventHandler(event) {
+
+        // Unterdrücke eigentliche Funktion des HTML Elements
+        event.preventDefault();
+
+        // Lade uuid von alt
+        const uuid = $(event.target).attr('alt');
+
+        // Zeige verknüpfte Datei im PdfModal 
+        this.showAssignedPdfFromUuid(uuid);      
+    }
+
+    /**
+     * Methode versucht ein PdfMOdal anhand der übergebenen Slide uuid einzublenden
+     * @param uuid 
+     */
+    private showAssignedPdfFromUuid(uuid: string) {
+
         // Lade gecachtes Datenobjekt das zu dieser Slide gehört
-        const slideObj = this.timeline.slideInstance(uuid) as BeratungsunterlageSlide|ProtokollSlide;
+        const slideObj = this.timeline.slideInstance(uuid) as SlideGenerator;
 
         // ...wir stoppen hier, wenn wir zu der uuid kein passendes Slide Objekt bekommen
         if(slideObj === null) { return; }
 
-        // Zeige PdfModal mit der PDF Datei, welche mit dieser Slide verknüpft ist
+        // Zeige die verknüpfte Datei
         this.show(slideObj.getAssignedPdf());
-
-        event.preventDefault();
     }
 }
