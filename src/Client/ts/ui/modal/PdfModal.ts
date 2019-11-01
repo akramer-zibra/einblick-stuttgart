@@ -12,6 +12,13 @@ export class PdfModal {
     private searchHistory: SearchHistory;
 
     /**
+     * Factory Methode
+     */
+    static build(container) {
+        return new PdfModal(container.Timeline, container.SearchHistory);
+    }
+
+    /**
      * Konstruktor
      * @param searchController
      * @param timeline
@@ -47,18 +54,26 @@ export class PdfModal {
     /**
      * Methode blendet das übergebene PDF Dokument in einem Modal über der Seite ein
      * @param pdfFile 
+     * @param highlightSearchText
      */
-    show(pdfFile: Datei) {
+    show(pdfFile: Datei, highlightSearchText = false) {
+
+        // Konfiguriere den PDF Viewer
+        const pdfOpenParams: any = {
+            view: 'FitH,20',     // Passt sich an die verfügbare Breite mit ein bisschen Padding an
+        }
 
         // Lade den letzten Suchtext aus der Historie
         const searchText = this.searchHistory.last(); 
 
+        // Wenn gewollt und vorhanden, markieren wir unseren Suchtext im angezeigten PDF
+        if(highlightSearchText && searchText !== null) {
+            pdfOpenParams.search = searchText;  
+        }
+
         // Integriere fremdes PDF in das Modal mit dem PDFjs Viewer
         PDFObject.embed(pdfFile.url, '#app__pdfmodal__viewer', {
-            pdfOpenParams: { 
-                view: 'FitH,20',     // Passt sich an die verfügbare Breite mit ein bisschen Padding an
-                search: searchText   // Unser Suchtext soll im PDF markiert werden
-            }      
+            pdfOpenParams  
         });
 
         $('#app__pdfmodal').addClass('is-active');
