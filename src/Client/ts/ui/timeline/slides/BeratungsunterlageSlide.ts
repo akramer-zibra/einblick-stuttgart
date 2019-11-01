@@ -27,7 +27,7 @@ export class BeratungsunterlageSlide {
     /**
      * Methode ergänzt das übergebene Timeline Side-Objekt um spezifische Werte und Aussehen
      */
-    adjustJson(slideDefaults: TimelineSlide) {
+    slideJson(slideDefaults: TimelineSlide) {
         
         slideDefaults.media = {
             url: "/static/img/beratungsunterlage-200x.png",

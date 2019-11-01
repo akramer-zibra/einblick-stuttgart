@@ -27,7 +27,7 @@ export class ProtokollSlide {
     /**
      * Methode ergänzt das übergebene Timeline Side-Objekt um spezifische Werte und Aussehen
      */
-    adjustJson(slideDefaults: TimelineSlide) {
+    slideJson(slideDefaults: TimelineSlide) {
         
         slideDefaults.media = {
             url: "/static/img/protokoll-200x.png",
