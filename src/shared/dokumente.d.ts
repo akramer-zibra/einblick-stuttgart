@@ -1,7 +1,7 @@
 export interface Beratungsunterlage {
     class: Dokumenttyp,
     datum: Date,
-    id: string,
+    bezeichnung: string,
     titel: string,
     ausschuss: string,
     dokument: Datei,

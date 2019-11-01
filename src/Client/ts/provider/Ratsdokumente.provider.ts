@@ -14,7 +14,7 @@ export class RatsdokumenteProvider {
             ... on Beratungsunterlage {
                 class
                 datum
-                id
+                bezeichnung
                 titel
                 ausschuss
                 dokument {url, titel, mime}

@@ -8,7 +8,7 @@ export class BeratungsunterlageSlide implements SlideGenerator {
     private TEXT_TEMPLATE = `<a class="app__pdfmodal__anchor" href="{{data.dokument.url}}" 
                                 target="_blank"
                                 data-uuid="{{slide.unique_id}}">
-                                {{data.id}} <i class="fas fa-external-link-alt"></i>
+                                {{data.bezeichnung}} <i class="fas fa-external-link-alt"></i>
                             </a>
                             <br /><strong>{{data.titel}}</strong>
                             <br />{{data.ausschuss}}`;
@@ -65,7 +65,7 @@ export class BeratungsunterlageSlide implements SlideGenerator {
 
         slide.text = {
             headline : this.data.class,
-            text: Mustache.render(this.TEXT_TEMPLATE, {data: this.data, slide: slideDefaults})  // Wir rendern den Textblock mit Mustache
+            text: Mustache.render(this.TEXT_TEMPLATE, {data: this.data, slide})  // Wir rendern den Textblock mit Mustache
         }
                 
         return slide;

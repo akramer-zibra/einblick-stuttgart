@@ -40,10 +40,10 @@ export class SuchergebnisBunterlagenScraper {
             // Lade alle Zellen dieser Reihe in ein Array
             const cells = $(rows[i]).find('td').toArray();
 
-            // Extrahiere Id
+            // Extrahiere Bezeichnung
             // und verknüpfte Dokument-Datei
             const firstCell = $(cells[0]);
-            const id = this.extractId(firstCell);
+            const bezeichnung = this.extractBezeichnung(firstCell);
             const dokument = this.extractDokumentDatei(firstCell);
 
             // Extrahiere Datum
@@ -63,7 +63,7 @@ export class SuchergebnisBunterlagenScraper {
             result.push({
                 class: "Beratungsunterlage",
                 datum,
-                id,
+                bezeichnung,
                 titel,
                 ausschuss,
                 dokument,
@@ -75,12 +75,12 @@ export class SuchergebnisBunterlagenScraper {
     }
 
     /**
-     * Methode extrahiert "Id" aus übergebener Zelle
+     * Methode extrahiert "Bezeichnung" aus übergebener Zelle
      * @param cell 
      */
-    private extractId(cell): string {
-        const idAnchor = cell.find('a');
-        return idAnchor.text().replace('Drucksache ', 'GRDrs ');
+    private extractBezeichnung(cell): string {
+        const anchor = cell.find('a');
+        return anchor.text().replace('Drucksache ', 'GRDrs ');
     }
 
     /**

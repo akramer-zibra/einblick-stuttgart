@@ -8,7 +8,7 @@ scalar Date
 type Beratungsunterlage {
     class: String!
     datum: Date!
-    id: String!
+    bezeichnung: String!
     titel: String!
     ausschuss: String!
     """
