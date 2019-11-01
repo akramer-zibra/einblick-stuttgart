@@ -6,7 +6,7 @@ union Dokument = Beratungsunterlage | Protokoll | Antrag | Stellungnahme
 scalar Date
 
 type Beratungsunterlage {
-    class: String!
+    type:  String!
     datum: Date!
     bezeichnung: String!
     titel: String!
@@ -19,7 +19,7 @@ type Beratungsunterlage {
 }
 
 type Protokoll {
-    class: String!
+    type:  String!
     datum: Date!
     top: String!
     nnr: String!
@@ -30,7 +30,7 @@ type Protokoll {
 }
 
 type Antrag {
-    class: String!
+    type:  String!
     datum: Date!
     bezeichnung: String!
     betreff: String!
@@ -39,7 +39,7 @@ type Antrag {
 }
 
 type Stellungnahme {
-    class: String!
+    type:  String!
     datum: Date!
     betreff: String!
     fraktionen: String!
@@ -48,7 +48,7 @@ type Stellungnahme {
 }
 
 type Datei {
-    class: String!
+    type:  String!
     url: String!
     titel: String!
     mime: String

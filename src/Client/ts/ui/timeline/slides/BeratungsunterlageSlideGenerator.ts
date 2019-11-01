@@ -25,7 +25,7 @@ export class BeratungsunterlageSlideGenerator implements SlideGenerator {
     static build(data: Beratungsunterlage): BeratungsunterlageSlideGenerator|null {
         
         // Überprüfe, ob übergebene Daten ausreichen
-        if(data.class !== 'Beratungsunterlage') { return null; }
+        if(data.type !== 'Beratungsunterlage') { return null; }
 
         return new BeratungsunterlageSlideGenerator(data);
     }
@@ -64,7 +64,7 @@ export class BeratungsunterlageSlideGenerator implements SlideGenerator {
         },
 
         slide.text = {
-            headline : this.data.class,
+            headline : this.data.type,
             text: Mustache.render(this.TEXT_TEMPLATE, {data: this.data, slide})  // Wir rendern den Textblock mit Mustache
         }
                 

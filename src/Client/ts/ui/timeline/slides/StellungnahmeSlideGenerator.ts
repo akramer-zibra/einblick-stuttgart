@@ -23,7 +23,7 @@ export class StellungnahmeSlideGenerator implements SlideGenerator {
     static build(data: Stellungnahme) {
 
         // Überprüfe, ob übergebene Daten ausreichen
-        if(data.class !== 'Stellungnahme') { return null; }
+        if(data.type !== 'Stellungnahme') { return null; }
 
         return new StellungnahmeSlideGenerator(data);
     }
@@ -62,7 +62,7 @@ export class StellungnahmeSlideGenerator implements SlideGenerator {
         },
 
         slide.text = {
-            headline : this.data.class,
+            headline : this.data.type,
             text: Mustache.render(this.TEXT_TEMPLATE, {data: this.data, slide: slideDefaults})
         }
         

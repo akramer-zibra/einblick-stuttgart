@@ -23,7 +23,7 @@ export class ProtokollSlideGenerator implements SlideGenerator {
     static build(data: Protokoll) {
 
         // Überprüfe, ob übergebene Daten ausreichen
-        if(data.class !== 'Protokoll') { return null; }
+        if(data.type !== 'Protokoll') { return null; }
 
         return new ProtokollSlideGenerator(data);
     }
@@ -62,7 +62,7 @@ export class ProtokollSlideGenerator implements SlideGenerator {
         },
 
         slide.text = {
-            headline : this.data.class,
+            headline : this.data.type,
             text: Mustache.render(this.TEXT_TEMPLATE, {data: this.data, slide: slideDefaults})
         }
         

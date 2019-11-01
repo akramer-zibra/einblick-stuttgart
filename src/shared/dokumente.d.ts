@@ -1,5 +1,5 @@
 export interface Beratungsunterlage {
-    class: Dokumenttyp,
+    type: Dokumenttyp,
     datum: Date,
     bezeichnung: string,
     titel: string,
@@ -9,7 +9,7 @@ export interface Beratungsunterlage {
 }
 
 export interface Protokoll {
-    class: Dokumenttyp,
+    type: Dokumenttyp,
     datum: Date,
     top: string,
     nnr: string,
@@ -20,7 +20,7 @@ export interface Protokoll {
 }
 
 export interface Antrag {
-    class: Dokumenttyp,
+    type: Dokumenttyp,
     datum: Date,
     bezeichnung: string,
     betreff: string,
@@ -29,7 +29,7 @@ export interface Antrag {
 }
 
 export interface Stellungnahme {
-    class: Dokumenttyp,
+    type: Dokumenttyp,
     datum: Date,
     betreff: string,
     fraktionen: string,
@@ -38,7 +38,7 @@ export interface Stellungnahme {
 }
 
 export interface Datei {
-    class: Dateityp,
+    type: Dateityp,
     url: string,
     titel: string,
     mime: string

@@ -60,7 +60,7 @@ export class SuchergebnisAntraegeScraper {
 
             // 
             result.push({
-                class: 'Antrag',
+                type:  'Antrag',
                 bezeichnung,
                 datum,
                 betreff,
@@ -114,7 +114,7 @@ export class SuchergebnisAntraegeScraper {
     private extractDokumentDatei(cell): Datei {
         const anchor = cell.find('a');
         return {
-            class: "Datei",
+            type:  "Datei",
             url: anchor.attr("href"),
             titel: anchor.text(),
             mime: "text/html"

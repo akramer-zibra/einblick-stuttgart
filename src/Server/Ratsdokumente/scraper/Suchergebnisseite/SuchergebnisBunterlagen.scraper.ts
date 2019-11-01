@@ -61,7 +61,7 @@ export class SuchergebnisBunterlagenScraper {
 
             // Sammle herausgezogenes Datenobjekt 
             result.push({
-                class: "Beratungsunterlage",
+                type:  "Beratungsunterlage",
                 datum,
                 bezeichnung,
                 titel,
@@ -90,7 +90,7 @@ export class SuchergebnisBunterlagenScraper {
     private extractDokumentDatei(cell): Datei {
         const anchor = cell.find('a');
         return {
-            class: "Datei",
+            type:  "Datei",
             url: anchor.attr("href"),
             titel: anchor.text(),
             mime: "application/pdf"
@@ -134,7 +134,7 @@ export class SuchergebnisBunterlagenScraper {
 
         attachmentAnchors.forEach((anchor) => {
             anhaenge.push({
-                class: "Datei",
+                type:  "Datei",
                 url: this.urlPath + $(anchor).attr('href').replace('./.', ''),  // Remove broken path prefix and append with url path
                 titel: $(anchor).text(),
                 mime: "application/pdf"

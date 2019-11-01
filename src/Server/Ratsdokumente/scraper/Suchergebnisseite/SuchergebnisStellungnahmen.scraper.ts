@@ -60,7 +60,7 @@ export class SuchergebnisStellungnahmenScraper {
 
             // 
             result.push({
-                class: 'Stellungnahme',
+                type:  'Stellungnahme',
                 datum,
                 betreff,
                 fraktionen,
@@ -114,7 +114,7 @@ export class SuchergebnisStellungnahmenScraper {
     private extractDokumentDatei(cell): Datei {
         const anchor = cell.find('a');
         return {
-            class: "Datei",
+            type:  "Datei",
             url: anchor.attr("href"),
             titel: anchor.text(),
             mime: "application/pdf"

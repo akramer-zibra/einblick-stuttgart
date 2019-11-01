@@ -148,7 +148,7 @@ export class Timeline {
 
         // Wir haben einen Fehler, wenn wir keinen Generator zuordnen können
         if(slideGenerator === null) {
-            throw new Error("Es liegen Daten vor, die wir nicht anzeigen können: "+ slideData.class);
+            throw new Error("Es liegen Daten vor, die wir nicht anzeigen können: "+ slideData.type);
         } 
 
         // Wir haben einen Generator gefunden und casten die Instanz entsprechend 

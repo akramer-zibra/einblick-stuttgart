@@ -12,8 +12,8 @@ const resolvers = {
     },
     Dokument: {     
         __resolveType(dokument, context, info) {    // Wir brauchen einen zusätzlichen Resolver, der Untertypen des abstrakten Typs Dokument auflösen kann 
-            if (dokument.class !== undefined) {
-                return dokument.class
+            if (dokument.type !== undefined) {
+                return dokument.type
             }
             return null;
         },

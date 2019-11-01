@@ -60,7 +60,7 @@ export class SuchergebnisProtokolleScraper {
             // NOTICE: dafür muss man das verlinkte PDF scrapen...
 
             result.push({
-                class: 'Protokoll',
+                type:  'Protokoll',
                 top,
                 nnr,
                 datum,
@@ -90,7 +90,7 @@ export class SuchergebnisProtokolleScraper {
     private extractProtokollDatei(cell): Datei {
         const anchor = cell.find('a');
         return {
-            class: "Datei",
+            type:  "Datei",
             url: anchor.attr("href"),
             titel: anchor.text(),
             mime: "application/pdf"

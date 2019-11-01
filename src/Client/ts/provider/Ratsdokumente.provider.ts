@@ -12,7 +12,7 @@ export class RatsdokumenteProvider {
         ratsdokumente(suchbegriff: $suchbegriff) {
             __typename
             ... on Beratungsunterlage {
-                class
+                type
                 datum
                 bezeichnung
                 titel
@@ -21,7 +21,7 @@ export class RatsdokumenteProvider {
                 anhaenge {url, titel, mime}
             }
             ... on Protokoll {
-                class
+                type
                 datum
                 nnr
                 betreff
@@ -29,7 +29,7 @@ export class RatsdokumenteProvider {
                 protokoll {url, titel, mime}
             }
             ... on Antrag {
-                class
+                type
                 datum
                 bezeichnung
                 betreff
@@ -37,7 +37,7 @@ export class RatsdokumenteProvider {
                 dokument {url, titel, mime}
             }
             ... on Stellungnahme {
-                class
+                type
                 datum
                 refAntrag
                 betreff
