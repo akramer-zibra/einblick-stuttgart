@@ -3,6 +3,7 @@ import { TimelineData, TimelineSlide } from "./timeline.d";
 import { Protokoll, Beratungsunterlage } from "../../../../shared/dokumente";
 import { BeratungsunterlageSlide } from "./slides/BeratungsunterlageSlide";
 import { ProtokollSlide } from "./slides/ProtokollSlide";
+import uuidv4 from 'uuid/v4';
 
 export class Timeline {
 
@@ -11,6 +12,9 @@ export class Timeline {
 
     /** Hashmap mit Arrays von listenern für bestimmte Events der Timeline */
     private listeners: any = {};
+
+    /** Hashmap mit  */
+    private dataObjects: any = {};
 
     /**
      * Konstruktor
@@ -57,6 +61,25 @@ export class Timeline {
     }
 
     /**
+     * Methode cached übergebenes Datenobjekt
+     * Das Datenobjekt ist über die eindeutige uuid wieder abrufbar
+     * @param uuid 
+     * @param data 
+     */
+    cache(uuid: string, data) {
+        this.dataObjects[uuid] = data;
+    }
+
+    /**
+     * Methode gibt das mit einer Slide verknüpfte Datenobjekt
+     * @param slideId 
+     */
+    slideData(slideId): any {
+        if(!(slideId in this.dataObjects)) { return null; } 
+        return this.dataObjects[slideId];
+    }
+
+    /**
      * Methode aktualisiert die Timeline mit api Daten
      * @param apiRatsdokumente 
      */
@@ -80,6 +103,10 @@ export class Timeline {
             // Deserialisiere "Datum" String in ein Date Objekt
             const ratsdokumentDatum = new Date(ratsdokument.datum);
 
+            // Wir generieren eine uuid für diese Slide
+            // ...um die Datenstruktur, die zur Slide gehört, eindeutig zu cachen
+            const uniqueId = uuidv4();
+
             // Starte mit den default Werten dieser Slide
             let slide: TimelineSlide = {
                 start_date: {
@@ -89,11 +116,12 @@ export class Timeline {
                 },
                 text: {
                     headline: ratsdokument.class
-                }
+                },
+                unique_id: uniqueId
             };
 
             // Befülle diese Slide entsprechend des Dokumenttyps            
-            slide = this.classDependingLook(slide, ratsdokument);
+            slide = this.classDependingSlide(slide, ratsdokument);
 
             // Übernehme diese Slide in die Timeline Datenstruktur
             slides.push(slide);
@@ -106,13 +134,16 @@ export class Timeline {
      * Methode generiert eine Dokumenttyp spezifischen Look der übergebenen Slide
      * @param dokument 
      */
-    private classDependingLook(slide: TimelineSlide, dokument): TimelineSlide {
+    private classDependingSlide(slide: TimelineSlide, dokument): TimelineSlide {
         if(dokument.class === "Beratungsunterlage") {
 
             (dokument as Beratungsunterlage);
 
             const customSlide = new BeratungsunterlageSlide(dokument);
             slide = customSlide.adjustJson(slide);
+
+            
+            this.cache(slide.unique_id, ratsdokument);
 
         } else if(dokument.class === "Protokoll") {
 
