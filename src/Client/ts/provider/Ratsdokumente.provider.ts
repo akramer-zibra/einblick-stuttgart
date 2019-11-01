@@ -28,6 +28,14 @@ export class RatsdokumenteProvider {
                 ausschuss
                 protokoll {url, titel, mime}
             }
+            ... on Antrag {
+                class
+                datum
+                bezeichnung
+                betreff
+                fraktionen
+                dokument {url, titel, mime}
+            }
         }
     }`;
 
