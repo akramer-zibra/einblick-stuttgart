@@ -56,7 +56,7 @@ export class BeratungsunterlageSlide implements SlideGenerator {
         },
 
         slide.media = {
-            url: "/static/img/beratungsunterlage-200x.png",
+            url: "/static/img/beratungsunterlage-200px.png",
             link: this.data.vorlage.url,
             link_target: "_blank",
             thumbnail: "/static/img/beratungsunterlage-thumb.svg"

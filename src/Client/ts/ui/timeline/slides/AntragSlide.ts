@@ -54,7 +54,7 @@ export class AntragSlide implements SlideGenerator {
         },
 
         slide.media = {
-            url: "/static/img/antrag-300px.png",
+            url: "/static/img/antrag-200px.png",
             link: this.data.dokument.url,
             link_target: "_blank",
             thumbnail: "/static/img/antrag-thumb.svg"
