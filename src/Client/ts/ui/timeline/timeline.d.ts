@@ -52,3 +52,10 @@ export interface TimelineDate {
     millisecond?: number,
     display_date?: string
 }
+
+/* Iterne Timeline Typen */
+export interface TimelineEvent {
+    target: any,
+    type: string,
+    unique_id: string    
+}
