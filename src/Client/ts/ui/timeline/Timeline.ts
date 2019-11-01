@@ -1,6 +1,8 @@
 declare const TL: any;  // Declares global TL object integrated with linked script file in index.html
 import { TimelineData, TimelineSlide } from "./timeline.d";
-import { Protokoll, Beratungsunterlage } from "../../../../Server/Ratsdokumente/dokumente";
+import { Protokoll, Beratungsunterlage } from "../../../../shared/dokumente";
+import { BeratungsunterlageSlide } from "./slides/BeratungsunterlageSlide";
+import { ProtokollSlide } from "./slides/ProtokollSlide";
 
 export class Timeline {
 
@@ -107,29 +109,18 @@ export class Timeline {
     private classDependingLook(slide: TimelineSlide, dokument): TimelineSlide {
         if(dokument.class === "Beratungsunterlage") {
 
-            (dokument as Beratungsunterlage);   // ACHTUNG: Dieser Typ ist eine Serverseitige Definition
+            (dokument as Beratungsunterlage);
 
-            slide.media = {
-                url: "/static/img/beratungsunterlage-200x.png",
-                link: dokument.vorlage.url,
-                link_target: "_blank"
-            },
-            slide.text.text = `<a class="app__pdfmodal__anchor" href="${dokument.vorlage.url}" target="_blank">${dokument.id} <i class="fas fa-external-link-alt"></i></a>
-                                <br /><strong>${dokument.titel}</strong>
-                                <br />${dokument.ausschuss}`;
+            const customSlide = new BeratungsunterlageSlide(dokument);
+            slide = customSlide.adjustJson(slide);
 
         } else if(dokument.class === "Protokoll") {
 
-            (dokument as Protokoll);    // ACHTUNG: Dieser Typ ist eine Serverseitige Definition
+            (dokument as Protokoll);
 
-            slide.media = {
-                url: "/static/img/protokoll-200x.png",
-                link: dokument.protokoll.url,
-                link_target: "_blank"
-            },
-            slide.text.text = `<a class="app__pdfmodal__anchor" href="${dokument.protokoll.url}" target="_blank">${dokument.nnr} <i class="fas fa-external-link-alt"></i></a>
-                                <br /><strong>${dokument.betreff}</strong>
-                                <br />${dokument.ausschuss}`;
+            const customSlide = new ProtokollSlide(dokument);
+            slide = customSlide.adjustJson(slide);
+            
         } else {
             throw new Error("Es wurde ein Dokumententyp gefunden, der nicht unterstützt wird: "+ dokument.class);
         }
