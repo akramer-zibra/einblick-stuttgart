@@ -1,7 +1,16 @@
+import Mustache from 'mustache';
 import { Protokoll, Datei } from "../../../../../shared/dokumente";
 import { TimelineSlide } from "..";
 
 export class ProtokollSlide {
+
+    private TEXT_TEMPLATE = `<a class="app__pdfmodal__anchor" href="{{data.protokoll.url}}" 
+                                    target="_blank"
+                                    data-uuid="{{slide.unique_id}}">
+                                    {{data.nnr}} <i class="fas fa-external-link-alt"></i>
+                                </a>
+                                <br /><strong>{{data.betreff}}</strong>
+                                <br />{{data.ausschuss}}`;
 
     /** Referenz zu verknüpftem Datenobjekt */
     private data: Protokoll;
@@ -24,13 +33,7 @@ export class ProtokollSlide {
             link: this.data.protokoll.url,
             link_target: "_blank"
         },
-        slideDefaults.text.text = `<a class="app__pdfmodal__anchor" href="${this.data.protokoll.url}" 
-                                        target="_blank"
-                                        data-uuid="${slideDefaults.unique_id}">
-                                        ${this.data.nnr} <i class="fas fa-external-link-alt"></i>
-                                    </a>
-                                    <br /><strong>${this.data.betreff}</strong>
-                                    <br />${this.data.ausschuss}`;
+        slideDefaults.text.text = Mustache.render(this.TEXT_TEMPLATE, {data: this.data, slide: slideDefaults});
         
         return slideDefaults;
     }

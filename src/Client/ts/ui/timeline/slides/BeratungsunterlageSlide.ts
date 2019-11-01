@@ -1,7 +1,17 @@
+import Mustache from 'mustache';
 import { Beratungsunterlage, Datei } from "../../../../../shared/dokumente";
 import { TimelineSlide } from "..";
 
 export class BeratungsunterlageSlide {
+
+    /** Vorlage für den Textblock in der Slide */
+    private TEXT_TEMPLATE = `<a class="app__pdfmodal__anchor" href="{{data.vorlage.url}}" 
+                                target="_blank"
+                                data-uuid="{{slide.unique_id}}">
+                                {{data.id}} <i class="fas fa-external-link-alt"></i>
+                            </a>
+                            <br /><strong>{{data.titel}}</strong>
+                            <br />{{data.ausschuss}}`;
 
     /** Referenz zu verknüpftem Datenobjekt */
     private data: Beratungsunterlage;
@@ -24,13 +34,7 @@ export class BeratungsunterlageSlide {
             link: this.data.vorlage.url,
             link_target: "_blank"
         },
-        slideDefaults.text.text = `<a class="app__pdfmodal__anchor" href="${this.data.vorlage.url}" 
-                                      target="_blank"
-                                      data-uuid="${slideDefaults.unique_id}">
-                                        ${this.data.id} <i class="fas fa-external-link-alt"></i>
-                                    </a>
-                                    <br /><strong>${this.data.titel}</strong>
-                                    <br />${this.data.ausschuss}`;
+        slideDefaults.text.text = Mustache.render(this.TEXT_TEMPLATE, {data: this.data, slide: slideDefaults});   // Wir rendern den Textblock mit Mustache
         
         return slideDefaults;
     }
