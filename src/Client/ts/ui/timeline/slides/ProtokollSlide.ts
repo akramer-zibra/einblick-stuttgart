@@ -56,7 +56,8 @@ export class ProtokollSlide implements SlideGenerator {
         slide.media = {
             url: "/static/img/protokoll-200x.png",
             link: this.data.protokoll.url,
-            link_target: "_blank"
+            link_target: "_blank",
+            thumbnail: "/static/img/protokoll-thumb.svg"
         },
 
         slide.text = {
