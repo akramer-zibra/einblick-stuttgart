@@ -62,15 +62,6 @@ export class SearchController {
                 .catch(reject);
         });
     }
-
-    /**
-     * Methode gibt den letzten angewendeten Suchbegriff zurück
-     * oder null, falls die History leer ist
-     */
-    last(): string|null {
-        if(this.searchHistory.length === 0) { return null; }
-        return this.searchHistory[this.searchHistory.length - 1];
-    }
     
     /**
      * Methode reagiert auf ein leeres Ergebnis
