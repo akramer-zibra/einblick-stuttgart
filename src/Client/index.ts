@@ -1,11 +1,11 @@
 
 import { Timeline } from './ts/ui/timeline/Timeline';
-import { KeywordInput } from './ts/ui/KeywordInput';
+import { KeywordInput } from './ts/ui/input/KeywordInput';
 import { GraphQLClient } from './ts/data/GraphQLClient';
 import { RatsdokumenteProvider } from './ts/provider/Ratsdokumente.provider';
-import { SearchInput } from './ts/ui/SearchInput';
+import { SearchInput } from './ts/ui/input/SearchInput';
 import { SearchController } from './ts/controller/SearchController';
-import { PdfModal } from './ts/ui/PdfModal';
+import { PdfModal } from './ts/ui/modal/PdfModal';
 
 const main = () => {
     console.log('Client Applikation läuft...');
