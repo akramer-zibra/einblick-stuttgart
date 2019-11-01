@@ -40,6 +40,14 @@ export class RatsdokumenteProvider {
     }`;
 
     /**
+     * Statische factory Methode
+     * @param container 
+     */
+    static build(container) {
+        return new RatsdokumenteProvider(container.GraphQLClient);
+    }
+
+    /**
      * Konstruktor
      * @param graphQLclient 
      */

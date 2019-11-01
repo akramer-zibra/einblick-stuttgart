@@ -1,12 +1,19 @@
 import $ from "jquery";
 import { ToastFeedback } from "../ToastFeedback";
 import { SearchController } from "../../controller/SearchController";
-import { Divider } from "../Divider";
 
 export class KeywordInput {
 
     /** Referenzen zu anderen Objekten */
     private searchController: SearchController;
+
+    /**
+     * Statische factory Methode
+     * @param container 
+     */
+    static build(container) {
+        return new KeywordInput(container.SearchController);
+    }
 
     /**
      * Konstruktor

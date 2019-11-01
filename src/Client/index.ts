@@ -1,4 +1,5 @@
 
+import Bottle from 'bottlejs';
 import { Timeline } from './ts/ui/timeline/Timeline';
 import { KeywordInput } from './ts/ui/input/KeywordInput';
 import { GraphQLClient } from './ts/data/GraphQLClient';
@@ -11,24 +12,23 @@ import { SearchHistory } from './ts/helper/SearchHistory';
 const main = () => {
     console.log('Client Applikation läuft...');
 
-    // Initialisiere helper Ojekte
-    const searchHistory = new SearchHistory();
+    // Wir benutzen bottle js als Dependency Container
+    const bottle = new Bottle();
 
-    // Initialisiere api Objekt
-    const graphQLCLient = new GraphQLClient();
+    // Definiere alle Service Klassen
+    bottle.service('SearchHistory', SearchHistory);
+    bottle.service('GraphQLClient', GraphQLClient);
+    bottle.service('Timeline', Timeline);
 
-    // Initialisiere provider Objekte
-    const ratsdokumenteProvider = new RatsdokumenteProvider(graphQLCLient);
+    bottle.factory('RatsdokumenteProvider', RatsdokumenteProvider.build);
+    bottle.factory('SearchController', SearchController.build);
+    bottle.factory('SearchInput', SearchInput.build);
+    bottle.factory('KeywordInput', KeywordInput.build);
+    bottle.factory('PdfModal', PdfModal.build);
 
-    // Initialisiere UI Ausgabe Komponenten
-    const timeline = new Timeline();
-
-    // Initialisiere core Objekte
-    const searchController = new SearchController(ratsdokumenteProvider, timeline, searchHistory);
-
-    // Initialisiere EIngabe Komponenten
-    new SearchInput(searchController);
-    new KeywordInput(searchController);
-    new PdfModal(timeline, searchHistory);
+    // Initialisiere Eingabe Komponenten
+    bottle.container.SearchInput;
+    bottle.container.KeywordInput;
+    bottle.container.PdfModal;
 }
 main();

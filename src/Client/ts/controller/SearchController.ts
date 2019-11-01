@@ -12,6 +12,14 @@ export class SearchController {
     private searchHistory: SearchHistory;
 
     /**
+     * Statische factory Methode
+     * @param container 
+     */
+    static build(container) {
+        return new SearchController(container.RatsdokumenteProvider, container.Timeline, container.SearchHistory);
+    }
+
+    /**
      * Konstruktor
      * @param ratsdokumenteProvider 
      * @param timeline 

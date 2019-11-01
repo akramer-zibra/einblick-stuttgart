@@ -9,6 +9,14 @@ export class SearchInput {
     private searchController: SearchController;
 
     /**
+     * Factory Methode 
+     * @param container 
+     */
+    static build(container) {
+        return new SearchInput(container.SearchController);
+    }
+
+    /**
      * Konstruktor
      * @param SearchController
      */
