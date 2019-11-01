@@ -41,7 +41,6 @@ export interface TimelineMedia {
     link_target?: string
 }
 
-
 export interface TimelineDate {
     year: number,
     month?: number,
@@ -61,6 +60,11 @@ export interface TimelineEvent {
 }
 
 /* Eigene Typen die mit der Timeline zusammenhängen*/
+
+export interface TimelineSlideDefault {
+    unique_id: string
+}
+
 export interface SlideGenerator {
-    generateWith: (slideDefaults: TimelineSlide) => {}
+    generateWith(slideDefaults: TimelineSlideDefault): TimelineSlide
 }
