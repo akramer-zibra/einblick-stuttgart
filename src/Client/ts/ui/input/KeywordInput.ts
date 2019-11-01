@@ -35,20 +35,8 @@ export class KeywordInput {
         // Benutze den Search-Controller für die Datenabfrage und Weitergabe
         this.searchController
             .search(keyword)
-            .then((count) => {
+            .then(() => {
                 $('.pageloader').removeClass('is-active');
-                
-                /*
-                // Wenn kein Ergebnis da ist, dann resetten wir den Divider und leeren die timeline 
-                if(count === 0) {
-                    Divider.reset();
-                    $('#timeline-embed').empty().removeClass('tl-timeline');
-                    return;
-                } 
-
-                // ...anonsten scrollen wir ganz normal zum Suchergebnis
-                Divider.scrollTo(); 
-                */
             })
             .catch((error) => {
                 $('.pageloader').removeClass('is-active');
