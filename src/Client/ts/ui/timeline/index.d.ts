@@ -53,9 +53,14 @@ export interface TimelineDate {
     display_date?: string
 }
 
-/* Iterne Timeline Typen */
+/* Interne Timeline Typen */
 export interface TimelineEvent {
     target: any,
     type: string,
     unique_id: string    
+}
+
+/* Eigene Typen die mit der Timeline zusammenhängen*/
+export interface SlideGenerator {
+    generateWith: (slideDefaults: TimelineSlide) => {}
 }
