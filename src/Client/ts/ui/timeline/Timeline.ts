@@ -39,8 +39,7 @@ export class Timeline {
         this.timeline = new TL.Timeline('timeline-embed', timelineJson, {
                 start_at_end: true,
                 timenav_height: 300,
-                language: 'de',
-                track_events: ['loaded', 'added', 'change', 'nav_next', 'nav_previous']
+                language: 'de'
             });
 
         // Die registrierten event Listener mit der frischen Timeline verbinden

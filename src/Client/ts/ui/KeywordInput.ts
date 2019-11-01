@@ -37,7 +37,18 @@ export class KeywordInput {
             .search(keyword)
             .then((count) => {
                 $('.pageloader').removeClass('is-active');
-                if (count > 0) { Divider.scrollTo(); }   // Wir scrollen bis zu den Suchergebnissen, wenn es welche gibt                 
+                
+                /*
+                // Wenn kein Ergebnis da ist, dann resetten wir den Divider und leeren die timeline 
+                if(count === 0) {
+                    Divider.reset();
+                    $('#timeline-embed').empty().removeClass('tl-timeline');
+                    return;
+                } 
+
+                // ...anonsten scrollen wir ganz normal zum Suchergebnis
+                Divider.scrollTo(); 
+                */
             })
             .catch((error) => {
                 $('.pageloader').removeClass('is-active');
@@ -52,12 +63,5 @@ export class KeywordInput {
     private handleError(err) {
         console.error(err);
         ToastFeedback.showErrorToast(err);  // Benutze eine separate Funktion für eine grafische Rückmeldung
-    }
-
-    /**
-     * Methode reagiert auf ein leeres Ergebnis
-     */
-    private handleEmptyResult() {
-        ToastFeedback.showWarningToast("Es wurden keine Dokumente gefunden...");
     }
 }
