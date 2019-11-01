@@ -19,6 +19,15 @@ export interface Protokoll {
     verhandlung?: Beratungsunterlage
 }
 
+export interface Antrag {
+    class: Dokumenttyp,
+    datum: Date,
+    bezeichnung: string,
+    betreff: string,
+    fraktionen: string,
+    dokument: Datei
+}
+
 export interface Datei {
     class: Dateityp,
     url: string,
