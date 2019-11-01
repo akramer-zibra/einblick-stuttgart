@@ -59,12 +59,12 @@ export class PdfModal {
 
     /**
      * Methode blendet das übergebene PDF Dokument in einem Modal über der Seite ein
-     * @param pdf 
+     * @param pdfFile 
      */
-    show(file: Datei) {
+    show(pdfFile: Datei) {
 
         // Integriere fremdes PDF in das Modal mit dem PDFjs Viewer
-        PDFObject.embed(file.url, '#app__pdfmodal__viewer', {
+        PDFObject.embed(pdfFile.url, '#app__pdfmodal__viewer', {
             pdfOpenParams: { view: 'FitH,20' }      // Passt sich an die verfügbare Breite mit ein bisschen Padding an
         });
 
