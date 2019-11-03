@@ -5,8 +5,9 @@ import { SuchergebnisProtokolleScraper } from '../Ratsdokumente/scraper/Sucherge
 import { Beratungsunterlage, Protokoll, Antrag, Stellungnahme } from '../../shared/dokumente';
 import { SuchergebnisAntraegeScraper } from '../Ratsdokumente/scraper/Suchergebnisseite/SuchergebnisAntraege.scraper';
 import { SuchergebnisStellungnahmenScraper } from '../Ratsdokumente/scraper/Suchergebnisseite/SuchergebnisStellungnahmen.scraper';
+import { Resolver } from '../index.d'; 
 
-export class RatsdokumenteResolver {
+export class RatsdokumenteResolver implements Resolver {
 
     /**
      * Methode löst die entsprechende GraphQL query mit dem übergebenen Parameter auf

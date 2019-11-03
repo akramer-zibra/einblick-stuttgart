@@ -1,8 +1,9 @@
 import dateUtil from 'date-and-time';
 import 'date-and-time/locale/de';
 import { Datei, Antrag } from '../../../../shared/dokumente';
+import { Scraper } from '../../../index.d';
 
-export class SuchergebnisAntraegeScraper {
+export class SuchergebnisAntraegeScraper implements Scraper<Antrag> {
 
     /** url path */
     private urlPath: string;

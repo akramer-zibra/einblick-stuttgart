@@ -2,8 +2,9 @@ import axios from 'axios';
 import fs from 'fs';
 import qs from 'query-string';
 import iconv from 'iconv-lite';
+import { DataClient } from '../../index.d';
 
-export class KsdSucheClient {
+export class KsdSucheClient implements DataClient {
 
     /* Axios client Instanz */
     private client;
