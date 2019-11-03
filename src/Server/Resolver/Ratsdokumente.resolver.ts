@@ -1,7 +1,7 @@
 import cheerio from 'cheerio';
 import { Antrag, Beratungsunterlage, Protokoll, Stellungnahme } from '../../shared/dokumente';
 import { Resolver } from '../index.d';
-import { KsdSucheClient } from "../Ratsdokumente/data/html/KsdSucheClient";
+import { KsdSucheClient } from "../Ratsdokumente/data/html3/KsdSucheClient";
 import { SuchergebnisAntraegeScraper } from '../Ratsdokumente/scraper/Suchergebnisseite/SuchergebnisAntraege.scraper';
 import { SuchergebnisBunterlagenScraper } from "../Ratsdokumente/scraper/Suchergebnisseite/SuchergebnisBunterlagen.scraper";
 import { SuchergebnisProtokolleScraper } from '../Ratsdokumente/scraper/Suchergebnisseite/SuchergebnisProtokolle.scraper';
