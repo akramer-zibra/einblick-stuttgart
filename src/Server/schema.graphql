@@ -47,6 +47,13 @@ type Stellungnahme {
     refAntrag: String!
 }
 
+type Tagesordnung {
+    type: String!
+    datum Date!
+    ausschuss: String!
+    dokument: Datei!
+}
+
 type Datei {
     type:  String!
     url: String!

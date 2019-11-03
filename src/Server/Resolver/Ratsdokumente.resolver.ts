@@ -1,11 +1,12 @@
 import cheerio from 'cheerio';
-import { Antrag, Beratungsunterlage, Protokoll, Stellungnahme } from '../../shared/dokumente';
+import { Antrag, Beratungsunterlage, Protokoll, Stellungnahme, Tagesordnung } from '../../shared/dokumente';
 import { Resolver } from '../interfaces.d';
 import { KsdSucheClient } from "../Ratsdokumente/data/html/KsdSucheClient";
 import { SuchergebnisAntraegeScraper } from '../Ratsdokumente/scraper/Suchergebnisseite/SuchergebnisAntraege.scraper';
 import { SuchergebnisBunterlagenScraper } from "../Ratsdokumente/scraper/Suchergebnisseite/SuchergebnisBunterlagen.scraper";
 import { SuchergebnisProtokolleScraper } from '../Ratsdokumente/scraper/Suchergebnisseite/SuchergebnisProtokolle.scraper';
 import { SuchergebnisStellungnahmenScraper } from '../Ratsdokumente/scraper/Suchergebnisseite/SuchergebnisStellungnahmen.scraper';
+import { SuchergebnisTagesordnungenScraper } from '../Ratsdokumente/scraper/Suchergebnisseite/SuchergebnisTagesordnungen.scraper';
 
 export class RatsdokumenteResolver implements Resolver {
 
@@ -41,9 +42,11 @@ export class RatsdokumenteResolver implements Resolver {
         const stellungnahmenScraper = new SuchergebnisStellungnahmenScraper();
         const stellungnahmenArr = stellungnahmenScraper.scrape($);
 
-        // TODO Andere Daten aus der Suchergebnisseite scrapen
+        // ..scrape "Tagesordnungen"
+        const tagesordnungenScraper = new SuchergebnisTagesordnungenScraper();
+        const tagesordnungenArr = tagesordnungenScraper.scrape($);
 
-        const mergedResult = this.merge([bunterlagenArr, protokollArr, antraegeArr, stellungnahmenArr]);
+        const mergedResult = this.merge([bunterlagenArr, protokollArr, antraegeArr, stellungnahmenArr, tagesordnungenArr]);
 
         // Zusammengeführtes Array mit Ergebnissen zurückgeben
         return mergedResult;
@@ -54,7 +57,7 @@ export class RatsdokumenteResolver implements Resolver {
      * NOTICE berücksichtigt keine Reihenfolge in den Arrays
      * @param ratsdokumente Arrays aus Ratsdokumenten
      */
-    private merge(ratsdokumente: any[]): Array<Beratungsunterlage|Protokoll|Antrag|Stellungnahme> {
+    private merge(ratsdokumente: any[]): Array<Beratungsunterlage|Protokoll|Antrag|Stellungnahme|Tagesordnung> {
 
         // Wir benutzen hier die reduce Methode um ein einziges Arrays mit allen Elementen zu erzeugen
         return ratsdokumente.reduce((accumulator, currentValue) => {
