@@ -1,7 +1,7 @@
 import dateUtil from 'date-and-time';
 import 'date-and-time/locale/de';
-import { Protokoll, Datei } from '../../../../shared/dokumente';
-import { Scraper } from '../../../index.d';
+import { Datei, Protokoll } from '../../../../shared/dokumente';
+import { Scraper } from '../../../interfaces.d';
 
 export class SuchergebnisProtokolleScraper implements Scraper<Protokoll> {
 

@@ -1,7 +1,7 @@
 import dateUtil from 'date-and-time';
 import 'date-and-time/locale/de';
 import { Datei, Stellungnahme } from '../../../../shared/dokumente';
-import { Scraper } from '../../../index.d';
+import { Scraper } from '../../../interfaces.d';
 
 export class SuchergebnisStellungnahmenScraper implements Scraper<Stellungnahme> {
 
