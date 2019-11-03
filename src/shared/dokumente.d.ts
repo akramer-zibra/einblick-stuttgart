@@ -37,6 +37,13 @@ export interface Stellungnahme {
     refAntrag: string
 }
 
+export interface Tagesordnung {
+    type: Dokumenttyp,
+    datum: Date,
+    ausschuss: string,
+    dokument: Datei
+}
+
 export interface Datei {
     type: Dateityp,
     url: string,
@@ -48,5 +55,5 @@ export interface Datei {
 // @See https://lukasbehal.com/2017-05-22-enums-in-declaration-files/
 // TLDR: TypeScript Declarations-Dateien werden nicht in JavaScript kompiliert.
 //       Während der Laufzeit kann darum darauf nicht zugegriffen werden
-export type Dokumenttyp = "Antrag" | "Beratungsunterlage" | "Protokoll" | "Stellungnahme";
+export type Dokumenttyp = "Antrag" | "Beratungsunterlage" | "Protokoll" | "Stellungnahme" | "Tagesordnung";
 export type Dateityp = "Datei";
