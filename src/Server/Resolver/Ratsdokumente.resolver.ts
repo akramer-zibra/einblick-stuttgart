@@ -1,11 +1,11 @@
 import cheerio from 'cheerio';
-import { KsdSucheClient } from "../Ratsdokumente/data/KsdSucheClient";
+import { Antrag, Beratungsunterlage, Protokoll, Stellungnahme } from '../../shared/dokumente';
+import { Resolver } from '../index.d';
+import { KsdSucheClient } from "../Ratsdokumente/data/html/KsdSucheClient";
+import { SuchergebnisAntraegeScraper } from '../Ratsdokumente/scraper/Suchergebnisseite/SuchergebnisAntraege.scraper';
 import { SuchergebnisBunterlagenScraper } from "../Ratsdokumente/scraper/Suchergebnisseite/SuchergebnisBunterlagen.scraper";
 import { SuchergebnisProtokolleScraper } from '../Ratsdokumente/scraper/Suchergebnisseite/SuchergebnisProtokolle.scraper';
-import { Beratungsunterlage, Protokoll, Antrag, Stellungnahme } from '../../shared/dokumente';
-import { SuchergebnisAntraegeScraper } from '../Ratsdokumente/scraper/Suchergebnisseite/SuchergebnisAntraege.scraper';
 import { SuchergebnisStellungnahmenScraper } from '../Ratsdokumente/scraper/Suchergebnisseite/SuchergebnisStellungnahmen.scraper';
-import { Resolver } from '../index.d'; 
 
 export class RatsdokumenteResolver implements Resolver {
 
