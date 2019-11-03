@@ -1,10 +1,11 @@
 declare const TL: any;  // Declares global TL object integrated with linked script file in index.html
-import { TimelineData, TimelineSlide, SlideGenerator, TimelineSlideDefault } from ".";
+import uuidv4 from 'uuid/v4';
+import { SlideGenerator, TimelineData, TimelineSlide, TimelineSlideDefault } from ".";
+import { AntragSlideGenerator } from "./slides/AntragSlideGenerator";
 import { BeratungsunterlageSlideGenerator } from "./slides/BeratungsunterlageSlideGenerator";
 import { ProtokollSlideGenerator } from "./slides/ProtokollSlideGenerator";
-import uuidv4 from 'uuid/v4';
-import { AntragSlideGenerator } from "./slides/AntragSlideGenerator";
 import { StellungnahmeSlideGenerator } from "./slides/StellungnahmeSlideGenerator";
+import { TagesordnungSlideGenerator } from "./slides/TagesordnungSlideGenerator";
 
 export class Timeline {
 
@@ -22,7 +23,8 @@ export class Timeline {
         'Beratungsunterlage': BeratungsunterlageSlideGenerator.build,
         'Protokoll': ProtokollSlideGenerator.build,
         'Antrag': AntragSlideGenerator.build,
-        'Stellungnahme': StellungnahmeSlideGenerator.build
+        'Stellungnahme': StellungnahmeSlideGenerator.build,
+        'Tagesordnung': TagesordnungSlideGenerator.build
     }
 
     /**

@@ -28,8 +28,8 @@ export class SuchergebnisTagesordnungenScraper implements Scraper<Tagesordnung> 
 
         const result: Tagesordnung[] = [];
 
-        // Wir suchen die vierte Tabelle auf der Seite
-        const thirdTable = $('table').toArray()[3];
+        // Wir suchen die fünfte Tabelle auf der Seite
+        const thirdTable = $('table').toArray()[4];
 
         // 
         const rows = $(thirdTable).find('tr').toArray();
@@ -82,7 +82,7 @@ export class SuchergebnisTagesordnungenScraper implements Scraper<Tagesordnung> 
     private extractDatum(cell1, cell2) {
         const dateString = cell1.find('p6').text().trim();
         const timeString = cell2.find('b').text().replace(' Uhr', '');
-        return dateUtil.parse(dateString + timeString, 'DD.MM.YYYY HH:mm');
+        return dateUtil.parse(`${timeString} ${dateString}`, 'HH:mm DD.MM.YYYY');
     }
 
     /**

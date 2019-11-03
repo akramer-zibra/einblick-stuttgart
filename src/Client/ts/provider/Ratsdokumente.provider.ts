@@ -44,6 +44,12 @@ export class RatsdokumenteProvider {
                 fraktionen
                 dokument {url, titel, mime}
             }
+            ... on Tagesordnung {
+                type
+                datum
+                ausschuss
+                dokument {url, titel, mime}
+            }
         }
     }`;
 
