@@ -1,7 +1,7 @@
 import axios from 'axios';
 import iconv from 'iconv-lite';
 import qs from 'query-string';
-import { DataClient } from '../../..';
+import { DataClient } from '../../../index.d';
 
 export class KsdSucheClient implements DataClient {
 
