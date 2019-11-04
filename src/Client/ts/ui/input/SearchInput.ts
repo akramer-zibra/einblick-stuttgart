@@ -29,7 +29,7 @@ export class SearchInput {
         $('#act__search').on('click', this.submit.bind(this));
 
         // ...und bei Enter Eingabe im Textfeld
-        $('#app__searchtext').on('keypress', (event) => {
+        $('#app__search__text').on('keypress', (event) => {
             if(event.which === 13){
                 this.submit(event);
             }
@@ -43,7 +43,7 @@ export class SearchInput {
     private submit(event) {
 
         // Ermittle den Suchtext 
-        const searchtext = $('#app__searchtext').val();
+        const searchtext = $('#app__search__text').val();
 
         $('.pageloader').addClass('is-active');
 
