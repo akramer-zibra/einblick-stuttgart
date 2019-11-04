@@ -50,8 +50,6 @@ export class RatsdokumenteResolver implements Resolver {
      */
     async resolve(suchbegriff: string, dokumenttypen: string[]) {
 
-        console.log(dokumenttypen);
-
         // Wir benutzen hier eine spezielle Client Instanz für die Suchefunktion
         // und führe die Suche mit unserem Parameter aus 
         const bodyHtml = await this.ksdSucheClient.submitSearch(suchbegriff);
@@ -65,7 +63,6 @@ export class RatsdokumenteResolver implements Resolver {
 
         // ..scrape "Beratungsunterlagen"
         if(dokumenttypen === undefined || dokumenttypen.indexOf('*') >= 0 || dokumenttypen.indexOf('Beratungsunterlage') >= 0) {
-            console.log('Beratungsunterlage laden');
             collectedDataArr.push(this.bunterlagenScraper.scrape($));
         }
 
