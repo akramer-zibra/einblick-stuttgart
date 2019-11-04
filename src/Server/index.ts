@@ -1,14 +1,35 @@
-import { GraphQLServer } from 'graphql-yoga';
+import Bottle from 'bottlejs';
 import express from 'express';
+import { GraphQLServer } from 'graphql-yoga';
+import { KsdSucheClient } from './Ratsdokumente/data/html/KsdSucheClient';
+import { SuchergebnisAntraegeScraper } from './Ratsdokumente/scraper/Suchergebnisseite/SuchergebnisAntraege.scraper';
+import { SuchergebnisBunterlagenScraper } from './Ratsdokumente/scraper/Suchergebnisseite/SuchergebnisBunterlagen.scraper';
+import { SuchergebnisProtokolleScraper } from './Ratsdokumente/scraper/Suchergebnisseite/SuchergebnisProtokolle.scraper';
+import { SuchergebnisStellungnahmenScraper } from './Ratsdokumente/scraper/Suchergebnisseite/SuchergebnisStellungnahmen.scraper';
+import { SuchergebnisTagesordnungenScraper } from './Ratsdokumente/scraper/Suchergebnisseite/SuchergebnisTagesordnungen.scraper';
 import { RatsdokumenteResolver } from './Resolver/Ratsdokumente.resolver';
 
-// Instantiiere resolver für Ratsdokumente query
-const ratsdokumenteResolver = new RatsdokumenteResolver();
+// Initialisisiere bottlejs dependency container
+const bottle = new Bottle();
 
-// Definiere GraphQL API resolver
+// Definiere services und factories
+bottle.factory('RatsdokumenteResolver', RatsdokumenteResolver.build);
+
+// Datenquellen
+bottle.service('KsdSucheClient', KsdSucheClient);
+
+// Scraper
+bottle.service('SuchergebnisBunterlagenScraper', SuchergebnisBunterlagenScraper);
+bottle.service('SuchergebnisProtokolleScraper', SuchergebnisProtokolleScraper);
+bottle.service('SuchergebnisAntraegeScraper', SuchergebnisAntraegeScraper);
+bottle.service('SuchergebnisStellungnahmenScraper', SuchergebnisStellungnahmenScraper);
+bottle.service('SuchergebnisTagesordnungenScraper', SuchergebnisTagesordnungenScraper);
+
+
+// Definiere GraphQL API mit resolvern aus dem IoC container
 const resolvers = {
     Query: {
-        ratsdokumente: (_, {suchbegriff}) => ratsdokumenteResolver.resolve(suchbegriff)
+        ratsdokumente: (_, {suchbegriff}) => bottle.container.RatsdokumenteResolver.resolve(suchbegriff)
     },
     Dokument: {     
         __resolveType(dokument, context, info) {    // Wir brauchen einen zusätzlichen Resolver, der Untertypen des abstrakten Typs Dokument auflösen kann 

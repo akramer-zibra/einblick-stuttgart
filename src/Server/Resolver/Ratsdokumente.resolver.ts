@@ -10,6 +10,39 @@ import { SuchergebnisTagesordnungenScraper } from '../Ratsdokumente/scraper/Such
 
 export class RatsdokumenteResolver implements Resolver {
 
+    /** Referenz zu abhängigen Objekten werden im Konstruktor direkt gesetzt */
+    
+    /**
+     * Factory Methode lädt Abhängigkeiten aus übergebenem IoC container
+     * @param container 
+     */
+    static build(container) {
+        return new RatsdokumenteResolver(container.KsdSucheClient,
+                                        container.SuchergebnisBunterlagenScraper,
+                                        container.SuchergebnisProtokolleScraper,
+                                        container.SuchergebnisAntraegeScraper,
+                                        container.SuchergebnisStellungnahmenScraper,
+                                        container.SuchergebnisTagesordnungenScraper);
+    } 
+
+    /**
+     * Konstruktor
+     * @param ksdSucheClient 
+     * @param bunterlagenScraper 
+     * @param protokollScraper 
+     * @param antragScraper 
+     * @param stellungnahmenScraper 
+     * @param tagesordnungenScraper 
+     */
+    private constructor(private ksdSucheClient: KsdSucheClient,
+                        private bunterlagenScraper: SuchergebnisBunterlagenScraper,
+                        private protokollScraper: SuchergebnisProtokolleScraper,
+                        private antragScraper: SuchergebnisAntraegeScraper,
+                        private stellungnahmenScraper: SuchergebnisStellungnahmenScraper,
+                        private tagesordnungenScraper: SuchergebnisTagesordnungenScraper,
+                        ) {
+    }
+
     /**
      * Methode löst die entsprechende GraphQL query mit dem übergebenen Parameter auf
      * @param suchbegriff 
@@ -17,34 +50,27 @@ export class RatsdokumenteResolver implements Resolver {
     async resolve(suchbegriff: string) {
 
         // Wir benutzen hier eine spezielle Client Instanz für die Suchefunktion
-        const ksdSucheClient = new KsdSucheClient();
-
-        // Führe die Suche mit unserem Parameter aus 
-        const bodyHtml = await ksdSucheClient.submitSearch(suchbegriff);
+        // und führe die Suche mit unserem Parameter aus 
+        const bodyHtml = await this.ksdSucheClient.submitSearch(suchbegriff);
 
         // Parse die HTTP Antwort mit cheerio
         const $ = cheerio.load(bodyHtml);     // We parse dom here an pass dom to scrapers instead of HTML string
 
         /* Scrape das abgefragte HTML */
         // ..scrape "Beratungsunterlagen"
-        const bunterlagenScraper = new SuchergebnisBunterlagenScraper();
-        const bunterlagenArr = bunterlagenScraper.scrape($);
+        const bunterlagenArr = this.bunterlagenScraper.scrape($);
 
         // ..scrape "Protokolle"
-        const protokollScraper = new SuchergebnisProtokolleScraper();
-        const protokollArr = protokollScraper.scrape($);
+        const protokollArr =this.protokollScraper.scrape($);
 
         // ..scrape "Anträge"
-        const antragScraper = new SuchergebnisAntraegeScraper();
-        const antraegeArr = antragScraper.scrape($);
+        const antraegeArr = this.antragScraper.scrape($);
 
         // ..scrape "Stellungnahmen"
-        const stellungnahmenScraper = new SuchergebnisStellungnahmenScraper();
-        const stellungnahmenArr = stellungnahmenScraper.scrape($);
+        const stellungnahmenArr = this.stellungnahmenScraper.scrape($);
 
         // ..scrape "Tagesordnungen"
-        const tagesordnungenScraper = new SuchergebnisTagesordnungenScraper();
-        const tagesordnungenArr = tagesordnungenScraper.scrape($);
+        const tagesordnungenArr = this.tagesordnungenScraper.scrape($);
 
         const mergedResult = this.merge([bunterlagenArr, protokollArr, antraegeArr, stellungnahmenArr, tagesordnungenArr]);
 
