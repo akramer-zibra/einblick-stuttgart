@@ -46,33 +46,50 @@ export class RatsdokumenteResolver implements Resolver {
     /**
      * Methode löst die entsprechende GraphQL query mit dem übergebenen Parameter auf
      * @param suchbegriff 
+     * @param dokumenttypen
      */
-    async resolve(suchbegriff: string) {
+    async resolve(suchbegriff: string, dokumenttypen: string[]) {
+
+        console.log(dokumenttypen);
 
         // Wir benutzen hier eine spezielle Client Instanz für die Suchefunktion
         // und führe die Suche mit unserem Parameter aus 
         const bodyHtml = await this.ksdSucheClient.submitSearch(suchbegriff);
 
         // Parse die HTTP Antwort mit cheerio
-        const $ = cheerio.load(bodyHtml);     // We parse dom here an pass dom to scrapers instead of HTML string
+        const $ = cheerio.load(bodyHtml);     // Wir parsen den DOM, um auf die HTML Daten einfache rzugreifen zu können
 
         /* Scrape das abgefragte HTML */
+        // Initialisiere Variable um ge-scrapte Daten zu sammeln
+        const collectedDataArr: Array<Beratungsunterlage[]|Protokoll[]|Antrag[]|Stellungnahme[]|Tagesordnung[]> = [];
+
         // ..scrape "Beratungsunterlagen"
-        const bunterlagenArr = this.bunterlagenScraper.scrape($);
+        if(dokumenttypen === undefined || dokumenttypen.indexOf('*') >= 0 || dokumenttypen.indexOf('Beratungsunterlage') >= 0) {
+            console.log('Beratungsunterlage laden');
+            collectedDataArr.push(this.bunterlagenScraper.scrape($));
+        }
 
         // ..scrape "Protokolle"
-        const protokollArr =this.protokollScraper.scrape($);
+        if(dokumenttypen === undefined || dokumenttypen.indexOf('*') >= 0 || dokumenttypen.indexOf('Protokoll') >= 0) {
+            collectedDataArr.push(this.protokollScraper.scrape($));
+        }
 
         // ..scrape "Anträge"
-        const antraegeArr = this.antragScraper.scrape($);
+        if(dokumenttypen === undefined || dokumenttypen.indexOf('*') >= 0 || dokumenttypen.indexOf('Antrag') >= 0) {
+            collectedDataArr.push(this.antragScraper.scrape($));
+        }
 
         // ..scrape "Stellungnahmen"
-        const stellungnahmenArr = this.stellungnahmenScraper.scrape($);
+        if(dokumenttypen === undefined || dokumenttypen.indexOf('*') >= 0 || dokumenttypen.indexOf('Stellungnahme') >= 0) {
+            collectedDataArr.push(this.stellungnahmenScraper.scrape($));
+        }
 
         // ..scrape "Tagesordnungen"
-        const tagesordnungenArr = this.tagesordnungenScraper.scrape($);
+        if(dokumenttypen === undefined || dokumenttypen.indexOf('*') >= 0 || dokumenttypen.indexOf('Tagesordnung') >= 0) {
+            collectedDataArr.push(this.tagesordnungenScraper.scrape($));
+        }
 
-        const mergedResult = this.merge([bunterlagenArr, protokollArr, antraegeArr, stellungnahmenArr, tagesordnungenArr]);
+        const mergedResult = this.merge(collectedDataArr);
 
         // Zusammengeführtes Array mit Ergebnissen zurückgeben
         return mergedResult;

@@ -1,5 +1,5 @@
 type Query {
-    ratsdokumente(suchbegriff: String!): [Dokument]!
+    ratsdokumente(suchbegriff: String!, dokumenttypen: [String]): [Dokument]!
 }
 
 union Dokument = Beratungsunterlage | Protokoll | Antrag | Stellungnahme | Tagesordnung
