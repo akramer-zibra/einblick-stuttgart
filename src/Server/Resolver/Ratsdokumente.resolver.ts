@@ -99,8 +99,8 @@ export class RatsdokumenteResolver implements Resolver {
      */
     private merge(ratsdokumente: any[]): Ratsdokument[] {
 
-        // Falls der Algorithmus keine Ergebnisse liefert brechen wir mit einem leeren Array hier ab
-        if(ratsdokumente.length === 0) { return []; } 
+        // Falls der Algorithmus nur eine Ergebnismenge liefert, brauchen wir nicht zu reduzieren
+        if(ratsdokumente.length === 1) { return ratsdokumente[0]; } 
 
         // Wir benutzen hier die reduce Methode um ein einziges Arrays mit allen Elementen zu erzeugen
         return ratsdokumente.reduce((accumulator, currentValue) => {
