@@ -11,7 +11,6 @@ export class TypeInput {
 
         // Wir selektieren alle ausgewählten Typen und ermitteln deren Werte
         $('.app__types:checked').toArray().forEach(element => {
-            console.log(element);
             result.push($(element).attr('data-type'));
         });
         return result;
