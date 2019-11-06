@@ -35,17 +35,41 @@
         <h2 style="margin-top: 30px;" class="is-size-3">
           Suche
         </h2>
-        <p>Nach diesem Text wird in den Ratsdokumenten gesucht...</p>
-        <div style="margin-top: 20px;" class="field is-grouped">
-          <input id="app__search__types" class="input" type="tags" placeholder="Dokumenttyp hinzufügen" value="">
-          <p class="control is-expanded">
-            <input id="app__search__text" class="input" type="text" placeholder="Ratsdokumente suchen">
-          </p>
-          <p class="control">
-            <a id="act__search" class="button is-info">
-              Suchen
-            </a>
-          </p>
+        <p style="margin-bottom: 8px;">Nach diesem Text wird in den Ratsdokumenten gesucht...</p>
+        
+        <div class="field is-grouped">
+          <p class="control is-expanded">              
+              <input id="app__search__text" class="input" type="text" placeholder="Ratsdokumente suchen">
+            </p>
+            <p class="control">
+              <a id="act__search" class="button is-info">
+                Suchen
+              </a>
+            </p>
+        </div>
+
+        <p style="margin-top: 20px; margin-bottom: 8px;">...mit diesen Typen von Dokumenten</p>
+        <div>
+          <div class="field">
+            <input id="app__types__beratungsunterlagen" type="checkbox" class="switch is-rounded app__types" checked="checked" data-type="beratungsunterlage">
+            <label for="app__types__beratungsunterlagen">Beratungsunterlagen</label>
+          </div>
+          <div class="field">
+            <input id="app__types__stellungnahmen" type="checkbox" class="switch is-rounded app__types" checked="checked" data-type="stellungnahme">
+            <label for="app__types__stellungnahmen">Stellungnahmen</label>
+          </div>
+          <div class="field">
+            <input id="app__types__antraege" type="checkbox" class="switch is-rounded app__types" checked="checked" data-type="antrag">
+            <label for="app__types__antraege">Anträge</label>
+          </div>
+          <div class="field">
+            <input id="app__types__protokolle" type="checkbox" class="switch is-rounded app__types" data-type="protokoll">
+            <label for="app__types__protokolle">Protokolle</label>
+          </div>
+          <div class="field">
+            <input id="app__types__tagesordnungen" type="checkbox" class="switch is-rounded app__types" data-type="tagesordnung">
+            <label for="app__types__tagesordnungen">Tagesordnungen</label>
+          </div>
         </div>
 
         <h2 style="margin-top: 30px;" class="is-size-3">
