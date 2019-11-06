@@ -1,4 +1,7 @@
-export interface Beratungsunterlage {
+
+export interface Ratsdokument {}
+
+export interface Beratungsunterlage extends Ratsdokument {
     type: Dokumenttyp,
     datum: Date,
     bezeichnung: string,
@@ -8,7 +11,7 @@ export interface Beratungsunterlage {
     anhaenge?: Datei[]
 }
 
-export interface Protokoll {
+export interface Protokoll extends Ratsdokument {
     type: Dokumenttyp,
     datum: Date,
     top: string,
@@ -19,7 +22,7 @@ export interface Protokoll {
     verhandlung?: Beratungsunterlage
 }
 
-export interface Antrag {
+export interface Antrag extends Ratsdokument {
     type: Dokumenttyp,
     datum: Date,
     bezeichnung: string,
@@ -28,7 +31,7 @@ export interface Antrag {
     dokument: Datei
 }
 
-export interface Stellungnahme {
+export interface Stellungnahme extends Ratsdokument {
     type: Dokumenttyp,
     datum: Date,
     betreff: string,
@@ -37,7 +40,7 @@ export interface Stellungnahme {
     refAntrag: string
 }
 
-export interface Tagesordnung {
+export interface Tagesordnung extends Ratsdokument {
     type: Dokumenttyp,
     datum: Date,
     ausschuss: string,
