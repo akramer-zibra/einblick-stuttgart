@@ -1,13 +1,14 @@
 
 import Bottle from 'bottlejs';
-import { Timeline } from './ts/ui/timeline/Timeline';
-import { KeywordInput } from './ts/ui/input/KeywordInput';
-import { GraphQLClient } from './ts/data/GraphQLClient';
-import { RatsdokumenteProvider } from './ts/provider/Ratsdokumente.provider';
-import { SearchInput } from './ts/ui/input/SearchInput';
 import { SearchController } from './ts/controller/SearchController';
-import { PdfModal } from './ts/ui/modal/PdfModal';
+import { GraphQLClient } from './ts/data/GraphQLClient';
 import { SearchHistory } from './ts/helper/SearchHistory';
+import { RatsdokumenteProvider } from './ts/provider/Ratsdokumente.provider';
+import { KeywordInput } from './ts/ui/input/KeywordInput';
+import { SearchInput } from './ts/ui/input/SearchInput';
+import { TypeInput } from './ts/ui/input/TypeInput';
+import { PdfModal } from './ts/ui/modal/PdfModal';
+import { Timeline } from './ts/ui/timeline/Timeline';
 
 const main = () => {
     console.log('Client Applikation läuft...');
@@ -15,20 +16,23 @@ const main = () => {
     // Wir benutzen bottle js als Dependency Container
     const bottle = new Bottle();
 
-    // Definiere alle Service Klassen
-    bottle.service('SearchHistory', SearchHistory);
+    // Definiere alle Service Klassen und Factory Methoden
     bottle.service('GraphQLClient', GraphQLClient);
-    bottle.service('Timeline', Timeline);
-
     bottle.factory('RatsdokumenteProvider', RatsdokumenteProvider.build);
+
+    bottle.service('Timeline', Timeline);
+    bottle.factory('PdfModal', PdfModal.build);
+
     bottle.factory('SearchController', SearchController.build);
+    bottle.service('SearchHistory', SearchHistory);
     bottle.factory('SearchInput', SearchInput.build);
     bottle.factory('KeywordInput', KeywordInput.build);
-    bottle.factory('PdfModal', PdfModal.build);
+    bottle.service('TypeInput', TypeInput);
 
     // Initialisiere Startkomponenten
     bottle.container.SearchInput;
     bottle.container.KeywordInput;
+    bottle.container.TypeInput;
     bottle.container.PdfModal;
 }
 main();
