@@ -1,7 +1,7 @@
 import $ from "jquery";
-import { ToastFeedback } from "../ToastFeedback";
 import { SearchController } from "../../controller/SearchController";
 import { Divider } from "../Divider";
+import { ToastFeedback } from "../ToastFeedback";
 
 export class SearchInput {
 
