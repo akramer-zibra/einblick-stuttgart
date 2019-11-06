@@ -99,6 +99,9 @@ export class RatsdokumenteResolver implements Resolver {
      */
     private merge(ratsdokumente: any[]): Array<Beratungsunterlage|Protokoll|Antrag|Stellungnahme|Tagesordnung> {
 
+        // Falls der Algorithmus keine Ergebnisse liefert brechen wir mit einem leeren Array hier ab
+        if(ratsdokumente.length === 0) { return []; } 
+
         // Wir benutzen hier die reduce Methode um ein einziges Arrays mit allen Elementen zu erzeugen
         return ratsdokumente.reduce((accumulator, currentValue) => {
             return accumulator.concat(currentValue);
