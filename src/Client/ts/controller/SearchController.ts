@@ -1,22 +1,23 @@
+import { SearchHistory } from "../helper/SearchHistory";
 import { RatsdokumenteProvider } from "../provider/Ratsdokumente.provider";
+import { Divider } from "../ui/Divider";
+import { TypeInput } from "../ui/input/TypeInput";
 import { Timeline } from "../ui/timeline/Timeline";
 import { ToastFeedback } from "../ui/ToastFeedback";
-import { Divider } from "../ui/Divider";
-import { SearchHistory } from "../helper/SearchHistory";
 
 export class SearchController {
 
     /** Referenzen zu notwendigen Objekten */
-    private ratsdokumenteProvider;
-    private timeline: Timeline;
-    private searchHistory: SearchHistory;
 
     /**
      * Statische factory Methode
      * @param container 
      */
     static build(container) {
-        return new SearchController(container.RatsdokumenteProvider, container.Timeline, container.SearchHistory);
+        return new SearchController(container.RatsdokumenteProvider, 
+                                    container.Timeline, 
+                                    container.SearchHistory,
+                                    container.TypeInput);
     }
 
     /**
@@ -24,14 +25,10 @@ export class SearchController {
      * @param ratsdokumenteProvider 
      * @param timeline 
      */
-    constructor(ratsdokumenteProvider: RatsdokumenteProvider, 
-                timeline: Timeline, 
-                searchHistory: SearchHistory) {
-
-        // Abhängikeiten injizieren
-        this.searchHistory = searchHistory;
-        this.ratsdokumenteProvider = ratsdokumenteProvider;
-        this.timeline = timeline;
+    constructor(private ratsdokumenteProvider: RatsdokumenteProvider, 
+                private timeline: Timeline, 
+                private searchHistory: SearchHistory,
+                private typeInput: TypeInput) {
     }
 
     /**
@@ -43,11 +40,14 @@ export class SearchController {
         // Behalte den Suchtext in einer Historie
         this.searchHistory.remember(searchtext);
 
+        // Ermittle ausgewählte Dokumenttypen
+        const dokumenttypen: string[] = this.typeInput.values();
+
         return new Promise((resolve, reject) => {
 
             // Benutze den Ratsdokumente-Provider um an die Daten aus der GraphQL API zu kommen
             this.ratsdokumenteProvider
-                .queryRatsdokumenteByText(searchtext)
+                .queryRatsdokumenteByText(searchtext, dokumenttypen)
                 .then((apiData) => {
 
                     // Überprüfe, ob überhaupt Ergebnisse vorhanden sind
