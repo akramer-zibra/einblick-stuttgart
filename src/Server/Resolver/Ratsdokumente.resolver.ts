@@ -1,5 +1,5 @@
 import cheerio from 'cheerio';
-import { Antrag, Beratungsunterlage, Protokoll, Stellungnahme, Tagesordnung } from '../../shared/dokumente';
+import { Ratsdokument } from '../../shared/dokumente';
 import { Resolver } from '../interfaces.d';
 import { KsdSucheClient } from "../Ratsdokumente/data/html/KsdSucheClient";
 import { SuchergebnisAntraegeScraper } from '../Ratsdokumente/scraper/Suchergebnisseite/SuchergebnisAntraege.scraper';
@@ -59,7 +59,7 @@ export class RatsdokumenteResolver implements Resolver {
 
         /* Scrape das abgefragte HTML */
         // Initialisiere Variable um ge-scrapte Daten zu sammeln
-        const collectedDataArr: Array<Beratungsunterlage[]|Protokoll[]|Antrag[]|Stellungnahme[]|Tagesordnung[]> = [];
+        const collectedDataArr: Ratsdokument[][] = [];
 
         // ..scrape "Beratungsunterlagen"
         if(dokumenttypen === undefined || dokumenttypen.indexOf('*') >= 0 || dokumenttypen.indexOf('Beratungsunterlage') >= 0) {
@@ -97,7 +97,7 @@ export class RatsdokumenteResolver implements Resolver {
      * NOTICE berücksichtigt keine Reihenfolge in den Arrays
      * @param ratsdokumente Arrays aus Ratsdokumenten
      */
-    private merge(ratsdokumente: any[]): Array<Beratungsunterlage|Protokoll|Antrag|Stellungnahme|Tagesordnung> {
+    private merge(ratsdokumente: any[]): Ratsdokument[] {
 
         // Falls der Algorithmus keine Ergebnisse liefert brechen wir mit einem leeren Array hier ab
         if(ratsdokumente.length === 0) { return []; } 
