@@ -67,8 +67,6 @@ export class KsdSucheClient implements DataClient {
 
         // Nutze default Parameter
         const params = this.params;
-//        params.Suchbegriff1 = words;
-//        params.Suchbegriff1 = words.replace(' ', '%2B');    // Wir ersetzen Leerzeichen durch + für eine bessere Suchlogik
 
         // Achtung!: Die Suchanfrage ist nicht konsistent url kodiert.
         // Die Suche funktioniert nicht richtig, wenn alles konsequent kodiert ist
