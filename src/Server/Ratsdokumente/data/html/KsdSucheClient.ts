@@ -35,9 +35,9 @@ export class KsdSucheClient implements DataClient {
             "Stellungnahmen", 
             "Tagesordnungen"
         ], 
-        "Suchbegriff1": "", 
-        "Suchbegriff2": "", 
-        "Suchbegriff3": "", 
+//        "Suchbegriff1": "", 
+//        "Suchbegriff2": "", 
+//        "Suchbegriff3": "", 
         "%%Surrogate_AnzahlDokAuswahl": "1", 
         "AnzahlDokAuswahl": "20", 
         "Dokumententyp": "Suche", 
@@ -61,22 +61,32 @@ export class KsdSucheClient implements DataClient {
 
     /**
      * Methode macht eine Suchanfrage an den Ratsdokumente-Server
-     * @param keyword 
+     * @param words 
      */
-    submitSearch(keyword: string): Promise<string> {
+    submitSearch(words: string): Promise<string> {
 
-        // Nutze deault Parameter
+        // Nutze default Parameter
         const params = this.params;
-        params.Suchbegriff1 = keyword.replace(' ', '+');    // Wir ersetzen Leerzeichen durch + für eine bessere Suchlogik
+//        params.Suchbegriff1 = words;
+//        params.Suchbegriff1 = words.replace(' ', '%2B');    // Wir ersetzen Leerzeichen durch + für eine bessere Suchlogik
+
+        // Achtung!: Die Suchanfrage ist nicht konsistent url kodiert.
+        // Die Suche funktioniert nicht richtig, wenn alles konsequent kodiert ist
 
         // Wandle die Anfrage Parameter in einen einzigen String um
-        const encodedParams = qs.stringify(params, {encode: false});
+        const stringifiedParams = qs.stringify(params, {encode: false});    
         
+        // Wandle den Suchbegriff in einen url kodierten String um
+        const encodedSearchString = qs.stringify({Suchbegriff1: words}, {encode: true});
+
+        // ...und verbinde unkodierten mit kodiertem Teil der Parameter
+        const requestParams = [stringifiedParams, encodedSearchString].join('&');
+
         // 
         return new Promise((resolve, reject) => {
 
             // Schicke eine POST Anfrage mit www-form-encoded Formulardaten
-            this.client.post('/masustart', encodedParams, { responseType: 'arraybuffer' })
+            this.client.post('/masustart', requestParams, { responseType: 'arraybuffer' })
                 .then((response) => {
                     
                     // Dekodiere die HTML Antwort von windows1252 in utf8
