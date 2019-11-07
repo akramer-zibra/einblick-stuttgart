@@ -54,9 +54,9 @@ const server = new GraphQLServer({
 
 // GraphQL Server benutzt intern express.js 
 // server.express.use(...);
-server.express.get('/test', (req, res) => {
+/*server.express.get('/test', (req, res) => {
     res.send('Hello World');
-});
+});*/
 
 // Konfiguriere ein Verzeichnis für statische Asset-Dateien 
 server.express.use('/', express.static('public'));
