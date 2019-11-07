@@ -5,6 +5,7 @@ type Query {
     antraege(suchbegriff: String!): [Antrag]!
     stellungnahmen(suchbegriff: String!): [Stellungnahme]!
     tagesordnungen(suchbegriff: String!): [Tagesordnung]!
+    gemeinderat: [String]
 }
 
 union Dokument = Beratungsunterlage | Protokoll | Antrag | Stellungnahme | Tagesordnung
