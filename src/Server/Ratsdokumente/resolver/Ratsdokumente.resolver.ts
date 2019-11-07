@@ -1,12 +1,12 @@
 import cheerio from 'cheerio';
-import { Ratsdokument } from '../../shared/ratsdokumente';
-import { Resolver } from '../interfaces.d';
-import { RatsdokumenteHtmlClient } from "../Ratsdokumente/data/html/RatsdokumenteHtmlClient";
-import { SuchergebnisAntraegeScraper } from '../Ratsdokumente/scraper/Suchergebnisseite/SuchergebnisAntraege.scraper';
-import { SuchergebnisBunterlagenScraper } from "../Ratsdokumente/scraper/Suchergebnisseite/SuchergebnisBunterlagen.scraper";
-import { SuchergebnisProtokolleScraper } from '../Ratsdokumente/scraper/Suchergebnisseite/SuchergebnisProtokolle.scraper';
-import { SuchergebnisStellungnahmenScraper } from '../Ratsdokumente/scraper/Suchergebnisseite/SuchergebnisStellungnahmen.scraper';
-import { SuchergebnisTagesordnungenScraper } from '../Ratsdokumente/scraper/Suchergebnisseite/SuchergebnisTagesordnungen.scraper';
+import { Ratsdokument } from '../../../shared/ratsdokumente';
+import { Resolver } from '../../interfaces';
+import { RatsdokumenteHtmlClient } from "../data/html/RatsdokumenteHtmlClient";
+import { SuchergebnisAntraegeScraper } from '../scraper/Suchergebnisseite/SuchergebnisAntraege.scraper';
+import { SuchergebnisBunterlagenScraper } from "../scraper/Suchergebnisseite/SuchergebnisBunterlagen.scraper";
+import { SuchergebnisProtokolleScraper } from '../scraper/Suchergebnisseite/SuchergebnisProtokolle.scraper';
+import { SuchergebnisStellungnahmenScraper } from '../scraper/Suchergebnisseite/SuchergebnisStellungnahmen.scraper';
+import { SuchergebnisTagesordnungenScraper } from '../scraper/Suchergebnisseite/SuchergebnisTagesordnungen.scraper';
 
 export class RatsdokumenteResolver implements Resolver {
 
