@@ -29,7 +29,12 @@ bottle.service('SuchergebnisTagesordnungenScraper', SuchergebnisTagesordnungenSc
 // Definiere GraphQL API mit resolvern aus dem IoC container
 const resolvers = {
     Query: {
-        ratsdokumente: (_, {suchbegriff, dokumenttypen}) => bottle.container.RatsdokumenteResolver.resolve(suchbegriff, dokumenttypen)
+        ratsdokumente: (_, {suchbegriff, dokumenttypen}) => bottle.container.RatsdokumenteResolver.resolve(suchbegriff, dokumenttypen),
+        beratungsunterlagen: (_, {suchbegriff}) => bottle.container.RatsdokumenteResolver.resolve(suchbegriff, ["Beratungsunterlage"]),
+        protokolle: (_, {suchbegriff}) => bottle.container.RatsdokumenteResolver.resolve(suchbegriff, ["Protokoll"]),
+        antraege: (_, {suchbegriff}) => bottle.container.RatsdokumenteResolver.resolve(suchbegriff, ["Antrag"]),
+        stellungnahmen: (_, {suchbegriff}) => bottle.container.RatsdokumenteResolver.resolve(suchbegriff, ["Stellungnahme"]),
+        tagesordnungen: (_, {suchbegriff}) => bottle.container.RatsdokumenteResolver.resolve(suchbegriff, ["Tagesordnung"])
     },
     Dokument: {     
         __resolveType(dokument, context, info) {    // Wir brauchen einen zusätzlichen Resolver, der Untertypen des abstrakten Typs Dokument auflösen kann 

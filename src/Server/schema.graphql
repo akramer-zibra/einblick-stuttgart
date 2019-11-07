@@ -1,5 +1,10 @@
 type Query {
     ratsdokumente(suchbegriff: String!, dokumenttypen: [String]): [Dokument]!
+    beratungsunterlagen(suchbegriff: String!): [Beratungsunterlage]!
+    protokolle(suchbegriff: String!): [Protokoll]!
+    antraege(suchbegriff: String!): [Antrag]!
+    stellungnahmen(suchbegriff: String!): [Stellungnahme]!
+    tagesordnungen(suchbegriff: String!): [Tagesordnung]!
 }
 
 union Dokument = Beratungsunterlage | Protokoll | Antrag | Stellungnahme | Tagesordnung
