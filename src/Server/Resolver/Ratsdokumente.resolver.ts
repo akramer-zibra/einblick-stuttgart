@@ -1,7 +1,7 @@
 import cheerio from 'cheerio';
 import { Ratsdokument } from '../../shared/dokumente';
 import { Resolver } from '../interfaces.d';
-import { KsdSucheClient } from "../Ratsdokumente/data/html/KsdSucheClient";
+import { RatsdokumenteHtmlClient } from "../Ratsdokumente/data/html/RatsdokumenteHtmlClient";
 import { SuchergebnisAntraegeScraper } from '../Ratsdokumente/scraper/Suchergebnisseite/SuchergebnisAntraege.scraper';
 import { SuchergebnisBunterlagenScraper } from "../Ratsdokumente/scraper/Suchergebnisseite/SuchergebnisBunterlagen.scraper";
 import { SuchergebnisProtokolleScraper } from '../Ratsdokumente/scraper/Suchergebnisseite/SuchergebnisProtokolle.scraper';
@@ -17,7 +17,7 @@ export class RatsdokumenteResolver implements Resolver {
      * @param container 
      */
     static build(container) {
-        return new RatsdokumenteResolver(container.KsdSucheClient,
+        return new RatsdokumenteResolver(container.RatsdokumenteHtmlClient,
                                         container.SuchergebnisBunterlagenScraper,
                                         container.SuchergebnisProtokolleScraper,
                                         container.SuchergebnisAntraegeScraper,
@@ -27,14 +27,14 @@ export class RatsdokumenteResolver implements Resolver {
 
     /**
      * Konstruktor
-     * @param ksdSucheClient 
+     * @param htmlClient 
      * @param bunterlagenScraper 
      * @param protokollScraper 
      * @param antragScraper 
      * @param stellungnahmenScraper 
      * @param tagesordnungenScraper 
      */
-    private constructor(private ksdSucheClient: KsdSucheClient,
+    private constructor(private htmlClient: RatsdokumenteHtmlClient,
                         private bunterlagenScraper: SuchergebnisBunterlagenScraper,
                         private protokollScraper: SuchergebnisProtokolleScraper,
                         private antragScraper: SuchergebnisAntraegeScraper,
@@ -52,7 +52,7 @@ export class RatsdokumenteResolver implements Resolver {
 
         // Wir benutzen hier eine spezielle Client Instanz für die Suchefunktion
         // und führe die Suche mit unserem Parameter aus 
-        const bodyHtml = await this.ksdSucheClient.submitSearch(suchbegriff);
+        const bodyHtml = await this.htmlClient.submitSearch(suchbegriff);
 
         // Parse die HTTP Antwort mit cheerio
         const $ = cheerio.load(bodyHtml);     // Wir parsen den DOM, um auf die HTML Daten einfache rzugreifen zu können

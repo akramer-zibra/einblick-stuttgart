@@ -1,7 +1,7 @@
 import Bottle from 'bottlejs';
 import express from 'express';
 import { GraphQLServer } from 'graphql-yoga';
-import { KsdSucheClient } from './Ratsdokumente/data/html/KsdSucheClient';
+import { RatsdokumenteHtmlClient } from './Ratsdokumente/data/html/RatsdokumenteHtmlClient';
 import { SuchergebnisAntraegeScraper } from './Ratsdokumente/scraper/Suchergebnisseite/SuchergebnisAntraege.scraper';
 import { SuchergebnisBunterlagenScraper } from './Ratsdokumente/scraper/Suchergebnisseite/SuchergebnisBunterlagen.scraper';
 import { SuchergebnisProtokolleScraper } from './Ratsdokumente/scraper/Suchergebnisseite/SuchergebnisProtokolle.scraper';
@@ -16,7 +16,7 @@ const bottle = new Bottle();
 bottle.factory('RatsdokumenteResolver', RatsdokumenteResolver.build);
 
 // Datenquellen
-bottle.service('KsdSucheClient', KsdSucheClient);
+bottle.service('RatsdokumenteHtmlClient', RatsdokumenteHtmlClient);
 
 // Scraper
 bottle.service('SuchergebnisBunterlagenScraper', SuchergebnisBunterlagenScraper);

@@ -1,9 +1,9 @@
 import axios from 'axios';
 import iconv from 'iconv-lite';
 import qs from 'query-string';
-import { DataClient } from '../../../interfaces.d';
+import { DataClient } from '../../../interfaces';
 
-export class KsdSucheClient implements DataClient {
+export class RatsdokumenteHtmlClient implements DataClient {
 
     /* Axios client Instanz */
     private client;
