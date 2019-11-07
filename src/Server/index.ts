@@ -15,15 +15,15 @@ const bottle = new Bottle();
 // Definiere services und factories
 bottle.factory('RatsdokumenteResolver', RatsdokumenteResolver.build);
 
-// Datenquellen
-bottle.service('RatsdokumenteHtmlClient', RatsdokumenteHtmlClient);
-
 // Scraper
 bottle.service('SuchergebnisBunterlagenScraper', SuchergebnisBunterlagenScraper);
 bottle.service('SuchergebnisProtokolleScraper', SuchergebnisProtokolleScraper);
 bottle.service('SuchergebnisAntraegeScraper', SuchergebnisAntraegeScraper);
 bottle.service('SuchergebnisStellungnahmenScraper', SuchergebnisStellungnahmenScraper);
 bottle.service('SuchergebnisTagesordnungenScraper', SuchergebnisTagesordnungenScraper);
+
+// Datenquellen
+bottle.service('RatsdokumenteHtmlClient', RatsdokumenteHtmlClient);
 
 
 // Definiere GraphQL API mit resolvern aus dem IoC container
