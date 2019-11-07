@@ -1,6 +1,6 @@
 import Mustache from 'mustache';
 import { SlideGenerator, TimelineSlide, TimelineSlideDefault } from "..";
-import { Datei, Tagesordnung } from "../../../../../shared/dokumente";
+import { Datei, Tagesordnung } from "../../../../../shared/ratsdokumente";
 
 export class TagesordnungSlideGenerator implements SlideGenerator {
 

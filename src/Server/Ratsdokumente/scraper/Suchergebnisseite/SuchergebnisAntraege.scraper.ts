@@ -1,6 +1,6 @@
 import dateUtil from 'date-and-time';
 import 'date-and-time/locale/de';
-import { Antrag, Datei } from '../../../../shared/dokumente';
+import { Antrag, Datei } from '../../../../shared/ratsdokumente';
 import { Scraper } from '../../../interfaces.d';
 
 export class SuchergebnisAntraegeScraper implements Scraper<Antrag> {

@@ -1,5 +1,5 @@
 import cheerio from 'cheerio';
-import { Ratsdokument } from '../../shared/dokumente';
+import { Ratsdokument } from '../../shared/ratsdokumente';
 import { Resolver } from '../interfaces.d';
 import { RatsdokumenteHtmlClient } from "../Ratsdokumente/data/html/RatsdokumenteHtmlClient";
 import { SuchergebnisAntraegeScraper } from '../Ratsdokumente/scraper/Suchergebnisseite/SuchergebnisAntraege.scraper';

@@ -1,6 +1,6 @@
 import dateUtil from 'date-and-time';
 import 'date-and-time/locale/de';
-import { Datei, Tagesordnung } from '../../../../shared/dokumente';
+import { Datei, Tagesordnung } from '../../../../shared/ratsdokumente';
 import { Scraper } from '../../../interfaces';
 
 export class SuchergebnisTagesordnungenScraper implements Scraper<Tagesordnung> {

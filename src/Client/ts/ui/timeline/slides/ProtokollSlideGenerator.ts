@@ -1,6 +1,6 @@
 import Mustache from 'mustache';
-import { Protokoll, Datei } from "../../../../../shared/dokumente";
-import { TimelineSlide, SlideGenerator, TimelineSlideDefault } from "..";
+import { SlideGenerator, TimelineSlide, TimelineSlideDefault } from "..";
+import { Datei, Protokoll } from "../../../../../shared/ratsdokumente";
 
 export class ProtokollSlideGenerator implements SlideGenerator {
 

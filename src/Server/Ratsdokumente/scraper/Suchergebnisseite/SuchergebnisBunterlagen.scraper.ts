@@ -1,6 +1,6 @@
 import dateUtil from 'date-and-time';
 import 'date-and-time/locale/de';
-import { Beratungsunterlage, Datei } from '../../../../shared/dokumente';
+import { Beratungsunterlage, Datei } from '../../../../shared/ratsdokumente';
 import { Scraper } from '../../../interfaces.d';
 
 export class SuchergebnisBunterlagenScraper implements Scraper<Beratungsunterlage> {

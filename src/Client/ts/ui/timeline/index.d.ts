@@ -1,4 +1,4 @@
-import { Datei } from "../../../../shared/dokumente";   // ACHTUNG Das ist ein Import aus einer geteilten Typendefinition
+import { Datei } from "../../../../shared/ratsdokumente"; // ACHTUNG Das ist ein Import aus einer geteilten Typendefinition
 
 export interface TimelineData {
     events: TimelineSlide[],

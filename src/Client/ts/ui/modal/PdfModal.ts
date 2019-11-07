@@ -1,9 +1,9 @@
 import $ from "jquery";
 import PDFObject from 'pdfobject';
-import { Datei } from "../../../../shared/dokumente";
-import { Timeline } from "../timeline/Timeline";
-import { TimelineEvent, SlideGenerator } from "../timeline";
+import { Datei } from "../../../../shared/ratsdokumente";
 import { SearchHistory } from "../../helper/SearchHistory";
+import { SlideGenerator, TimelineEvent } from "../timeline";
+import { Timeline } from "../timeline/Timeline";
 
 export class PdfModal {
 
