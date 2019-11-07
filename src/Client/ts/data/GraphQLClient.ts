@@ -1,5 +1,5 @@
-import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
+import { ApolloClient } from 'apollo-client';
 import { HttpLink } from 'apollo-link-http';
 
 
@@ -15,7 +15,7 @@ export class GraphQLClient {
 
         const cache = new InMemoryCache();
         const link = new HttpLink({
-            uri: 'http://localhost:4000/endpoint'
+            uri: '/endpoint'
         });
 
         this.client = new ApolloClient({
