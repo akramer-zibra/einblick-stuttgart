@@ -1,48 +1,22 @@
 import Bottle from 'bottlejs';
 import express from 'express';
 import { GraphQLServer } from 'graphql-yoga';
-import { GemeinderatClient } from './Gemeinderat/data/html/GemeinderatClient';
-import { GemeinderatWahldaten } from './Gemeinderat/data/static/GemeinderatWahldaten';
+import GemeinderatModulFactory from './Gemeinderat/module';
 import { GemeinderatResolver } from './Gemeinderat/resolver/Gemeinderat.resolver';
-import { UebersichtPersonenScraper } from './Gemeinderat/scraper/UebersichtPersonen.scraper';
-import { RatsdokumenteHtmlClient } from './Ratsdokumente/data/html/RatsdokumenteHtmlClient';
+import RatsdokumenteModulFactory from './Ratsdokumente/module';
 import { RatsdokumenteResolver } from './Ratsdokumente/resolver/Ratsdokumente.resolver';
-import { SuchergebnisAntraegeScraper } from './Ratsdokumente/scraper/Suchergebnisseite/SuchergebnisAntraege.scraper';
-import { SuchergebnisBunterlagenScraper } from './Ratsdokumente/scraper/Suchergebnisseite/SuchergebnisBunterlagen.scraper';
-import { SuchergebnisProtokolleScraper } from './Ratsdokumente/scraper/Suchergebnisseite/SuchergebnisProtokolle.scraper';
-import { SuchergebnisStellungnahmenScraper } from './Ratsdokumente/scraper/Suchergebnisseite/SuchergebnisStellungnahmen.scraper';
-import { SuchergebnisTagesordnungenScraper } from './Ratsdokumente/scraper/Suchergebnisseite/SuchergebnisTagesordnungen.scraper';
 
 // Initialisisiere bottlejs dependency container
 const bottle = new Bottle();
 
 // Wir legen auch eine Referenz zu bottlejs in den IoC container
-bottle.value('bottlejs', bottle);
+bottle.value('bottle', bottle);
 
-/* MODUL: Ratsdokumente */
-// Resolver
-bottle.factory('RatsdokumenteResolver', RatsdokumenteResolver.build);
-// Scraper
-bottle.service('SuchergebnisBunterlagenScraper', SuchergebnisBunterlagenScraper);
-bottle.service('SuchergebnisProtokolleScraper', SuchergebnisProtokolleScraper);
-bottle.service('SuchergebnisAntraegeScraper', SuchergebnisAntraegeScraper);
-bottle.service('SuchergebnisStellungnahmenScraper', SuchergebnisStellungnahmenScraper);
-bottle.service('SuchergebnisTagesordnungenScraper', SuchergebnisTagesordnungenScraper);
-// Datenquelle
-bottle.service('RatsdokumenteHtmlClient', RatsdokumenteHtmlClient);
-/* ----------------------- */
+// Initialisiere vorhandene Module
+RatsdokumenteModulFactory(bottle.container);
+GemeinderatModulFactory(bottle.container);
 
-/* MODUL: Gemeinderat */
-// Resolver
-bottle.factory('GemeinderatResolver', GemeinderatResolver.build);
-// Scraper
-bottle.service('UebersichtPersonenScraper', UebersichtPersonenScraper);
-// Datenquellen
-bottle.service('GemeinderatClient', GemeinderatClient);
-bottle.service('GemeinderatWahldaten', GemeinderatWahldaten);
-/* ----------------------- */
-
-// Wir holen die Resolver vom IoC container
+// Wir holen unsere Resolver vom IoC container
 const ratsdokumenteResolver: RatsdokumenteResolver = bottle.container.RatsdokumenteResolver;
 const gemeinderatResolver: GemeinderatResolver = bottle.container.GemeinderatResolver;
 
