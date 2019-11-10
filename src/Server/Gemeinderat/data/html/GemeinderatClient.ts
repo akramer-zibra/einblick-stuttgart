@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { DataClient } from '../../../interfaces';
 
-export class GemeinderatHtmlClient implements DataClient {
+export class GemeinderatClient implements DataClient {
 
     /* Axios client Instanz */
     private client;

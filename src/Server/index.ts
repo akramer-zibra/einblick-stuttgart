@@ -1,7 +1,7 @@
 import Bottle from 'bottlejs';
 import express from 'express';
 import { GraphQLServer } from 'graphql-yoga';
-import { GemeinderatHtmlClient } from './Gemeinderat/data/html/GemeinderatHtmlClient';
+import { GemeinderatClient } from './Gemeinderat/data/html/GemeinderatClient';
 import { GemeinderatResolver } from './Gemeinderat/resolver/Gemeinderat.resolver';
 import { UebersichtPersonenScraper } from './Gemeinderat/scraper/UebersichtPersonen.scraper';
 import { RatsdokumenteHtmlClient } from './Ratsdokumente/data/html/RatsdokumenteHtmlClient';
@@ -34,7 +34,7 @@ bottle.factory('GemeinderatResolver', GemeinderatResolver.build);
 // Scraper
 bottle.service('UebersichtPersonenScraper', UebersichtPersonenScraper);
 // Datenquellen
-bottle.service('GemeinderatHtmlClient', GemeinderatHtmlClient);
+bottle.service('GemeinderatClient', GemeinderatClient);
 /* ----------------------- */
 
 // Definiere GraphQL API mit resolvern aus dem IoC container
