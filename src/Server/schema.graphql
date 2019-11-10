@@ -1,19 +1,24 @@
 type Query {
+    # Diese Query ist eine Suchanfrage auf die Ratsdokumente der Stadt Stuttgart
     ratsdokumente(suchbegriff: String!, dokumenttypen: [String]): [Dokument]!
+    # Diese Query ist eine Suchanfrage, die nur Dokumente vom Typ Beratungsunterlagen liefert
     beratungsunterlagen(suchbegriff: String!): [Beratungsunterlage]!
+    # Diese Query ist eine Suchanfrage, die nur Dokumente vom Typ Protokol liefert
     protokolle(suchbegriff: String!): [Protokoll]!
+    # Diese Query ist eine Suchanfrage, die nur Dokumente vom Typ Antrag liefert
     antraege(suchbegriff: String!): [Antrag]!
     stellungnahmen(suchbegriff: String!): [Stellungnahme]!
     tagesordnungen(suchbegriff: String!): [Tagesordnung]!
+    # Diese Query liefert Informationen zu den aktuellen Gemeinderatsmitgliedern der Stadt Stuttgart
     gemeinderatMitglieder: [Person]
+    # Diese Query liefert Informationen zu den Wahlergebnissen der Gemeinderäte der Stadt Stuttgart
     gemeinderatWahldaten: [Wahldaten]
 }
 
+# Date ist ein serialisiertes JavaScript Date-Objekt
 scalar Date
 
-""" 
-Dokumentypen 
-"""
+# Dokument ist ein abstrakter Typ, der alle Arten der Ratsdokumente beschreibt
 union Dokument = Beratungsunterlage | Protokoll | Antrag | Stellungnahme | Tagesordnung
 
 # Beratungsunterlagen sind Dokumente, die einem Ausschuss des Gemeinderats vorgelegt werden
