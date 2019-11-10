@@ -71,6 +71,7 @@ type Datei {
 """ Organisatorische Typen """
 type Person {
     name: String!
+    funktion: String
     fraktion: Fraktion
     partei: String
     profilseite: String
