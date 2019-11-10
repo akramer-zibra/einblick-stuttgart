@@ -11,7 +11,6 @@ import { PdfModal } from './ts/ui/modal/PdfModal';
 import { Timeline } from './ts/ui/timeline/Timeline';
 
 const main = () => {
-    console.log('Client Applikation läuft...');
 
     // Wir benutzen bottle js als Dependency Container
     const bottle = new Bottle();
