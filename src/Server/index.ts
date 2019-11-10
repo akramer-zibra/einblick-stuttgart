@@ -16,6 +16,9 @@ import { SuchergebnisTagesordnungenScraper } from './Ratsdokumente/scraper/Suche
 // Initialisisiere bottlejs dependency container
 const bottle = new Bottle();
 
+// Wir legen auch eine Referenz zu bottlejs in den IoC container
+bottle.value('bottlejs', bottle);
+
 /* MODUL: Ratsdokumente */
 // Resolver
 bottle.factory('RatsdokumenteResolver', RatsdokumenteResolver.build);
@@ -39,17 +42,21 @@ bottle.service('GemeinderatClient', GemeinderatClient);
 bottle.service('GemeinderatWahldaten', GemeinderatWahldaten);
 /* ----------------------- */
 
-// Definiere GraphQL API mit resolvern aus dem IoC container
+// Wir holen die Resolver vom IoC container
+const ratsdokumenteResolver: RatsdokumenteResolver = bottle.container.RatsdokumenteResolver;
+const gemeinderatResolver: GemeinderatResolver = bottle.container.GemeinderatResolver;
+
+// Definiere GraphQL API
 const resolvers = {
     Query: {
-        ratsdokumente: (_, {suchbegriff, dokumenttypen}) => bottle.container.RatsdokumenteResolver.resolve(suchbegriff, dokumenttypen),
-        beratungsunterlagen: (_, {suchbegriff}) => bottle.container.RatsdokumenteResolver.resolve(suchbegriff, ["Beratungsunterlage"]),
-        protokolle: (_, {suchbegriff}) => bottle.container.RatsdokumenteResolver.resolve(suchbegriff, ["Protokoll"]),
-        antraege: (_, {suchbegriff}) => bottle.container.RatsdokumenteResolver.resolve(suchbegriff, ["Antrag"]),
-        stellungnahmen: (_, {suchbegriff}) => bottle.container.RatsdokumenteResolver.resolve(suchbegriff, ["Stellungnahme"]),
-        tagesordnungen: (_, {suchbegriff}) => bottle.container.RatsdokumenteResolver.resolve(suchbegriff, ["Tagesordnung"]),
-        gemeinderat: (_) => bottle.container.GemeinderatResolver.resolve(),
-        gemeinderatWahldaten: (_) => bottle.container.GemeinderatResolver.resolveWahldaten()
+        ratsdokumente: (_, {suchbegriff, dokumenttypen}) => ratsdokumenteResolver.resolve(suchbegriff, dokumenttypen),
+        beratungsunterlagen: (_, {suchbegriff}) => ratsdokumenteResolver.resolve(suchbegriff, ["Beratungsunterlage"]),
+        protokolle: (_, {suchbegriff}) => ratsdokumenteResolver.resolve(suchbegriff, ["Protokoll"]),
+        antraege: (_, {suchbegriff}) => ratsdokumenteResolver.resolve(suchbegriff, ["Antrag"]),
+        stellungnahmen: (_, {suchbegriff}) => ratsdokumenteResolver.resolve(suchbegriff, ["Stellungnahme"]),
+        tagesordnungen: (_, {suchbegriff}) => ratsdokumenteResolver.resolve(suchbegriff, ["Tagesordnung"]),
+        gemeinderatMitglieder: (_) => gemeinderatResolver.resolveMitglieder(),
+        gemeinderatWahldaten: (_) => gemeinderatResolver.resolveWahldaten()
     },
     Dokument: {     
         __resolveType(dokument, context, info) {    // Wir brauchen einen zusätzlichen Resolver, der Untertypen des abstrakten Typs Dokument auflösen kann 

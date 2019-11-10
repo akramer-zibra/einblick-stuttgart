@@ -50,7 +50,6 @@ export class GemeinderatWahldaten {
                     {name: "PIRATEN", sitze: 1},
                     {name: "Stadtisten", sitze: 1},
                     {name: "Junge Liste", sitze: 1}],
-            fraktionen: [],
             wahltag: date.parse('25.05.2014', 'DD.MM.YYYY')
         }, {
             parteien: [{name: "CDU", sitze: 15},
@@ -60,7 +59,6 @@ export class GemeinderatWahldaten {
                         {name: "FDP", sitze: 7},
                         {name: "SÖS", sitze: 3},
                         {name: "LINKE", sitze: 2}],
-            fraktionen: [],
             wahltag: date.parse('07.06.2009', 'DD.MM.YYYY')
         },{
             parteien: [{name: "CDU", sitze: 21},
@@ -70,7 +68,6 @@ export class GemeinderatWahldaten {
                         {name: "FDP", sitze: 4},
                         {name: "SÖS", sitze: 1},
                         {name: "LINKE", sitze: 1}],
-            fraktionen: [],
             wahltag: date.parse('13.06.2004', 'DD.MM.YYYY')
         },{
             parteien: [{name: "CDU", sitze: 25},
@@ -79,7 +76,6 @@ export class GemeinderatWahldaten {
                         {name: "Freie Wähler", sitze: 4},
                         {name: "FDP", sitze: 4},
                         {name: "LINKE", sitze: 1}],
-            fraktionen: [],
             wahltag: date.parse('24.10.1999', 'DD.MM.YYYY')
         }];
     }

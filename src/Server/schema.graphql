@@ -5,7 +5,7 @@ type Query {
     antraege(suchbegriff: String!): [Antrag]!
     stellungnahmen(suchbegriff: String!): [Stellungnahme]!
     tagesordnungen(suchbegriff: String!): [Tagesordnung]!
-    gemeinderatMitglieder: [Person],
+    gemeinderatMitglieder: [Person]
     gemeinderatWahldaten: [Wahldaten]
 }
 
@@ -80,10 +80,12 @@ type Person {
 }
 
 type Wahldaten {
-    parteien: {
-        name: String
-        sitze: Number
-    }
+    parteien: [Partei]
     fraktionen: [String]
-    wahltag: Date 
+    wahltag: Date!
+}
+
+type Partei {
+    name: String!
+    sitze: Int
 }

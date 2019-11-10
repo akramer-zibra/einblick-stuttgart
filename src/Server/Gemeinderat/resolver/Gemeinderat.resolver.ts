@@ -30,7 +30,7 @@ export class GemeinderatResolver implements Resolver {
     /**
      * Methode löst die entsprechende GraphQL query auf
      */
-    async resolveGemeineratMitglieder() {
+    async resolveMitglieder() {
 
         // Wir lassen den HTML Client alle Gemeinderatsmitglieder laden
         const bodyHtml = await this.htmlClient.getMitgliederGemeinderat();
@@ -45,7 +45,7 @@ export class GemeinderatResolver implements Resolver {
     /**
      * Methode liefert Wahldaten des Stuttgarter Gemeinderats 
      */
-    resolveGemeinderatWahldaten() {
+    resolveWahldaten() {
         return this.gemeinderatWahldaten.getWahldaten();
     }
 }
