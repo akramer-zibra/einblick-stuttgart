@@ -30,7 +30,7 @@ export class GemeinderatResolver implements Resolver {
     /**
      * Methode löst die entsprechende GraphQL query auf
      */
-    async resolve() {
+    async resolveGemeineratMitglieder() {
 
         // Wir lassen den HTML Client alle Gemeinderatsmitglieder laden
         const bodyHtml = await this.htmlClient.getMitgliederGemeinderat();
