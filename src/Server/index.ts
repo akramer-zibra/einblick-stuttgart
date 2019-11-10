@@ -1,6 +1,9 @@
 import Bottle from 'bottlejs';
 import express from 'express';
 import { GraphQLServer } from 'graphql-yoga';
+import { GemeinderatHtmlClient } from './Gemeinderat/data/html/GemeinderatHtmlClient';
+import { GemeinderatResolver } from './Gemeinderat/resolver/Gemeinderat.resolver';
+import { UebersichtPersonenScraper } from './Gemeinderat/scraper/UebersichtPersonen.scraper';
 import { RatsdokumenteHtmlClient } from './Ratsdokumente/data/html/RatsdokumenteHtmlClient';
 import { RatsdokumenteResolver } from './Ratsdokumente/resolver/Ratsdokumente.resolver';
 import { SuchergebnisAntraegeScraper } from './Ratsdokumente/scraper/Suchergebnisseite/SuchergebnisAntraege.scraper';
@@ -12,19 +15,27 @@ import { SuchergebnisTagesordnungenScraper } from './Ratsdokumente/scraper/Suche
 // Initialisisiere bottlejs dependency container
 const bottle = new Bottle();
 
-// Definiere services und factories
+/* MODUL: Ratsdokumente */
+// Resolver
 bottle.factory('RatsdokumenteResolver', RatsdokumenteResolver.build);
-
 // Scraper
 bottle.service('SuchergebnisBunterlagenScraper', SuchergebnisBunterlagenScraper);
 bottle.service('SuchergebnisProtokolleScraper', SuchergebnisProtokolleScraper);
 bottle.service('SuchergebnisAntraegeScraper', SuchergebnisAntraegeScraper);
 bottle.service('SuchergebnisStellungnahmenScraper', SuchergebnisStellungnahmenScraper);
 bottle.service('SuchergebnisTagesordnungenScraper', SuchergebnisTagesordnungenScraper);
-
-// Datenquellen
+// Datenquelle
 bottle.service('RatsdokumenteHtmlClient', RatsdokumenteHtmlClient);
+/* ----------------------- */
 
+/* MODUL: Gemeinderat */
+// Resolver
+bottle.factory('GemeinderatResolver', GemeinderatResolver.build);
+// Scraper
+bottle.service('UebersichtPersonenScraper', UebersichtPersonenScraper);
+// Datenquellen
+bottle.service('GemeinderatHtmlClient', GemeinderatHtmlClient);
+/* ----------------------- */
 
 // Definiere GraphQL API mit resolvern aus dem IoC container
 const resolvers = {
@@ -34,7 +45,8 @@ const resolvers = {
         protokolle: (_, {suchbegriff}) => bottle.container.RatsdokumenteResolver.resolve(suchbegriff, ["Protokoll"]),
         antraege: (_, {suchbegriff}) => bottle.container.RatsdokumenteResolver.resolve(suchbegriff, ["Antrag"]),
         stellungnahmen: (_, {suchbegriff}) => bottle.container.RatsdokumenteResolver.resolve(suchbegriff, ["Stellungnahme"]),
-        tagesordnungen: (_, {suchbegriff}) => bottle.container.RatsdokumenteResolver.resolve(suchbegriff, ["Tagesordnung"])
+        tagesordnungen: (_, {suchbegriff}) => bottle.container.RatsdokumenteResolver.resolve(suchbegriff, ["Tagesordnung"]),
+        gemeinderat: (_) => bottle.container.GemeinderatResolver.resolve()
     },
     Dokument: {     
         __resolveType(dokument, context, info) {    // Wir brauchen einen zusätzlichen Resolver, der Untertypen des abstrakten Typs Dokument auflösen kann 
