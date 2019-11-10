@@ -11,19 +11,27 @@ type Query {
 
 scalar Date
 
-""" Dokumentypen """
+""" 
+Dokumentypen 
+"""
 union Dokument = Beratungsunterlage | Protokoll | Antrag | Stellungnahme | Tagesordnung
 
+# Beratungsunterlagen sind Dokumente, die einem Ausschuss des Gemeinderats vorgelegt werden
+# um darüber zu beraten. Beratungsunterlagen können Anhänge besitzen 
 type Beratungsunterlage {
+    # Beinhaltet den Dokumenttype als Meta-Datum
     type:  String!
+    # Datum, wann diese Beratungsunterlage angelegt werde
     datum: Date!
+    # Bezeichnung der Beratungsunterlage
     bezeichnung: String!
+    # Betreff der Beratungsunterlage
     titel: String!
+    # Der Ausschuss in dem die Beratungsunterlage vorliegt
     ausschuss: String!
-    """
-    Referenzen zu verknüpften pdf Dateien
-    """
+    # Das Doument
     dokument: Datei!
+    # Mögliche Anhänge der Beratungsunterlage
     anhaenge: [Datei]
 }
 
