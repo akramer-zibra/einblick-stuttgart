@@ -1,7 +1,6 @@
 declare const TL: any;  // Declares global TL object integrated with linked script file in index.html
 import uuidv4 from 'uuid/v4';
 import { SlideGenerator, TimelineData, TimelineSlide, TimelineSlideDefault } from ".";
-import { GemeinderatStuttgartWahldaten } from '../../provider/static/GemeinderatStuttgartWahldaten.provider';
 import { AntragSlideGenerator } from "./slides/AntragSlideGenerator";
 import { BeratungsunterlageSlideGenerator } from "./slides/BeratungsunterlageSlideGenerator";
 import { ProtokollSlideGenerator } from "./slides/ProtokollSlideGenerator";
@@ -33,14 +32,13 @@ export class Timeline {
      * @param container 
      */
     static build(container) {
-        return new Timeline(container.GemeinderatStuttgartWahldatenProvider);   
+        return new Timeline();   
     }
 
     /**
      * Konstruktor
-     * @param stuttgartGemeinderatWahldaten
      */
-    private constructor(private stuttgartGemeinderatWahldaten: GemeinderatStuttgartWahldaten) {}
+    private constructor() {}
     
     /**
      * Methode aktualisiert die Timeline mit neuen Daten
@@ -48,9 +46,6 @@ export class Timeline {
      */
     update(timelineJson: TimelineData) {
 
-        // Lade statische Gemeinderat Wahldaten
-        timelineJson.eras = this.stuttgartGemeinderatWahldaten.getTimelineWahldaten();
-        
         // Erzeuge eine neue Timeline mit den übergebenen Daten
         this.timeline = new TL.Timeline('timeline-embed', timelineJson, {
                 start_at_end: true,

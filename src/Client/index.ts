@@ -4,7 +4,6 @@ import { GraphQLClient } from './ts/api/GraphQLClient';
 import { SearchController } from './ts/controller/SearchController';
 import { SearchHistory } from './ts/helper/SearchHistory';
 import { RatsdokumenteProvider } from './ts/provider/Ratsdokumente.provider';
-import { GemeinderatStuttgartWahldaten } from './ts/provider/static/GemeinderatStuttgartWahldaten.provider';
 import { KeywordInput } from './ts/ui/input/KeywordInput';
 import { SearchInput } from './ts/ui/input/SearchInput';
 import { TypeInput } from './ts/ui/input/TypeInput';
@@ -20,7 +19,6 @@ const main = () => {
     // Definiere alle Service Klassen und Factory Methoden
     bottle.service('GraphQLClient', GraphQLClient);
     bottle.factory('RatsdokumenteProvider', RatsdokumenteProvider.build);
-    bottle.service('GemeinderatStuttgartWahldatenProvider', GemeinderatStuttgartWahldaten);
 
     bottle.factory('Timeline', Timeline.build);
     bottle.factory('PdfModal', PdfModal.build);
