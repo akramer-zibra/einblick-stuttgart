@@ -3,11 +3,15 @@ import { TimelineEra } from "../../ui/timeline";
 /**
  * Stuttgart Wahldaten von Webseite
  * @see https://servicex.stuttgart.de/lhs-services/komunis/documents/7653_1_Faltblatt_Stuttgarter_Wahldaten___Ausgabe_2018.PDF
+ * 
+ * Mehr Informationen
+ * https://www.stuttgart.de/img/mdb/item/673539/144734.pdf
  */
 export class GemeinderatStuttgartWahldaten {
 
     /**
      * Methode gibt Stuttgart Wahldaten in Timelinejs Era Format
+     * ACHTUNG: Die Zeiträume von Wahltag bis Wahltag
      */
     getTimelineWahldaten(): TimelineEra[] {
 
@@ -35,9 +39,9 @@ export class GemeinderatStuttgartWahldaten {
     }
 
     /**
-     * Methode liefert Quelle dieser Wahldaten
+     * Methode liefert Quellen dieser Wahldaten
      */
-    getSourceUrl() {
-        return "https://servicex.stuttgart.de/lhs-services/komunis/documents/7653_1_Faltblatt_Stuttgarter_Wahldaten___Ausgabe_2018.PDF";
+    getSourceUrls(): string[] {
+        return ["https://servicex.stuttgart.de/lhs-services/komunis/documents/7653_1_Faltblatt_Stuttgarter_Wahldaten___Ausgabe_2018.PDF"];
     }
 }
