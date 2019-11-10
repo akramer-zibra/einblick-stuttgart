@@ -5,12 +5,14 @@ type Query {
     antraege(suchbegriff: String!): [Antrag]!
     stellungnahmen(suchbegriff: String!): [Stellungnahme]!
     tagesordnungen(suchbegriff: String!): [Tagesordnung]!
-    gemeinderat: [Person]
+    gemeinderat: [Person],
+    gemeinderatWahldaten: [Wahldaten]
 }
+
+scalar Date
 
 """ Dokumentypen """
 union Dokument = Beratungsunterlage | Protokoll | Antrag | Stellungnahme | Tagesordnung
-scalar Date
 
 type Beratungsunterlage {
     type:  String!
@@ -75,4 +77,13 @@ type Person {
     fraktion: String
     partei: String
     profilseite: String
+}
+
+type Wahldaten {
+    parteien: {
+        name: String
+        sitze: Number
+    }
+    fraktionen: [String]
+    wahltag: Date 
 }

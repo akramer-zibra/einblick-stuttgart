@@ -1,6 +1,7 @@
 import cheerio from 'cheerio';
 import { Resolver } from '../../interfaces';
 import { GemeinderatClient } from '../data/html/GemeinderatClient';
+import { GemeinderatWahldaten } from '../data/static/GemeinderatWahldaten';
 import { UebersichtPersonenScraper } from '../scraper/UebersichtPersonen.scraper';
 
 export class GemeinderatResolver implements Resolver {
@@ -13,7 +14,8 @@ export class GemeinderatResolver implements Resolver {
      */
     static build(container) {
         return new GemeinderatResolver(container.GemeinderatClient,
-                                       container.UebersichtPersonenScraper);
+                                       container.UebersichtPersonenScraper,
+                                       container.GemeinderatWahldaten);
     } 
 
     /**
@@ -21,7 +23,8 @@ export class GemeinderatResolver implements Resolver {
      * @param htmlClient
      */
     private constructor(private htmlClient: GemeinderatClient,
-                        private uebersichtPersonenScraper: UebersichtPersonenScraper) {
+                        private uebersichtPersonenScraper: UebersichtPersonenScraper,
+                        private gemeinderatWahldaten: GemeinderatWahldaten) {
     }
 
     /**
@@ -37,5 +40,12 @@ export class GemeinderatResolver implements Resolver {
 
         // Scrape Mitglieder und gib die Arraycollection weiter
         return this.uebersichtPersonenScraper.scrape($);
+    }
+
+    /**
+     * Methode liefert Wahldaten des Stuttgarter Gemeinderats 
+     */
+    resolveGemeinderatWahldaten() {
+        return this.gemeinderatWahldaten.getWahldaten();
     }
 }

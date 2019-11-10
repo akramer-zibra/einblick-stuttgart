@@ -2,6 +2,7 @@ import Bottle from 'bottlejs';
 import express from 'express';
 import { GraphQLServer } from 'graphql-yoga';
 import { GemeinderatClient } from './Gemeinderat/data/html/GemeinderatClient';
+import { GemeinderatWahldaten } from './Gemeinderat/data/static/GemeinderatWahldaten';
 import { GemeinderatResolver } from './Gemeinderat/resolver/Gemeinderat.resolver';
 import { UebersichtPersonenScraper } from './Gemeinderat/scraper/UebersichtPersonen.scraper';
 import { RatsdokumenteHtmlClient } from './Ratsdokumente/data/html/RatsdokumenteHtmlClient';
@@ -35,6 +36,7 @@ bottle.factory('GemeinderatResolver', GemeinderatResolver.build);
 bottle.service('UebersichtPersonenScraper', UebersichtPersonenScraper);
 // Datenquellen
 bottle.service('GemeinderatClient', GemeinderatClient);
+bottle.service('GemeinderatWahldaten', GemeinderatWahldaten);
 /* ----------------------- */
 
 // Definiere GraphQL API mit resolvern aus dem IoC container
@@ -46,7 +48,8 @@ const resolvers = {
         antraege: (_, {suchbegriff}) => bottle.container.RatsdokumenteResolver.resolve(suchbegriff, ["Antrag"]),
         stellungnahmen: (_, {suchbegriff}) => bottle.container.RatsdokumenteResolver.resolve(suchbegriff, ["Stellungnahme"]),
         tagesordnungen: (_, {suchbegriff}) => bottle.container.RatsdokumenteResolver.resolve(suchbegriff, ["Tagesordnung"]),
-        gemeinderat: (_) => bottle.container.GemeinderatResolver.resolve()
+        gemeinderat: (_) => bottle.container.GemeinderatResolver.resolve(),
+        gemeinderatWahldaten: (_) => bottle.container.GemeinderatResolver.resolveWahldaten()
     },
     Dokument: {     
         __resolveType(dokument, context, info) {    // Wir brauchen einen zusätzlichen Resolver, der Untertypen des abstrakten Typs Dokument auflösen kann 
