@@ -1,7 +1,7 @@
 
 import Bottle from 'bottlejs';
+import { GraphQLClient } from './ts/api/GraphQLClient';
 import { SearchController } from './ts/controller/SearchController';
-import { GraphQLClient } from './ts/data/GraphQLClient';
 import { SearchHistory } from './ts/helper/SearchHistory';
 import { RatsdokumenteProvider } from './ts/provider/Ratsdokumente.provider';
 import { GemeinderatStuttgartWahldaten } from './ts/provider/static/GemeinderatStuttgartWahldaten.provider';

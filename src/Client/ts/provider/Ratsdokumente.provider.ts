@@ -1,5 +1,5 @@
 import gql from "graphql-tag";
-import { GraphQLClient } from "../data/GraphQLClient";
+import { GraphQLClient } from "../api/GraphQLClient";
 
 export class RatsdokumenteProvider {
 
