@@ -24,9 +24,9 @@
   },
   "keywords": [
     "Stuttgart",
-    "API",
+    "Bürgerbeteiligung",
     "Open Governence",
-    "Bürgerbeteiligung"
+    "Open Data"    
   ],
   "dependencies": {
     "apollo-cache-inmemory": "1.6.3",
