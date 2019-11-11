@@ -15,7 +15,8 @@
     <script src="https://cdn.knightlab.com/libs/timeline3/latest/js/timeline.js"></script>
     
     <style type="text/css">
-      .app__clickable { cursor: pointer; }
+      .act__keyword { cursor: pointer; }
+      .act__author { cursor: pointer; }
       #app__types__group .field {margin-right: 15px;}      
     </style>
   </head>
@@ -30,102 +31,7 @@
           Diese Anwendung durchsucht die <a href="https://www.stuttgart.de/external/show/ratsdokumente" target="_blank">öffentlichen Ratsdokumente der Stadt Stuttgart</a> und bereitet das Suchergebnis in einer Zeitleiste auf.
         </p>
 
-        <h2 style="margin-top: 15px;" class="is-size-4">Suche</h2>
-        <p style="margin-bottom: 8px;" class="is-size-7">Nach diesem Text wird in den Ratsdokumenten gesucht...</p>
-        
-        <div class="field is-grouped">
-          <p class="control is-expanded">              
-              <input id="app__search__text" class="input" type="text" placeholder="Ratsdokumente suchen">
-            </p>
-            <p class="control">
-              <a id="act__search" class="button is-info">
-                Suchen
-              </a>
-            </p>
-        </div>
-
-        <h2 style="margin-top: 20px;" class="is-size-4">Stichwörter</h2>
-        <p class="is-size-7">Auswählen und entsprechende Ratsdokumente anzeigen lassen...</p>
-        <div style="margin-top: 20px;" class="tags">
-          <span class="act__keyword tag is-small  is-primary app__clickable">5G</span>
-          <span class="act__keyword tag is-small  is-primary app__clickable">Mann+Hummel</span>
-          <span class="act__keyword tag is-small  is-primary app__clickable">233/2013</span>
-          <span class="act__keyword tag is-small  is-primary app__clickable">435/2019</span>
-          <span class="act__keyword tag is-small  is-primary app__clickable">Stuttgart 28</span>
-          <span class="act__keyword tag is-small  is-primary app__clickable">Zu Fuß</span>
-          <span class="act__keyword tag is-small  is-primary app__clickable">Lebenswertes Stuttgart</span>
-          <span class="act__keyword tag is-small  is-primary app__clickable">Digitalisierung</span>
-          <span class="act__keyword tag is-small  is-primary app__clickable">Kulturprojekt</span>
-          <span class="tag is-small is-primary">...</span>
-        </div>
-
-        <h2 style="margin-top: 20px;" class="is-size-4">Fraktionen</h2>
-        <p class="is-size-7">Zeigt öffentliche Dokumente, die von der entsprechenden Fraktion eingereicht wurden...</p>
-        <div style="margin-top: 20px;" class="field is-grouped is-grouped-multiline">
-          <div class="control">
-            <div class="tags has-addons">
-              <span class="tag is-small is-info">Bündnis 90/DIE GRÜNEN</span>
-              <span class="tag is-small">16 Sitze</span>
-            </div>
-          </div>
-        
-          <div class="control">
-            <div class="tags has-addons">
-                <span class="tag is-small is-info">CDU</span>
-                <span class="tag is-small">12 Sitze</span>
-            </div>
-          </div>
-        
-          <div class="control">
-            <div class="tags has-addons">
-                <span class="tag is-small is-info">LINKE SÖS PIRATEN Tierschutzpartei</span>
-                <span class="tag is-small">8 Sitze</span>
-            </div>
-          </div>
-          
-          <div class="control">
-            <div class="tags has-addons">
-                <span class="tag is-small is-info">SPD</span>
-                <span class="tag is-small">7 Sitze</span>
-            </div>
-          </div>
-
-          <div class="control">
-            <div class="tags has-addons">
-                <span class="tag is-small is-info">FDP</span>
-                <span class="tag is-small">5 Sitze</span>
-            </div>
-          </div>
-
-          <div class="control">
-            <div class="tags has-addons">
-              <span class="tag is-small is-info">Freie Wähler</span>
-              <span class="tag is-small">4 Sitze</span>
-            </div>
-          </div>
-
-          <div class="control">
-            <div class="tags has-addons">
-              <span class="tag is-small is-info">Alternative für Deutschland (AfD)</span>
-              <span class="tag is-small">4 Sitze</span>
-            </div>
-          </div>
-
-          <div class="control">
-            <div class="tags has-addons">
-              <span class="tag is-small is-info">PULS</span>
-              <span class="tag is-small">4 Sitze</span>
-            </div>
-          </div>
-
-          <div class="control">
-            <div class="tags has-addons">
-              <span class="tag is-small is-info">...</span>
-            </div>
-          </div>
-        </div>
-
-        <h2 style="margin-top: 20px;" class="is-size-4">Dokumenttypen</h2>
+        <h2 style="margin-top: 25px;" class="is-size-4">Dokumenttypen</h2>
         <p style="margin-bottom: 8px;" class="is-size-7">Definiert welche Arten der Ratsdokumente angezeigt werden sollen</p>
         <div id="app__types__group" class="field is-grouped">
           <div class="field">
@@ -147,6 +53,100 @@
           <div class="field">
             <input id="app__types__tagesordnungen" type="checkbox" class="is-small switch is-rounded app__types" data-type="Tagesordnung">
             <label for="app__types__tagesordnungen">Tagesordnungen</label>
+          </div>
+        </div>
+
+        <h2 style="margin-top: 15px;" class="is-size-4">Suche</h2>
+        <p style="margin-bottom: 8px;" class="is-size-7">Nach diesem Text wird in den Ratsdokumenten gesucht...</p>
+        <div class="field is-grouped">
+          <p class="control is-expanded">              
+              <input id="app__search__text" class="input" type="text" placeholder="Ratsdokumente suchen">
+            </p>
+            <p class="control">
+              <a id="act__search" class="button is-info">
+                Suchen
+              </a>
+            </p>
+        </div>
+
+        <h2 style="margin-top: 20px;" class="is-size-4">Stichwörter</h2>
+        <p class="is-size-7">Auswählen und entsprechende Ratsdokumente anzeigen lassen...</p>
+        <div style="margin-top: 20px;" class="tags">
+          <span class="act__keyword tag is-small is-primary">5G</span>
+          <span class="act__keyword tag is-small is-primary">Mann+Hummel</span>
+          <span class="act__keyword tag is-small is-primary">233/2013</span>
+          <span class="act__keyword tag is-small is-primary">435/2019</span>
+          <span class="act__keyword tag is-small is-primary">Stuttgart 28</span>
+          <span class="act__keyword tag is-small is-primary">Zu Fuß</span>
+          <span class="act__keyword tag is-small is-primary">Lebenswertes Stuttgart</span>
+          <span class="act__keyword tag is-small is-primary">Digitalisierung</span>
+          <span class="act__keyword tag is-small is-primary">Kulturprojekt</span>
+          <span class="tag is-small is-primary">...</span>
+        </div>
+
+        <h2 style="margin-top: 20px;" class="is-size-4">Fraktionen</h2>
+        <p class="is-size-7">Zeigt öffentliche Anträge, die von der entsprechenden Fraktion im Gemeinderat eingereicht wurden...</p>
+        <div style="margin-top: 20px;" class="field is-grouped is-grouped-multiline">
+          <div class="control act__author" data-author="Bündnis 90/DIE GRÜNEN-Gemeinderatsfraktion">
+            <div class="tags has-addons">
+              <span class="tag is-small is-info">Bündnis 90/DIE GRÜNEN</span>
+              <span class="tag is-small">16 Sitze</span>
+            </div>
+          </div>
+        
+          <div class="control act__author" data-author="CDU-Gemeinderatsfraktion">
+            <div class="tags has-addons">
+                <span class="tag is-small is-info">CDU</span>
+                <span class="tag is-small">12 Sitze</span>
+            </div>
+          </div>
+        
+          <div class="control act__author" data-author="Die FrAKTION LINKE SÖS PIRATEN Tierschutzpartei">
+            <div class="tags has-addons">
+                <span class="tag is-small is-info">LINKE SÖS PIRATEN Tierschutzpartei</span>
+                <span class="tag is-small">8 Sitze</span>
+            </div>
+          </div>
+          
+          <div class="control act__author" data-author="SPD-Gemeinderatsfraktion">
+            <div class="tags has-addons">
+                <span class="tag is-small is-info">SPD</span>
+                <span class="tag is-small">7 Sitze</span>
+            </div>
+          </div>
+
+          <div class="control act__author" data-author="FDP-Gemeinderatsfraktion">
+            <div class="tags has-addons">
+                <span class="tag is-small is-info">FDP</span>
+                <span class="tag is-small">5 Sitze</span>
+            </div>
+          </div>
+
+          <div class="control act__author" data-author="Freie Wähler-Gemeinderatsfraktion">
+            <div class="tags has-addons">
+              <span class="tag is-small is-info">Freie Wähler</span>
+              <span class="tag is-small">4 Sitze</span>
+            </div>
+          </div>
+
+          <div class="control act__author" data-author="AfD-Gemeinderatsfraktion">
+            <div class="tags has-addons">
+              <span class="tag is-small is-info">Alternative für Deutschland (AfD)</span>
+              <span class="tag is-small">4 Sitze</span>
+            </div>
+          </div>
+
+          <div class="control act__author" data-author="PULS-Fraktionsgemeinschaft">
+            <div class="tags has-addons">
+              <span class="tag is-small is-info">PULS</span>
+              <span class="tag is-small">4 Sitze</span>
+            </div>
+          </div>
+
+          <div class="control act__author">
+            <div class="tags has-addons">
+              <span class="tag is-small is-info">...</span>
+            </div>
           </div>
         </div>
 
