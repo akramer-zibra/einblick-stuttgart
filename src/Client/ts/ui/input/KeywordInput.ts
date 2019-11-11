@@ -1,6 +1,6 @@
 import $ from "jquery";
-import { ToastFeedback } from "../ToastFeedback";
 import { SearchController } from "../../controller/SearchController";
+import { ToastFeedback } from "../ToastFeedback";
 
 export class KeywordInput {
 
@@ -37,16 +37,10 @@ export class KeywordInput {
         // Ermittle das ausgewählte Stichwort 
         const keyword = $(event.target).text();
 
-        $('.pageloader').addClass('is-active');
-
         // Benutze den Search-Controller für die Datenabfrage und Weitergabe
         this.searchController
             .search(keyword)
-            .then(() => {
-                $('.pageloader').removeClass('is-active');
-            })
             .catch((error) => {
-                $('.pageloader').removeClass('is-active');
                 this.handleError(error);
             });
     }

@@ -54,6 +54,9 @@ export class SearchController {
                 .queryRatsdokumenteByText(searchtext, dokumenttypen)
                 .then((apiData) => {
 
+                    // Wir blenden den pageloader aus, sobald ein Ergebnis da ist
+                    $('.pageloader').removeClass('is-active');
+
                     // Überprüfe, ob überhaupt Ergebnisse vorhanden sind
                     if(apiData.ratsdokumente.length === 0) {
                         this.handleEmptyResult();
@@ -63,9 +66,6 @@ export class SearchController {
 
                     // Zeige eine aktualisierte Timeline
                     this.timeline.updateWithApiData(apiData.ratsdokumente);     // Übergebe die API Daten an die Timeline Instanz, um zu aktualisieren
-
-                    // Wir blenden den pageloader wieder aus
-                    $('.pageloader').removeClass('is-active');
 
                     // Wir zeigen im Divider den Suchtext
                     // ...und scrollen dorthin
