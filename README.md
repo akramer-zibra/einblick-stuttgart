@@ -41,6 +41,8 @@ Die TypeScript Lint-Rules stammen aus dem tollen Open-Source Projekt [MichalLyte
 
 Anwender:innen von VS Code können den Editor so [konfigurieren](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-typescript-tslint-plugin), dass Lint-Errors automatisch beim Speichern behoben werden. 
 
+Dieses Projekt betrifft zu diesem Zeitpunkt ein sehr regionales Anwendungsgebiet. Aus diesem Grund wurde sich dazu entschlossen Commit-Nachrichten und Code-Kommentare in deutscher Sprache zu verfassen, um merkwürdige Übersetzungen deutscher Bürokratiebegriffe zu vermeiden (Bsp. Beratungsunterlage => Discussiondocument?!).
+
 ### Lizenz
 Der Quellcode dieses Projekts ist unter der [GNU-AGPLv3](LICENSE) lizensiert.
 
