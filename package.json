@@ -1,6 +1,6 @@
 {
   "name": "einblick-stuttgart",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Diese Software soll mehr Einblick in die politische Arbeit der Stadt Stuttgart ermöglichen",
   "main": "src/index.ts",
   "directories": {
