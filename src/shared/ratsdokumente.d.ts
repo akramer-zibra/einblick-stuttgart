@@ -3,7 +3,7 @@ export interface Ratsdokument {}
 
 export interface Beratungsunterlage extends Ratsdokument {
     type: Dokumenttyp,
-    datum: Date,
+    datum: string,
     bezeichnung: string,
     titel: string,
     ausschuss: string,
@@ -13,7 +13,7 @@ export interface Beratungsunterlage extends Ratsdokument {
 
 export interface Protokoll extends Ratsdokument {
     type: Dokumenttyp,
-    datum: Date,
+    datum: string,
     top: string,
     nnr: string,
     betreff: string,
@@ -24,7 +24,7 @@ export interface Protokoll extends Ratsdokument {
 
 export interface Antrag extends Ratsdokument {
     type: Dokumenttyp,
-    datum: Date,
+    datum: string,
     bezeichnung: string,
     betreff: string,
     fraktionen: string,
@@ -33,7 +33,7 @@ export interface Antrag extends Ratsdokument {
 
 export interface Stellungnahme extends Ratsdokument {
     type: Dokumenttyp,
-    datum: Date,
+    datum: string,
     betreff: string,
     fraktionen: string,
     dokument: Datei,
@@ -42,7 +42,7 @@ export interface Stellungnahme extends Ratsdokument {
 
 export interface Tagesordnung extends Ratsdokument {
     type: Dokumenttyp,
-    datum: Date,
+    datum: string,
     ausschuss: string,
     dokument: Datei
 }
