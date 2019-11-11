@@ -61,7 +61,7 @@ Ein Dankeschön an dieser Stelle an alle Open-Source Projekte, die als Bibliothe
 [Sitzungskalender + Tagesordnungen](https://www.domino1.stuttgart.de/web/ksd/KSDRedSystem.nsf/AnSiKa)  
 [Gemeinderat Mitglieder](https://www.stuttgart.de/gemeinderat)  
 [Gemeinderat politische Zusammensetzung](https://www.stuttgart.de/img/mdb/item/673539/148788.pdf)  
-[Gemeinderat Wahldaten Faltblatt](https://servicex.stuttgart.de/lhs-services/komunis/documents/  7653_1_Faltblatt_Stuttgarter_Wahldaten___Ausgabe_2018.PDF)  
+[Gemeinderat Wahldaten Faltblatt](https://servicex.stuttgart.de/lhs-services/komunis/documents/7653_1_Faltblatt_Stuttgarter_Wahldaten___Ausgabe_2018.PDF)  
 [Gemeinderat Wahldaten im Detail](https://www.stuttgart.de/img/mdb/item/673539/144734.pdf)  
 
 ### Glossar
