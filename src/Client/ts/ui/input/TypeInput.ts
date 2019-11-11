@@ -15,4 +15,18 @@ export class TypeInput {
         });
         return result;
     }
+
+    /**
+     * Methode aktiviert die übergebenen Dokumenttypen in dieserm Filter 
+     * @param types 
+     */
+    activate(types: string[]) {
+
+        // Iteriere alle Dokumenttypen-Checkboxen
+        $('.app__types').toArray().forEach(element => {
+            
+            // Aktiviere die Checkbox, wenn der entsprechende Typ im Argument enthalten ist
+            $(element).prop('checked', (types.indexOf($(element).attr('data-type')) >= 0));
+        });
+    } 
 }
