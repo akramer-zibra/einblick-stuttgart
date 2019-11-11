@@ -77,6 +77,7 @@ export class SearchController {
                 .catch(err => {
                     // wir blenden den Pageloader wieder aus, bevor wir den Fehler weitergeben
                     $('.pageloader').removeClass('is-active');
+                    this.handleError(err);
                     reject(err);
                 });
         });
@@ -86,6 +87,15 @@ export class SearchController {
      * Methode reagiert auf ein leeres Ergebnis
      */
     private handleEmptyResult() {
-        ToastFeedback.showWarningToast("Es wurden keine Dokumente gefunden...");    // Wir zeigen eine Toast Warnung
+        ToastFeedback.showWarningToast("Es wurden keine Dokumente gefunden. Überprüfe doch nochmal, ob auch alle Dokumenttypen angegeben sind, die du durchsuchen möchtest.");    // Wir zeigen eine Toast Warnung
+    }
+
+    /**
+     * Methode reagiert auf Fehler
+     * @param err 
+     */
+    private handleError(err) {
+        console.error(err);
+        ToastFeedback.showErrorToast(err);  // Benutze eine separate Funktion für eine grafische Rückmeldung
     }
 }

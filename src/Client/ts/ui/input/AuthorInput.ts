@@ -1,7 +1,6 @@
 
 import $ from 'jquery';
 import { SearchController } from '../../controller/SearchController';
-import { ToastFeedback } from '../ToastFeedback';
 import { TypeInput } from './TypeInput';
 
 export class AuthorInput {
@@ -39,19 +38,6 @@ export class AuthorInput {
         this.typeInput.activate(['Antrag'])
 
         // Benutze den Search-Controller für die Datenabfrage und Weitergabe
-        this.searchController
-            .search(fraktion)
-            .catch((error) => {
-                this.handleError(error);
-            });
-    }
-
-    /**
-     * Methode reagiert auf Fehler
-     * @param err 
-     */
-    private handleError(err) {
-        console.error(err);
-        ToastFeedback.showErrorToast(err);  // Benutze eine separate Funktion für eine grafische Rückmeldung
+        this.searchController.search(fraktion);
     }
 }
