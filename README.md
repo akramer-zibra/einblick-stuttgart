@@ -30,7 +30,7 @@ Der ausführbare Code des Server- und Client-Teil dieser Anwendung kann jeweils 
 Für die lokale Entwicklung eignen sich die Befehle `npm run server:build:live` und `npm run client:build:watch`, die in bedein Fällen den jeweiligen Code neu bauen, wenn sich etwas im Quellcode-Verzeichns der Anwendung ändert.
 
 ### Running: Anwendung benutzen
-Der Befehl `npm start` startet den Server-Teil der Anwendung. Vor dem Start werden jeweils der ausführbare Server- und auch der Client-Code neu erzeugt. Der Client-Teil für den Browser ist über die Server-Anwendung benutzbar.
+Der Befehl `npm start` startet den Server-Teil der Anwendung. Vor dem Start werden jeweils der ausführbare Server- und auch der Client-Code neu erzeugt. Die Anwendung ist anschließend über `localhost:4000` erreichbar.
 
 ### Testing: GraphQL API testen
 Anwendung starten (`npm start`) und mit dem Sandbox-Tool unter `localhost:4000/playground` die API testen. Der GraphQL Playground unterstützt mit Autovervollständigung und Korrekturfunktion das Testen der API.
