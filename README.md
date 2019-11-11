@@ -1,3 +1,5 @@
+    
+[![Known Vulnerabilities](https://snyk.io/test/github/akramer-zibra/einblick-stuttgart/badge.svg?targetFile=package.json)](https://snyk.io/test/github/akramer-zibra/einblick-stuttgart?targetFile=package.json)
 [![License](https://img.shields.io/badge/license-AGPLv3-blue.svg?style=flat)](LICENSE)
 
 # Einblick-Stuttgart
