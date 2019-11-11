@@ -31,18 +31,21 @@ Der Befehl `npm start` startet den Server-Teil der Anwendung. Vor dem Start werd
 ### Testing: GraphQL API testen
 Anwendung starten (`npm start`) und mit dem Sandbox-Tool unter `localhost:4000/playground` die API testen. Der GraphQL Playground unterstützt mit Autovervollständigung und Korrekturfunktion das Testen der API.
 
+### Contribution: Unterstützung bei der Entwicklung
+Eure Pull-Requests sind willkommen, aber bitte überprüft vor dem Commit Euren Code indem ihr den Code baut (`npm start`) und die Änderungen testet. 
+
+Möchte ihr ein neues 'großes' Feature in die Anwendung bringen, beschreibt eure Idee bitte zuerst als Issue, anhand dessen wir die Idee und die Implementierungsdetails besprechen können. Das verhindert, dass keine eurer wertvollen Zeit bei der Weiterentwicklung durch abgelehnte Pull-Requests vergeudet wird.
+
+#### Richtlinien
+Die TypeScript Lint-Rules stammen aus dem tollen Open-Source Projekt [MichalLytek/type-graphql](https://github.com/MichalLytek/type-graphql). Der Befehl `npm run lint` überprüft die in diesem Repository konfigurierten Richtlinien.
+
+Anwender:innen von VS Code können den Editor so [konfigurieren](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-typescript-tslint-plugin), dass Lint-Errors automatisch beim Speichern behoben werden. 
+
 ### Lizenz
 Der Quellcode dieses Projekts ist unter der [GNU-AGPLv3](LICENSE) lizensiert.
 
-### Contribution: Unterstützung bei der Entwicklung
-Eure Pull-Requests sind willkommen, aber bitte überprüft vor dem Commit Euren Code indem ihr den Code baut (`npm build`) und die Änderungen testet. 
-
-Möchte ihr ein neues 'großes' Feature in die Anwendung bringen, beschreibt eure Idee bitte zuerst als Issue, womit wir die Idee und die Implementierungsdetails diskutieren können. Das beugt vor, dass keine Zeit bei der Weiterentwicklung durch abgelehnte Pull-Requests vergeudet wird.
-
-#### Richtlinien
-Die TypeScript Lint-Rules stammen aus dem tollen Open-Source Projekt [MichalLytek/type-graphql](https://github.com/MichalLytek/type-graphql). Der Befehl `npm run server:lint` überprüft die in diesem Repository konfigurierten Richtlinien.
-
-Anwender:innen von VS Code können den Editor so [konfigurieren](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-typescript-tslint-plugin), dass Lint-Errors automatisch beim Speichern behoben werden. 
+### Eingebundene Projekte und Werkzeuge 
+Ein Dankeschön an dieser Stelle an alle Open-Source Projekte, die als Bibliotheken oder Frameworks Ihren Platz in dieser Anwendung gefunden haben. Ohne diese wertvollen Projekte wäre es nie möglich gewesen, dieses Projekt in solch einer kurzen Zeit auf die Beine zu stellen. Eine genaue Auflistung der verwendeten Projekte findet sich in der [package.json](package.json) unter den beiden Eigenschaften `dependencies` und `devDependencies`.
 
 ## Sonstiges
 ### Öffentliche Datenbestände
@@ -50,9 +53,6 @@ Anwender:innen von VS Code können den Editor so [konfigurieren](https://marketp
 [Ratsdokumente - Suche](https://www.domino1.stuttgart.de/web/ksd/KSDRedSystem.nsf/masustart)  
 [Sitzungskalender + Tagesordnungen](https://www.domino1.stuttgart.de/web/ksd/KSDRedSystem.nsf/AnSiKa)  
 [Gemeinderat Mitglieder](https://www.stuttgart.de/gemeinderat)  
-[Gemeinderat Zusammensetzung](https://www.stuttgart.de/img/mdb/item/673539/148788.pdf)  
+[Gemeinderat politische Zusammensetzung](https://www.stuttgart.de/img/mdb/item/673539/148788.pdf)  
 [Gemeinderat Wahldaten Faltblatt](https://servicex.stuttgart.de/lhs-services/komunis/documents/  7653_1_Faltblatt_Stuttgarter_Wahldaten___Ausgabe_2018.PDF)  
 [Gemeinderat Wahldaten im Detail](https://www.stuttgart.de/img/mdb/item/673539/144734.pdf)  
-
-### Drittanbieter "Werkzeuge" 
-Ein Dankeschön an dieser Stelle an alle Open-Source Projekte, die als Bibliotheken oder Frameworks Ihren Platz in dieser Anwendung gefunden haben. Ohne diese wertvollen Projekte wäre es nie möglich gewesen, dieses Projekt in solch einer kurzen Zeit auf die Beine zu stellen. Eine genaue Auflistung der verwendeten Projekte findet sich in der [package.json](package.json) unter den beiden Eigenschaften `dependencies` und `devDependencies`.
