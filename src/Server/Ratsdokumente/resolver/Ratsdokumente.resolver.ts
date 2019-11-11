@@ -99,6 +99,9 @@ export class RatsdokumenteResolver implements Resolver {
      */
     private merge(ratsdokumente: any[]): Ratsdokument[] {
 
+        // Falls das Ergebnis leer ist
+        if(ratsdokumente.length === 0) { return []; }
+
         // Falls der Algorithmus nur eine Ergebnismenge liefert, brauchen wir nicht zu reduzieren
         if(ratsdokumente.length === 1) { return ratsdokumente[0]; } 
 
