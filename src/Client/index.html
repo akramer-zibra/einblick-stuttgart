@@ -16,9 +16,7 @@
     
     <style type="text/css">
       .app__clickable { cursor: pointer; }
-
-      /* Custom timeline.js */
-      
+      #app__types__group .field {margin-right: 15px;}      
     </style>
   </head>
 
@@ -49,7 +47,7 @@
         </div>
 
         <p style="margin-top: 20px; margin-bottom: 8px;">...mit diesen Arten von Dokumenten</p>
-        <div>
+        <div id="app__types__group" class="field is-grouped">
           <div class="field">
             <input id="app__types__beratungsunterlagen" type="checkbox" class="is-small switch is-rounded app__types" checked="checked" data-type="Beratungsunterlage">
             <label for="app__types__beratungsunterlagen">Beratungsunterlagen</label>
