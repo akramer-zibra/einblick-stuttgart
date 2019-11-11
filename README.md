@@ -34,12 +34,12 @@ Anwendung starten (`npm start`) und mit dem Sandbox-Tool unter `localhost:4000/p
 ### Lizenz
 Der Quellcode dieses Projekts ist unter der [GNU-AGPLv3](LICENSE) lizensiert. Es ist euch darum unter anderem frei diesen Quellcode beliebig zu verändern und weiterzuverteilen. Was ihr rechtlich genau alles machen könnt, lest ihr entweder direkt in der Lizenzdatei oder in der zusammengefassten Form [hier](https://choosealicense.com/licenses/agpl-3.0/) nach.
 
-### Contribution: Unterstützung bei der Entwicklung
+### Contribution: Unterstützung bei der Weiterentwicklung
 Eure Pull-Requests sind willkommen, aber bitte überprüft vor dem Commit Euren Code indem ihr die Anwendung startet (`npm start`) und die Änderungen sinnvoll testet. 
 
 Möchte ihr ein neues 'großes' Feature in die Anwendung bringen, beschreibt eure Idee bitte zuerst als Issue, anhand dessen wir die Idee und die Implementierungsdetails besprechen können. Das verhindert, dass keine eurer wertvollen Zeit bei der Weiterentwicklung durch abgelehnte Pull-Requests vergeudet wird.
 
-#### Richtlinien
+#### Code-Richtlinien
 Die TypeScript Lint-Rules stammen aus dem tollen Open-Source Projekt [MichalLytek/type-graphql](https://github.com/MichalLytek/type-graphql). Der Befehl `npm run lint` überprüft die in diesem Repository konfigurierten Richtlinien.
 
 Anwender:innen von VS Code können den Editor so [konfigurieren](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-typescript-tslint-plugin), dass Lint-Errors automatisch beim Speichern behoben werden. 
