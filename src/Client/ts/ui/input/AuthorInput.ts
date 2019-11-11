@@ -38,16 +38,10 @@ export class AuthorInput {
         // Setze die gewünschten Dokumenttypen auf "Anträge"
         this.typeInput.activate(['Antrag'])
 
-        $('.pageloader').addClass('is-active');
-
         // Benutze den Search-Controller für die Datenabfrage und Weitergabe
         this.searchController
             .search(fraktion)
-            .then(() => {
-                $('.pageloader').removeClass('is-active');
-            })
             .catch((error) => {
-                $('.pageloader').removeClass('is-active');
                 this.handleError(error);
             });
     }

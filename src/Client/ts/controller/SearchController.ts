@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import { SearchHistory } from "../helper/SearchHistory";
 import { RatsdokumenteProvider } from "../provider/Ratsdokumente.provider";
 import { Divider } from "../ui/Divider";
@@ -37,6 +38,9 @@ export class SearchController {
      */
     search(searchtext: string): Promise<number> {
 
+        // Wir blenden den Pageloader ein
+        $('.pageloader').addClass('is-active');
+
         // Behalte den Suchtext in einer Historie
         this.searchHistory.remember(searchtext);
 
@@ -60,6 +64,9 @@ export class SearchController {
                     // Zeige eine aktualisierte Timeline
                     this.timeline.updateWithApiData(apiData.ratsdokumente);     // Übergebe die API Daten an die Timeline Instanz, um zu aktualisieren
 
+                    // Wir blenden den pageloader wieder aus
+                    $('.pageloader').removeClass('is-active');
+
                     // Wir zeigen im Divider den Suchtext
                     // ...und scrollen dorthin
                     Divider.setTitle(`Suche: ${searchtext} (${apiData.ratsdokumente.length} Ergebnisse)`);
@@ -67,7 +74,11 @@ export class SearchController {
                     
                     resolve(apiData.ratsdokumente.length);
                 })
-                .catch(reject);
+                .catch(err => {
+                    // wir blenden den Pageloader wieder aus, bevor wir den Fehler weitergeben
+                    $('.pageloader').removeClass('is-active');
+                    reject(err);
+                });
         });
     }
     
