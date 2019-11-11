@@ -1,6 +1,5 @@
 import $ from "jquery";
 import { SearchController } from "../../controller/SearchController";
-import { ToastFeedback } from "../ToastFeedback";
 
 export class KeywordInput {
 
@@ -38,19 +37,6 @@ export class KeywordInput {
         const keyword = $(event.target).text();
 
         // Benutze den Search-Controller für die Datenabfrage und Weitergabe
-        this.searchController
-            .search(keyword)
-            .catch((error) => {
-                this.handleError(error);
-            });
-    }
-
-    /**
-     * Methode reagiert auf Fehler
-     * @param err 
-     */
-    private handleError(err) {
-        console.error(err);
-        ToastFeedback.showErrorToast(err);  // Benutze eine separate Funktion für eine grafische Rückmeldung
+        this.searchController.search(keyword);
     }
 }
