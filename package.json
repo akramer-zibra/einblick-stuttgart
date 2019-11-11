@@ -7,6 +7,7 @@
     "doc": "doc"
   },
   "scripts": {
+    "build": "npm run client:build && npm run server:build",
     "doc:generate:uml": "puml generate doc/plantuml/komponenten.puml -o doc/plantuml/komponenten.png",
     "client:build": "parcel build src/Client/index.html --out-dir ./public",
     "client:build:debug": "parcel build src/Client/index.html --out-dir ./public --no-minify",
