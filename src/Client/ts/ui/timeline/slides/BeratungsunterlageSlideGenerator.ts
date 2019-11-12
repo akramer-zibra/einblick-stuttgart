@@ -1,3 +1,4 @@
+import moment from 'moment';
 import Mustache from 'mustache';
 import { SlideGenerator, TimelineSlide, TimelineSlideDefault } from "..";
 import { Beratungsunterlage, Datei } from "../../../../../shared/ratsdokumente";
@@ -47,12 +48,12 @@ export class BeratungsunterlageSlideGenerator implements SlideGenerator {
         const slide = (slideDefaults as TimelineSlide);
 
         // Deserialisiere "Datum" String in ein Date Objekt
-        const documentDate = new Date(this.data.datum);
+        const documentDate = moment(this.data.datum);
 
         slide.start_date = {
-            year: documentDate.getFullYear(), 
-            month: documentDate.getMonth(),
-            day: documentDate.getDay()
+            year: documentDate.year(), 
+            month: documentDate.month()+1,  // ACHTUNG: moment.js indexiert Monate mit 0 beginnend 
+            day: documentDate.date()
         },
 
         slide.media = {
