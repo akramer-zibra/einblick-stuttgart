@@ -20,7 +20,9 @@
     "server:check": "tsc --noEmit",
     "server:lint:graphql": "graphql-schema-linter ./src/Server/schema.graphql",
     "server:verify": "npm run server:check && npm run server:lint",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "keywords": [
     "Stuttgart",
@@ -52,7 +54,8 @@
     "query-string": "6.8.3",
     "ts-node": "8.4.1",
     "typescript": "3.4.5",
-    "uuid": "3.3.3"
+    "uuid": "3.3.3",
+    "snyk": "^1.316.1"
   },
   "devDependencies": {
     "@types/axios": "0.14.0",
@@ -68,5 +71,6 @@
   },
   "author": "Achim Kramer <achim@zibra.de>",
   "license": "AGPL-3.0-only",
-  "private": true
+  "private": true,
+  "snyk": true
 }
